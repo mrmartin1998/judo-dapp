@@ -1,5 +1,5 @@
 // Make sure to replace 'CONTRACT_ADDRESS' and 'CONTRACT_ABI' with the actual deployed contract address and ABI.
-const contractAddress = '0x06bc98edaC6036959C08bE0143629032B73A26EE';
+const contractAddress = '0x27ed102da0599f2Fe6bc1699e8655e41a95Db750';
 const contractABI = [
     {
       "inputs": [
@@ -233,8 +233,8 @@ const BeltLevel = {
   // Helper function to check if the current user is a sensei (black belt)
 function isSensei(walletAddress) {
     const senseiAddresses = [
-      '0xca75e8eae6fd94862541f01b2a67ac0b8a01431b', // Replace with actual sensei address 1
-      '0x38F756cA27c0CaF09Ee39879771616e964cd9358', // Replace with actual sensei address 2
+      '0x6bD300EcFc394Dd230f81B5D4e0D003416dcBAdF', // Replace with actual sensei address 1
+      '0x01555EEE2732C708BB8D628E44366Ff0Bb19CF33', // Replace with actual sensei address 2
     ];
     return senseiAddresses.includes(walletAddress.toLowerCase());
   }
