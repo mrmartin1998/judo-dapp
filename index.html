@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Judo Belt System dApp</title>
+</head>
+<body>
+    <h1>Judo Belt System dApp</h1>
+    <p>Welcome to the Judo Belt System! Please register or promote students.</p>
+
+    <label for="walletAddress">Your Wallet Address:</label>
+    <input type="text" id="walletAddress" /><br /><br />
+
+    <label for="beltLevel">Select Belt Level:</label>
+    <select id="beltLevel">
+        <option value="0">White Belt</option>
+        <option value="1">Yellow Belt</option>
+        <option value="2">Orange Belt</option>
+        <option value="3">Green Belt</option>
+        <option value="4">Blue Belt</option>
+        <option value="5">Brown Belt</option>
+        <option value="6">Black Belt</option>
+    </select><br /><br />
+
+    <button onclick="registerUser()">Register</button><br /><br />
+
+    <label for="studentAddress">Student's Wallet Address:</label>
+    <input type="text" id="studentAddress" /><br /><br />
+
+    <label for="newBeltLevel">Select New Belt Level:</label>
+    <select id="newBeltLevel">
+        <!-- Update options to include all belt levels higher than the student's current belt level -->
+        <option value="1">Yellow Belt</option>
+        <option value="2">Orange Belt</option>
+        <option value="3">Green Belt</option>
+        <option value="4">Blue Belt</option>
+        <option value="5">Brown Belt</option>
+        <option value="6">Black Belt</option>
+    </select><br /><br />
+
+    <button onclick="promoteStudent()">Promote Student</button><br /><br />
+
+    <label for="studentBeltLevel">Get Student's Belt Level (Enter Student's Wallet Address):</label>
+    <input type="text" id="studentBeltAddress" /><br /><br />
+
+    <!-- Update the onclick attribute to match the function name -->
+    <button onclick="getStudentBeltLevel()">Get Student's Belt Level</button>
+
+    <!-- Include the web3.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
