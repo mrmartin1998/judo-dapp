@@ -3,8 +3,8 @@ const JudoBeltSystem = artifacts.require("JudoBeltSystem");
 module.exports = function (deployer) {
   // Replace the senseiWallets array with actual addresses of senseis (black belts)
   const senseiWallets = [
-    "0xca75E8Eae6fD94862541f01B2A67Ac0B8A01431b",
-    "0x38F756cA27c0CaF09Ee39879771616e964cd9358",
+    "0x6bD300EcFc394Dd230f81B5D4e0D003416dcBAdF",
+    "0x01555EEE2732C708BB8D628E44366Ff0Bb19CF33",
     // Add more sensei addresses if needed
   ];
   deployer.deploy(JudoBeltSystem, senseiWallets);

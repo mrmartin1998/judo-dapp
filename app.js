@@ -1,132 +1,132 @@
 // Make sure to replace 'CONTRACT_ADDRESS' and 'CONTRACT_ABI' with the actual deployed contract address and ABI.
-const contractAddress = '0x27ed102da0599f2Fe6bc1699e8655e41a95Db750';
-const contractABI = [
-    {
-      "inputs": [
-        {
-          "internalType": "address[]",
-          "name": "senseiWallets",
-          "type": "address[]"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "wallet",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "belt",
-          "type": "uint8"
-        }
-      ],
-      "name": "UserPromoted",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "wallet",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "belt",
-          "type": "uint8"
-        }
-      ],
-      "name": "UserRegistered",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "users",
-      "outputs": [
-        {
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "belt",
-          "type": "uint8"
-        },
-        {
-          "internalType": "bool",
-          "name": "isSensei",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "initialBelt",
-          "type": "uint8"
-        }
-      ],
-      "name": "registerUser",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "studentWallet",
-          "type": "address"
-        },
-        {
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "newBelt",
-          "type": "uint8"
-        }
-      ],
-      "name": "promoteStudent",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "studentWallet",
-          "type": "address"
-        }
-      ],
-      "name": "getBeltLevel",
-      "outputs": [
-        {
-          "internalType": "enum JudoBeltSystem.BeltLevel",
-          "name": "",
-          "type": "uint8"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    }
-  ];
+const JudoBeltSystemAddress = '0x6C5C1CE77CdD074FE1d23DD0C7d74783BFB2EfAc';
+const JudoBeltSystemABI = [
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "senseiWallets",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "belt",
+        "type": "uint8"
+      }
+    ],
+    "name": "UserPromoted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "belt",
+        "type": "uint8"
+      }
+    ],
+    "name": "UserRegistered",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "users",
+    "outputs": [
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "belt",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "isSensei",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "initialBelt",
+        "type": "uint8"
+      }
+    ],
+    "name": "registerUser",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "studentWallet",
+        "type": "address"
+      },
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "newBelt",
+        "type": "uint8"
+      }
+    ],
+    "name": "promoteStudent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "studentWallet",
+        "type": "address"
+      }
+    ],
+    "name": "getBeltLevel",
+    "outputs": [
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  }
+];
 
 // Enum to represent belt levels
 const BeltLevel = {
@@ -163,7 +163,7 @@ const BeltLevel = {
     }
   
     try {
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const contract = new web3.eth.Contract(JudoBeltSystemABI, JudoBeltSystemAddress);
       await contract.methods.registerUser(beltLevel).send({ from: walletAddress });
       console.log('User registered successfully.');
       alert('User registered successfully. Wallet Address: ' + walletAddress + ', Belt Level: ' + BeltLevel[beltLevel]);
@@ -184,7 +184,7 @@ const BeltLevel = {
     }
   
     try {
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const contract = new web3.eth.Contract(JudoBeltSystemABI, JudoBeltSystemAddress);
       const studentBeltLevelBefore = await contract.methods.getBeltLevel(studentAddress).call();
       console.log('Student Belt Level (Before Promotion):', studentBeltLevelBefore);
   
@@ -250,7 +250,7 @@ async function getStudentBeltLevel() {
     }
   
     try {
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const contract = new web3.eth.Contract(JudoBeltSystemABI, JudoBeltSystemAddress);
       const studentBeltLevel = await contract.methods.getBeltLevel(studentAddress).call();
       
       if (studentBeltLevel == 0) {
