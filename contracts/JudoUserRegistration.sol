@@ -11,7 +11,7 @@ contract JudoUserRegistration {
     }
 
     function registerUser(address userAddress, JudoBeltStorage.BeltLevel belt) public {
-        // Ensure that only authorized users (like admins or senseis) can register new users
+        require(storageContract.senseis(msg.sender), "Only senseis can register users");
         storageContract.setBeltLevel(userAddress, belt);
     }
 }

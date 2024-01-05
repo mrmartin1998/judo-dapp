@@ -11,7 +11,7 @@ contract JudoBeltPromotion {
     }
 
     function promoteJudoka(address judoka) public {
-        // Ensure that only senseis can promote judokas
+        require(storageContract.senseis(msg.sender), "Only senseis can promote judokas");
         JudoBeltStorage.BeltLevel currentBelt = storageContract.getBeltLevel(judoka);
         require(currentBelt < JudoBeltStorage.BeltLevel.Black, "Cannot promote beyond black belt");
         storageContract.setBeltLevel(judoka, JudoBeltStorage.BeltLevel(uint(currentBelt) + 1));
