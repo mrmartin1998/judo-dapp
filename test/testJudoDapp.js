@@ -30,8 +30,7 @@ contract("Judo DApp Test", async accounts => {
     });
 
     it("should allow a black belt to promote a student", async () => {
-        // Assuming setBeltLevel is the correct function name in JudoBeltPromotion contract
-        await beltPromotion.setBeltLevel(student2, 1, { from: blackBelt2 }); // Promoting to Yellow
+        await beltPromotion.promoteJudoka(student2, { from: blackBelt2 }); // Promoting by one level
         const belt = await storage.getBeltLevel(student2);
         assert.equal(belt.toNumber(), 1, "Student should be promoted to yellow belt");
     });
