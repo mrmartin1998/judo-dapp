@@ -3,8 +3,7 @@ pragma solidity ^0.8.0;
 
 contract JudoBeltStorage {
     enum BeltLevel { White, Yellow, Orange, Green, Blue, Brown, Black }
-    mapping(address => BeltLevel) private judokaBelts;
-    mapping(address => bool) public senseis;
+    mapping(address => BeltLevel) public judokaBelts;
 
     address public admin;
 
@@ -13,26 +12,23 @@ contract JudoBeltStorage {
         _;
     }
 
-    constructor() {
+    constructor(address[] memory initialBlackBelts) {
         admin = msg.sender;
+        for (uint i = 0; i < initialBlackBelts.length; i++) {
+            judokaBelts[initialBlackBelts[i]] = BeltLevel.Black;
+        }
     }
 
-    function setBeltLevel(address judoka, BeltLevel belt) external onlyAdmin {
+    function setBeltLevel(address judoka, BeltLevel belt) external {
+        require(
+            judokaBelts[msg.sender] == BeltLevel.Black || msg.sender == admin, 
+            "Only black belts or admin can modify belt levels"
+        );
         judokaBelts[judoka] = belt;
-        if(belt == BeltLevel.Black) {
-            senseis[judoka] = true;
-        }
     }
 
     function getBeltLevel(address judoka) external view returns (BeltLevel) {
         return judokaBelts[judoka];
-    }
-
-    function initializeSenseis(address[] calldata senseiAddresses) external onlyAdmin {
-        for(uint i = 0; i < senseiAddresses.length; i++) {
-            senseis[senseiAddresses[i]] = true;
-            judokaBelts[senseiAddresses[i]] = BeltLevel.Black;
-        }
     }
 
     function transferAdminship(address newAdmin) external onlyAdmin {

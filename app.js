@@ -1,15 +1,49 @@
 // app.js
 
 // Contract addresses and ABIs (Update these to your deployed contracts)
-const judoBeltStorageAddress = '0x32Ed67057269f7b3c869A7C89bceE1301937c595';
-const judoUserRegistrationAddress = '0xB0906f2b3C7b09F4E3B03f8A334adA2352C44B8B';
-const judoBeltPromotionAddress = '0x620FDC5e8DCb116dC72fc1dCfa6411aDA53e42EA';
+const judoBeltStorageAddress = '0x85a874d10380F2E8a03B9d524AF398FC16dDF7F7';
+const judoUserRegistrationAddress = '0xbd9c9612A0E3C6aB28E699940f5aA0391EdCa96b';
+const judoBeltPromotionAddress = '0x90F3D57Bf53036DD69B9958a87004Df4aF4D21CF';
 
 const judoBeltStorageABI = [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "senseis",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -48,6 +82,19 @@ const judoBeltStorageABI = [
       "stateMutability": "view",
       "type": "function",
       "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "senseiAddresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "initializeSenseis",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
       "inputs": [
@@ -96,15 +143,61 @@ const judoUserRegistrationABI = [
   ]; // Replace with actual ABI of JudoUserRegistration
 const judoBeltPromotionABI = [
     {
-      "inputs": [
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
         {
           "internalType": "address",
-          "name": "_storageAddress",
+          "name": "",
           "type": "address"
         }
       ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "senseis",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        },
+        {
+          "internalType": "enum JudoBeltStorage.BeltLevel",
+          "name": "belt",
+          "type": "uint8"
+        }
+      ],
+      "name": "setBeltLevel",
+      "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "function"
     },
     {
       "inputs": [
@@ -114,7 +207,40 @@ const judoBeltPromotionABI = [
           "type": "address"
         }
       ],
-      "name": "promoteJudoka",
+      "name": "getBeltLevel",
+      "outputs": [
+        {
+          "internalType": "enum JudoBeltStorage.BeltLevel",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "senseiAddresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "initializeSenseis",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "transferAdminship",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -124,18 +250,19 @@ const judoBeltPromotionABI = [
 // Contract instances
 let judoBeltStorage, judoUserRegistration, judoBeltPromotion;
 
-// Initialize Web3
+// Initialize Web3 and contracts
 async function initWeb3() {
     if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
+        web3 = new Web3(window.ethereum);
         try {
-            await window.ethereum.request({ method: 'eth_requestAccounts' }); // Request account access
+            // Request account access
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
             setupContracts();
         } catch (error) {
             console.error("User denied web3 access:", error);
         }
     } else if (window.web3) {
-        window.web3 = new Web3(web3.currentProvider); // Legacy dapp browsers...
+        web3 = new Web3(window.web3.currentProvider);
     } else {
         console.error('Non-Ethereum browser detected. Consider trying MetaMask!');
     }
@@ -164,7 +291,7 @@ async function registerUser() {
 // Function to promote student
 async function promoteStudent() {
     const studentAddress = document.getElementById('studentAddress').value;
-    const fromAddress = document.getElementById('walletAddress').value; // Assumes the promoter uses their own address
+    const fromAddress = document.getElementById('walletAddress').value; 
 
     try {
         await judoBeltPromotion.methods.promoteStudent(studentAddress).send({ from: fromAddress });
@@ -175,8 +302,8 @@ async function promoteStudent() {
 }
 
 // Function to get user belt level
-async function getUserBeltLevel() {
-    const userAddress = document.getElementById('studentBeltAddress').value; // User whose belt level you want to check
+async function getStudentBeltLevel() {
+    const userAddress = document.getElementById('studentBeltAddress').value;
 
     try {
         const beltLevel = await judoBeltStorage.methods.getBeltLevel(userAddress).call();
@@ -186,6 +313,4 @@ async function getUserBeltLevel() {
     }
 }
 
-window.addEventListener('load', async () => {
-    initWeb3();
-});
+window.addEventListener('load', initWeb3);

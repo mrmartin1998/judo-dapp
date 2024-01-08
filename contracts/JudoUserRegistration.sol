@@ -11,7 +11,7 @@ contract JudoUserRegistration {
     }
 
     function registerUser(address userAddress, JudoBeltStorage.BeltLevel belt) public {
-        require(storageContract.senseis(msg.sender), "Only senseis can register users");
+        require(storageContract.getBeltLevel(msg.sender) == JudoBeltStorage.BeltLevel.Black, "Only black belts can register users");
         storageContract.setBeltLevel(userAddress, belt);
     }
 }
