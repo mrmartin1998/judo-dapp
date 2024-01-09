@@ -3263,12 +3263,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x01C7c75612D86De7917E8b7dcE7Fc1536A922607",
-      "transactionHash": "0xcc67057b8816dde7472488705e012b1fb4a81daf95ed41125caeff76858e348c"
+      "address": "0x87B7B6E66a85Cc2a10a4bA66b0A1Ecae0fD24B03",
+      "transactionHash": "0x6732361134480a3c6fd9857db18a20193472956d617876618ee373f4a0f762b2"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-01-08T14:21:14.062Z",
+  "updatedAt": "2024-01-09T12:14:38.398Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
