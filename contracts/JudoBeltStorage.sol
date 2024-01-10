@@ -1,37 +1,29 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-contract JudoBeltStorage {
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+
+contract JudoBeltStorage is Initializable, OwnableUpgradeable {
     enum BeltLevel { White, Yellow, Orange, Green, Blue, Brown, Black }
     mapping(address => BeltLevel) public judokaBelts;
 
-    address public admin;
-
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin can perform this action");
-        _;
-    }
-
-    constructor(address[] memory initialBlackBelts) {
-        admin = msg.sender;
+    function initialize(address[] memory initialBlackBelts) public initializer {
+        __Ownable_init();
         for (uint i = 0; i < initialBlackBelts.length; i++) {
             judokaBelts[initialBlackBelts[i]] = BeltLevel.Black;
         }
     }
 
-    function setBeltLevel(address judoka, BeltLevel belt) external {
+    function setBeltLevel(address judoka, BeltLevel belt) public onlyOwner {
         require(
-            judokaBelts[msg.sender] == BeltLevel.Black || msg.sender == admin, 
-            "Only black belts or admin can modify belt levels"
+            judokaBelts[msg.sender] == BeltLevel.Black || msg.sender == owner(), 
+            "Only black belts or owner can modify belt levels"
         );
         judokaBelts[judoka] = belt;
     }
 
-    function getBeltLevel(address judoka) external view returns (BeltLevel) {
+    function getBeltLevel(address judoka) public view returns (BeltLevel) {
         return judokaBelts[judoka];
-    }
-
-    function transferAdminship(address newAdmin) external onlyAdmin {
-        admin = newAdmin;
     }
 }

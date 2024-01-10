@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
 import "./JudoBeltStorage.sol";
 
@@ -15,7 +15,6 @@ contract JudoBeltPromotion {
         JudoBeltStorage.BeltLevel currentBelt = storageContract.getBeltLevel(judoka);
         require(currentBelt < JudoBeltStorage.BeltLevel.Black, "Cannot promote beyond black belt");
         
-        // Promote to the next belt level
         storageContract.setBeltLevel(judoka, JudoBeltStorage.BeltLevel(uint(currentBelt) + 1));
     }
 }
