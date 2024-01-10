@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^5.0.1",
+    "@openzeppelin/truffle-upgrades": "^1.21.0",
     "web3": "^4.0.3"
   }
 }
