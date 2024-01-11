@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract JudoBeltStorage {
-    enum BeltLevel { White, Yellow, Orange, Green, Blue, Brown, Black }
+import "./JudoBeltStorageInterface.sol";
+
+contract JudoBeltStorage is IJudoBeltStorage {
     mapping(address => BeltLevel) public judokaBelts;
 
     address public admin;
@@ -29,7 +30,7 @@ contract JudoBeltStorage {
         beltPromotionAddress = _beltPromotionAddress;
     }
 
-    function setBeltLevel(address judoka, BeltLevel belt, address caller) public {
+    function setBeltLevel(address judoka, BeltLevel belt, address caller) public override {
         require(
             msg.sender == userRegistrationAddress || msg.sender == beltPromotionAddress,
             "Only specific contracts can call this function"
@@ -41,7 +42,7 @@ contract JudoBeltStorage {
         judokaBelts[judoka] = belt;
     }
 
-    function getBeltLevel(address judoka) external view returns (BeltLevel) {
+    function getBeltLevel(address judoka) external view override returns (BeltLevel) {
         return judokaBelts[judoka];
     }
 }

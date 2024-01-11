@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./JudoBeltStorage.sol";
+import "./JudoBeltStorageInterface.sol";
 
 contract JudoUserRegistration {
-    JudoBeltStorage private beltStorage;
+    IJudoBeltStorage private beltStorage;
 
     constructor(address storageAddress) {
-        beltStorage = JudoBeltStorage(storageAddress);
+        beltStorage = IJudoBeltStorage(storageAddress);
     }
 
     function registerUser(address user) public {
-        require(beltStorage.getBeltLevel(msg.sender) == JudoBeltStorage.BeltLevel.Black, "Only black belts can register users");
-        beltStorage.setBeltLevel(user, JudoBeltStorage.BeltLevel.White, msg.sender);
+        require(beltStorage.getBeltLevel(msg.sender) == IJudoBeltStorage.BeltLevel.Black, "Only black belts can register users");
+        beltStorage.setBeltLevel(user, IJudoBeltStorage.BeltLevel.White, msg.sender);
     }
 }

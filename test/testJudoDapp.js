@@ -11,8 +11,11 @@ contract("Judo DApp Tests", accounts => {
 
     before(async () => {
         beltStorage = await JudoBeltStorage.deployed();
-        userRegistration = await JudoUserRegistration.deployed();
-        beltPromotion = await JudoBeltPromotion.deployed();
+        userRegistration = await JudoUserRegistration.deployed(beltStorage.address);
+        beltPromotion = await JudoBeltPromotion.deployed(beltStorage.address);
+
+        // Set contract addresses in JudoBeltStorage
+        await beltStorage.setContractAddresses(userRegistration.address, beltPromotion.address);
     });
 
     it("should allow a black belt to register a new user", async () => {
