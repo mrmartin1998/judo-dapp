@@ -1,8 +1,8 @@
 // app.js
 
-const judoBeltStorageAddress = '0xea8d4db3Bb29A24C553f2A4761a8C0761046B138';
-const judoUserRegistrationAddress = '0xD7532D6Fa440D0CaCed4a30c5778c4C200F3DF42';
-const judoBeltPromotionAddress = '0xD437B0eB80a7bD474684ed95A3e266F97BfCD3a5';
+const judoBeltStorageAddress = '0x329672B5Ee90e3Bb22388E13b0b487A4705D3255';
+const judoUserRegistrationAddress = '0xC361A101CC3E4f32F2701CFec6b95a2D29099baa';
+const judoBeltPromotionAddress = '0x2408236548c7BCdC09DAE405346c637e7064a6a2';
 
 const judoBeltStorageABI = [
     {
@@ -25,8 +25,14 @@ const judoBeltStorageABI = [
       "constant": true
     },
     {
-      "inputs": [],
-      "name": "beltPromotionAddress",
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "blackBelts",
       "outputs": [
         {
           "internalType": "address",
@@ -49,23 +55,9 @@ const judoBeltStorageABI = [
       "name": "judokaBelts",
       "outputs": [
         {
-          "internalType": "enum IJudoBeltStorage.BeltLevel",
+          "internalType": "enum JudoBeltStorage.BeltLevel",
           "name": "",
           "type": "uint8"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "userRegistrationAddress",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -76,16 +68,11 @@ const judoBeltStorageABI = [
       "inputs": [
         {
           "internalType": "address",
-          "name": "_userRegistrationAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_beltPromotionAddress",
+          "name": "blackBeltAddress",
           "type": "address"
         }
       ],
-      "name": "setContractAddresses",
+      "name": "addBlackBelt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -98,14 +85,9 @@ const judoBeltStorageABI = [
           "type": "address"
         },
         {
-          "internalType": "enum IJudoBeltStorage.BeltLevel",
+          "internalType": "enum JudoBeltStorage.BeltLevel",
           "name": "belt",
           "type": "uint8"
-        },
-        {
-          "internalType": "address",
-          "name": "caller",
-          "type": "address"
         }
       ],
       "name": "setBeltLevel",
@@ -124,9 +106,29 @@ const judoBeltStorageABI = [
       "name": "getBeltLevel",
       "outputs": [
         {
-          "internalType": "enum IJudoBeltStorage.BeltLevel",
+          "internalType": "enum JudoBeltStorage.BeltLevel",
           "name": "",
           "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        }
+      ],
+      "name": "isBlackBelt",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -185,7 +187,7 @@ const judoBeltPromotionABI = [
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ]; // Replace with actual ABI of JudoBeltPromotion
+  ]; 
 
 
 // Contract instances
@@ -219,17 +221,18 @@ function setupContracts() {
 
 // Function to register user
 async function registerUser() {
-    const beltLevel = document.getElementById('beltLevel').value;
-    const fromAddress = document.getElementById('walletAddress').value;
+  const userAddress = document.getElementById('walletAddress').value; // Address of the user being registered
 
-    try {
-        await judoUserRegistration.methods.registerUser(fromAddress, beltLevel).send({ from: fromAddress });
-        displayMessage('Registration successful.');
-    } catch (error) {
-        console.error('Error registering user:', error);
-        displayError('Error registering user.');
-    }
+  try {
+      await judoUserRegistration.methods.registerUser(userAddress).send({ from: userAddress });
+      displayMessage('Registration successful.');
+  } catch (error) {
+      console.error('Error registering user:', error);
+      displayError('Error registering user.');
+  }
 }
+
+
 
 // Function to promote student
 async function promoteStudent() {
