@@ -1,11 +1,21 @@
-const JudoBeltSystem = artifacts.require("JudoBeltSystem");
+const JudoBeltStorage = artifacts.require("JudoBeltStorage");
+const JudoUserRegistration = artifacts.require("JudoUserRegistration");
+const JudoBeltPromotion = artifacts.require("JudoBeltPromotion");
 
-module.exports = function (deployer) {
-  // Replace the senseiWallets array with actual addresses of senseis (black belts)
-  const senseiWallets = [
-    "0x6bD300EcFc394Dd230f81B5D4e0D003416dcBAdF",
-    "0x01555EEE2732C708BB8D628E44366Ff0Bb19CF33",
-    // Add more sensei addresses if needed
-  ];
-  deployer.deploy(JudoBeltSystem, senseiWallets);
+module.exports = async function(deployer) {
+    try {
+        await deployer.deploy(JudoBeltStorage);
+        const storageInstance = await JudoBeltStorage.deployed();
+
+        await deployer.deploy(JudoUserRegistration, storageInstance.address);
+        await deployer.deploy(JudoBeltPromotion, storageInstance.address);
+
+        console.log("Deployed addresses:");
+        console.log(`JudoBeltStorage: ${storageInstance.address}`);
+        console.log(`JudoUserRegistration: ${JudoUserRegistration.address}`);
+        console.log(`JudoBeltPromotion: ${JudoBeltPromotion.address}`);
+    } catch (error) {
+        console.error("Error deploying contracts:", error);
+    }
 };
+

@@ -1,0 +1,337 @@
+{
+  "contractName": "IJudoBeltStorage",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        },
+        {
+          "internalType": "enum IJudoBeltStorage.BeltLevel",
+          "name": "belt",
+          "type": "uint8"
+        }
+      ],
+      "name": "setBeltLevel",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        }
+      ],
+      "name": "getBeltLevel",
+      "outputs": [
+        {
+          "internalType": "enum IJudoBeltStorage.BeltLevel",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"judoka\",\"type\":\"address\"}],\"name\":\"getBeltLevel\",\"outputs\":[{\"internalType\":\"enum IJudoBeltStorage.BeltLevel\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"judoka\",\"type\":\"address\"},{\"internalType\":\"enum IJudoBeltStorage.BeltLevel\",\"name\":\"belt\",\"type\":\"uint8\"}],\"name\":\"setBeltLevel\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/JudoBeltStorageInterface.sol\":\"IJudoBeltStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/JudoBeltStorageInterface.sol\":{\"keccak256\":\"0x5976fde5c96fd3627d2f9606d303775b9780250bd067be79de460c5e4c3d3b7e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://40bd195319c2e7135bb2d40fee3155d52490ffa01a879c9fc247a9a317c7889e\",\"dweb:/ipfs/QmYbXBnZ2Yif3fR8RMkvoTrq7KuTzasXx57pBUQw3EtEee\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IJudoBeltStorage {\r\n    enum BeltLevel { White, Yellow, Orange, Green, Blue, Brown, Black }\r\n    function setBeltLevel(address judoka, BeltLevel belt) external;\r\n    function getBeltLevel(address judoka) external view returns (BeltLevel);\r\n}",
+  "sourcePath": "C:\\Users\\marti\\Documents\\projects\\judo-dapp\\contracts\\JudoBeltStorageInterface.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/JudoBeltStorageInterface.sol",
+    "exportedSymbols": {
+      "IJudoBeltStorage": [
+        231
+      ]
+    },
+    "id": 232,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 206,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 231,
+        "linearizedBaseContracts": [
+          231
+        ],
+        "name": "IJudoBeltStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IJudoBeltStorage.BeltLevel",
+            "id": 214,
+            "members": [
+              {
+                "id": 207,
+                "name": "White",
+                "nodeType": "EnumValue",
+                "src": "111:5:2"
+              },
+              {
+                "id": 208,
+                "name": "Yellow",
+                "nodeType": "EnumValue",
+                "src": "118:6:2"
+              },
+              {
+                "id": 209,
+                "name": "Orange",
+                "nodeType": "EnumValue",
+                "src": "126:6:2"
+              },
+              {
+                "id": 210,
+                "name": "Green",
+                "nodeType": "EnumValue",
+                "src": "134:5:2"
+              },
+              {
+                "id": 211,
+                "name": "Blue",
+                "nodeType": "EnumValue",
+                "src": "141:4:2"
+              },
+              {
+                "id": 212,
+                "name": "Brown",
+                "nodeType": "EnumValue",
+                "src": "147:5:2"
+              },
+              {
+                "id": 213,
+                "name": "Black",
+                "nodeType": "EnumValue",
+                "src": "154:5:2"
+              }
+            ],
+            "name": "BeltLevel",
+            "nodeType": "EnumDefinition",
+            "src": "94:67:2"
+          },
+          {
+            "functionSelector": "d53f3250",
+            "id": 222,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setBeltLevel",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 220,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 216,
+                  "mutability": "mutable",
+                  "name": "judoka",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 222,
+                  "src": "189:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 215,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 219,
+                  "mutability": "mutable",
+                  "name": "belt",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 222,
+                  "src": "205:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BeltLevel_$214",
+                    "typeString": "enum IJudoBeltStorage.BeltLevel"
+                  },
+                  "typeName": {
+                    "id": 218,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 217,
+                      "name": "BeltLevel",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 214,
+                      "src": "205:9:2"
+                    },
+                    "referencedDeclaration": 214,
+                    "src": "205:9:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BeltLevel_$214",
+                      "typeString": "enum IJudoBeltStorage.BeltLevel"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "188:32:2"
+            },
+            "returnParameters": {
+              "id": 221,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "229:0:2"
+            },
+            "scope": 231,
+            "src": "167:63:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "e00e2713",
+            "id": 230,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBeltLevel",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 225,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 224,
+                  "mutability": "mutable",
+                  "name": "judoka",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 230,
+                  "src": "258:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 223,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "258:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "257:16:2"
+            },
+            "returnParameters": {
+              "id": 229,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 228,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 230,
+                  "src": "297:9:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BeltLevel_$214",
+                    "typeString": "enum IJudoBeltStorage.BeltLevel"
+                  },
+                  "typeName": {
+                    "id": 227,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 226,
+                      "name": "BeltLevel",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 214,
+                      "src": "297:9:2"
+                    },
+                    "referencedDeclaration": 214,
+                    "src": "297:9:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BeltLevel_$214",
+                      "typeString": "enum IJudoBeltStorage.BeltLevel"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "296:11:2"
+            },
+            "scope": 231,
+            "src": "236:72:2",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 232,
+        "src": "60:251:2"
+      }
+    ],
+    "src": "33:278:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-01-12T10:36:43.016Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

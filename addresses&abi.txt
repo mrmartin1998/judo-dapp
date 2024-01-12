@@ -1,0 +1,188 @@
+const judoBeltStorageAddress = '0x329672B5Ee90e3Bb22388E13b0b487A4705D3255';
+const judoUserRegistrationAddress = '0xC361A101CC3E4f32F2701CFec6b95a2D29099baa';
+const judoBeltPromotionAddress = '0x2408236548c7BCdC09DAE405346c637e7064a6a2';
+
+const judoBeltStorageABI = [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "blackBelts",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "judokaBelts",
+      "outputs": [
+        {
+          "internalType": "enum JudoBeltStorage.BeltLevel",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "blackBeltAddress",
+          "type": "address"
+        }
+      ],
+      "name": "addBlackBelt",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        },
+        {
+          "internalType": "enum JudoBeltStorage.BeltLevel",
+          "name": "belt",
+          "type": "uint8"
+        }
+      ],
+      "name": "setBeltLevel",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        }
+      ],
+      "name": "getBeltLevel",
+      "outputs": [
+        {
+          "internalType": "enum JudoBeltStorage.BeltLevel",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        }
+      ],
+      "name": "isBlackBelt",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ];
+const judoUserRegistrationABI = [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "storageAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "registerUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ];
+const judoBeltPromotionABI = [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "storageAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judoka",
+          "type": "address"
+        }
+      ],
+      "name": "promoteJudoka",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]; // Replace with actual ABI of JudoBeltPromotion

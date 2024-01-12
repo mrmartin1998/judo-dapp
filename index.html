@@ -2,51 +2,59 @@
 <html>
 <head>
     <title>Judo Belt System dApp</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .button:hover { background-color: #45a049; }
+        .input-field { padding: 10px; width: 300px; }
+        .message { color: #006400; margin-top: 10px; }
+        .error { color: #FF0000; }
+    </style>
 </head>
 <body>
-    <h1>Judo Belt System dApp</h1>
-    <p>Welcome to the Judo Belt System! Please register or promote students.</p>
+    <div class="container">
+        <h1>Judo Belt System dApp</h1>
+        <p>Welcome to the Judo Belt System! Please register or promote students.</p>
 
-    <label for="walletAddress">Your Wallet Address:</label>
-    <input type="text" id="walletAddress" /><br /><br />
+        <div id="walletAddressSection">
+            <label for="walletAddress">Your Wallet Address:</label>
+            <input type="text" id="walletAddress" class="input-field" placeholder="Enter your wallet address"/>
+        </div><br />
 
-    <label for="beltLevel">Select Belt Level:</label>
-    <select id="beltLevel">
-        <option value="0">White Belt</option>
-        <option value="1">Yellow Belt</option>
-        <option value="2">Orange Belt</option>
-        <option value="3">Green Belt</option>
-        <option value="4">Blue Belt</option>
-        <option value="5">Brown Belt</option>
-        <option value="6">Black Belt</option>
-    </select><br /><br />
+        <div id="registrationSection">
+            <label for="beltLevel">Select Belt Level:</label>
+            <select id="beltLevel" class="input-field">
+                <option value="0">White Belt</option>
+                <option value="1">Yellow Belt</option>
+                <option value="2">Orange Belt</option>
+                <option value="3">Green Belt</option>
+                <option value="4">Blue Belt</option>
+                <option value="5">Brown Belt</option>
+                <option value="6">Black Belt</option>
+            </select>
+            <button class="button" onclick="registerUser()">Register</button>
+        </div><br />
 
-    <button onclick="registerUser()">Register</button><br /><br />
+        <div id="promotionSection">
+            <label for="studentAddress">Student's Wallet Address:</label>
+            <input type="text" id="studentAddress" class="input-field" placeholder="Enter student's wallet address"/>
+            <button class="button" onclick="promoteStudent()">Promote Student</button>
+        </div><br />
 
-    <label for="studentAddress">Student's Wallet Address:</label>
-    <input type="text" id="studentAddress" /><br /><br />
+        <div id="checkBeltLevelSection">
+            <label for="studentBeltAddress">Get Student's Belt Level:</label>
+            <input type="text" id="studentBeltAddress" class="input-field" placeholder="Enter student's wallet address"/>
+            <button class="button" onclick="getStudentBeltLevel()">Get Student's Belt Level</button>
+        </div><br />
 
-    <label for="newBeltLevel">Select New Belt Level:</label>
-    <select id="newBeltLevel">
-        <!-- Update options to include all belt levels higher than the student's current belt level -->
-        <option value="1">Yellow Belt</option>
-        <option value="2">Orange Belt</option>
-        <option value="3">Green Belt</option>
-        <option value="4">Blue Belt</option>
-        <option value="5">Brown Belt</option>
-        <option value="6">Black Belt</option>
-    </select><br /><br />
+        <div id="resultMessage" class="message"></div>
+        <div id="errorMessage" class="error"></div>
+    </div>
 
-    <button onclick="promoteStudent()">Promote Student</button><br /><br />
-
-    <label for="studentBeltLevel">Get Student's Belt Level (Enter Student's Wallet Address):</label>
-    <input type="text" id="studentBeltAddress" /><br /><br />
-
-    <!-- Update the onclick attribute to match the function name -->
-    <button onclick="getStudentBeltLevel()">Get Student's Belt Level</button>
-
-    <!-- Include the web3.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
-    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js">
+// ...continuing the script inclusion
+</script>
+<script src="app.js"></script>
 </body>
 </html>
