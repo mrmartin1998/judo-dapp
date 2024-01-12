@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -30,7 +31,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -49,7 +51,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -62,7 +65,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -122,7 +126,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"beltPromotionAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"judoka\",\"type\":\"address\"}],\"name\":\"getBeltLevel\",\"outputs\":[{\"internalType\":\"enum IJudoBeltStorage.BeltLevel\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"judokaBelts\",\"outputs\":[{\"internalType\":\"enum IJudoBeltStorage.BeltLevel\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"judoka\",\"type\":\"address\"},{\"internalType\":\"enum IJudoBeltStorage.BeltLevel\",\"name\":\"belt\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"setBeltLevel\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userRegistrationAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_beltPromotionAddress\",\"type\":\"address\"}],\"name\":\"setContractAddresses\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"userRegistrationAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/JudoBeltStorage.sol\":\"JudoBeltStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/JudoBeltStorage.sol\":{\"keccak256\":\"0x1a2c796059b580436d97a282600e5d99fbc838d4c877216eb15c649ea3d8e4ef\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dedc2046181bcf779491e3f3e0bb2ab3e5a43892d8e0d4b196002164701b4132\",\"dweb:/ipfs/QmXns78PBVca1KuX2t6f2NBri6sa7MrJE1zW2HjZkhvMW2\"]},\"project:/contracts/JudoBeltStorageInterface.sol\":{\"keccak256\":\"0xa3c4b887891b72ded06709bb56d9285e6a965ad19db595a650acf3bfb58d4a6c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5cfda5f1b65fd7580e663f4fa475c5ab0f78a882e71e9b533a20c2fb6a9f1cf7\",\"dweb:/ipfs/QmZ8sQtJaFSSJqJp6EWbCKJ9eCTM41aDySqHrHZ4bMvyC9\"]}},\"version\":1}",
@@ -4760,12 +4765,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x5a4695288A53dec5E1F6cc2cBA8d731376d7dDe2",
-      "transactionHash": "0x5389bf6aef637342396639c4c6aa19856e63556e60130ce3bd7225c96ac3305d"
+      "address": "0xea8d4db3Bb29A24C553f2A4761a8C0761046B138",
+      "transactionHash": "0x2e432f9c688385e3caa31bc3e6346c8404cef160b2a7b92fc908c1bc6d1910a7"
     }
   },
-  "schemaVersion": "3.4.14",
-  "updatedAt": "2024-01-11T11:57:22.841Z",
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-01-12T08:48:35.751Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
