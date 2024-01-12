@@ -2,48 +2,52 @@
 
 ## Description
 
-The Ethereum Judo Belt System dApp is a decentralized application that leverages the Ethereum blockchain to manage and track students' progress in a Judo Belt System. It allows senseis (black belt instructors) to register new students, promote them to higher belt levels, and view their current belt levels in real-time.
+The Ethereum Judo Belt System dApp is a blockchain-based decentralized application (dApp) on the Ethereum network. It's designed to manage and track the progression of students in a Judo Belt System. The dApp enables senseis (black belt instructors) to seamlessly register new students, promote them through different belt levels, and view their current belt levels in real-time, all secured by the Ethereum blockchain.
 
 ## Technologies Used
 
-- Solidity (Smart Contract Development)
-- HTML/CSS/JavaScript (Front-end)
-- Truffle (Development Framework)
-- Ganache (Local Blockchain for Testing)
-- Web3.js (Library for Interacting with the Ethereum Network)
-- MetaMask (Ethereum Wallet Integration)
+- **Solidity:** Smart contract development on the Ethereum blockchain.
+- **HTML/CSS/JavaScript:** Front-end user interface.
+- **Truffle:** Development framework for Ethereum.
+- **Ganache:** Personal blockchain for Ethereum development.
+- **Web3.js:** Ethereum JavaScript API for interacting with the blockchain.
+- **MetaMask:** Browser-based Ethereum wallet.
 
-## Smart Contract
+## Modular Smart Contract Architecture
 
-The core of the dApp is the smart contract (JudoBeltSystem.sol), responsible for storing student data and managing promotions. Here are the main functions in the smart contract:
+The dApp's architecture is centered around modular smart contracts, enhancing flexibility and scalability. This design allows for easier updates and future expansions. The main contracts include:
 
-1. `constructor`: The constructor function is called when the contract is deployed. It takes an array of addresses (`senseiWallets`) representing the black belt senseis.
+1. **JudoBeltStorage.sol:** Central contract for managing judokas' belt levels.
+2. **JudoUserRegistration.sol:** Manages the registration of new judokas, ensuring that only authorized instructors can add new students.
+3. **JudoBeltPromotion.sol:** Handles the promotion of judokas, updating their belt levels according to Judo standards.
 
-2. `registerUser`: This function allows senseis to register new students with their initial belt level. It takes the initial belt level as an argument and adds the student's address and belt level to the `users` mapping.
+Each contract is designed to be independent yet interconnected, providing a robust and efficient system for managing the Judo Belt System.
 
-3. `promoteStudent`: Senseis can use this function to promote a registered student to a higher belt level. It takes the student's address and the new belt level as arguments and updates the student's belt level in the `users` mapping.
+## Front-End Interface
 
-4. `getBeltLevel`: This function allows anyone to query a student's current belt level by providing the student's address.
+The front-end is a user-friendly interface developed with HTML, CSS, and JavaScript. It interacts with the smart contracts via Web3.js, offering functionalities such as:
 
-## Front-End
+- Registering new judokas.
+- Promoting students to higher belts.
+- Viewing real-time belt levels.
 
-The front-end consists of an `index.html` file and an `app.js` file. The HTML provides the user interface, while the JavaScript code interacts with the smart contract and updates the UI based on blockchain data.
+### Installation & Setup
 
-### Installation
+1. **Clone the Repository:** Get the code on your local machine.
+2. **Install Truffle and Ganache:** Set up a local blockchain environment for testing and development.
+3. **Compile and Deploy Smart Contracts:** Use Truffle to deploy contracts on your local blockchain.
+4. **Connect to MetaMask:** Ensure MetaMask is configured for your local Ethereum blockchain.
 
-1. Clone the repository to your local machine.
-2. Install Truffle and Ganache to set up a local blockchain environment.
-3. Compile and deploy the smart contract to the local blockchain.
-4. Update the `contractAddress` variable in the `app.js` file with the deployed contract address.
+### Usage Guide
 
-### Usage
+- Open `index.html` in your browser to interact with the dApp.
+- Connect MetaMask to transact on the Ethereum network.
+- Register, promote, and view judokas' belt levels directly through the dApp.
 
-1. Open the `index.html` file in a web browser.
-2. Connect your MetaMask wallet to the dApp (make sure you have some test Ether on the local blockchain).
-3. Register new students, promote existing students, and check their belt levels.
+## Roadmap
 
-### Roadmap
+Future updates will focus on:
 
-- Enhance user authentication and access control for more secure interactions.
-- Implement additional features, such as student profiles, achievements, and certificates.
-- Improve the UI/UX with styling and interactive elements.
+- Improved security measures and access controls.
+- Expanded features like comprehensive student profiles and achievement tracking.
+- Enhanced UI/UX for a more engaging user experience.
