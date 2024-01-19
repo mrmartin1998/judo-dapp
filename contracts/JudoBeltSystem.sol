@@ -16,8 +16,9 @@ contract JudoBeltSystem {
     mapping(address => uint256) public judokaIds;
     address public admin;
 
-    event JudokaRegistered(uint256 indexed id, string name, address walletAddress, BeltLevel beltLevel);
-    event BeltLevelUpdated(uint256 indexed id, BeltLevel newBeltLevel);
+    // Updated event definitions with timestamps
+    event JudokaRegistered(uint256 indexed id, string name, address walletAddress, BeltLevel beltLevel, uint256 timestamp);
+    event BeltLevelUpdated(uint256 indexed id, BeltLevel oldBeltLevel, BeltLevel newBeltLevel, uint256 timestamp);
 
     constructor() {
         admin = msg.sender;
@@ -29,7 +30,7 @@ contract JudoBeltSystem {
         judokaCount++;
         judokas[judokaCount] = Judoka(judokaCount, _name, _walletAddress, BeltLevel.Black);
         judokaIds[_walletAddress] = judokaCount;
-        emit JudokaRegistered(judokaCount, _name, _walletAddress, BeltLevel.Black);
+        emit JudokaRegistered(judokaCount, _name, _walletAddress, BeltLevel.Black, block.timestamp);
     }
 
     function registerJudoka(string memory _name, address _walletAddress) public {
@@ -38,7 +39,7 @@ contract JudoBeltSystem {
         judokaCount++;
         judokas[judokaCount] = Judoka(judokaCount, _name, _walletAddress, BeltLevel.White);
         judokaIds[_walletAddress] = judokaCount;
-        emit JudokaRegistered(judokaCount, _name, _walletAddress, BeltLevel.White);
+        emit JudokaRegistered(judokaCount, _name, _walletAddress, BeltLevel.White, block.timestamp);
     }
 
     function getBeltLevel(uint256 _id) public view returns (BeltLevel) {
@@ -50,8 +51,11 @@ contract JudoBeltSystem {
         require(isBlackBelt(msg.sender), "Only black belts can promote judokas");
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
         require(_newBeltLevel > judokas[_id].beltLevel, "New level must be higher");
+
+        BeltLevel oldBeltLevel = judokas[_id].beltLevel;
         judokas[_id].beltLevel = _newBeltLevel;
-        emit BeltLevelUpdated(_id, _newBeltLevel);
+
+        emit BeltLevelUpdated(_id, oldBeltLevel, _newBeltLevel, block.timestamp);
     }
 
     function isBlackBelt(address _address) public view returns(bool) {
