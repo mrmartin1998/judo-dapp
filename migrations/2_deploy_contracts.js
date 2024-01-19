@@ -1,22 +1,14 @@
-const JudoBeltStorage = artifacts.require("JudoBeltStorage");
-const JudokaRegistration = artifacts.require("JudokaRegistration");
-const BeltPromotionManagement = artifacts.require("BeltPromotionManagement");
+const JudoBeltSystem = artifacts.require("JudoBeltSystem");
 
 module.exports = async function(deployer) {
     try {
-        await deployer.deploy(JudoBeltStorage);
-        const storageInstance = await JudoBeltStorage.deployed();
-
-        await deployer.deploy(JudokaRegistration, storageInstance.address);
-        const registrationInstance = await JudokaRegistration.deployed();
-        await deployer.deploy(BeltPromotionManagement, storageInstance.address);
-        const promotionInstance = await BeltPromotionManagement.deployed();
+        // Deploy the JudoBeltSystem contract
+        await deployer.deploy(JudoBeltSystem);
+        const beltSystemInstance = await JudoBeltSystem.deployed();
     
         console.log("Deployed addresses:");
-        console.log(`JudoBeltStorage: ${storageInstance.address}`);
-        console.log(`JudokaRegistration: ${registrationInstance.address}`);
-        console.log(`BeltPromotionManagement: ${promotionInstance.address}`);
+        console.log(`JudoBeltSystem: ${beltSystemInstance.address}`);
     } catch (error) {
         console.error("Error deploying contracts:", error);
     }
-};    
+};
