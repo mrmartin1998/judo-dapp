@@ -1,197 +1,261 @@
 // app.js
 
-const judoBeltStorageAddress = '0x329672B5Ee90e3Bb22388E13b0b487A4705D3255';
-const judoUserRegistrationAddress = '0xC361A101CC3E4f32F2701CFec6b95a2D29099baa';
-const judoBeltPromotionAddress = '0x2408236548c7BCdC09DAE405346c637e7064a6a2';
+const judoBeltSystemAddress = '0xBDF6E2f379ba491B1B3deC1B2342bea3B8139b86'; // Replace with your JudoBeltSystem contract address
 
-const judoBeltStorageABI = [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [],
-      "name": "admin",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "blackBelts",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "judokaBelts",
-      "outputs": [
-        {
-          "internalType": "enum JudoBeltStorage.BeltLevel",
-          "name": "",
-          "type": "uint8"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "blackBeltAddress",
-          "type": "address"
-        }
-      ],
-      "name": "addBlackBelt",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "judoka",
-          "type": "address"
-        },
-        {
-          "internalType": "enum JudoBeltStorage.BeltLevel",
-          "name": "belt",
-          "type": "uint8"
-        }
-      ],
-      "name": "setBeltLevel",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "judoka",
-          "type": "address"
-        }
-      ],
-      "name": "getBeltLevel",
-      "outputs": [
-        {
-          "internalType": "enum JudoBeltStorage.BeltLevel",
-          "name": "",
-          "type": "uint8"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "judoka",
-          "type": "address"
-        }
-      ],
-      "name": "isBlackBelt",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    }
-  ];
-const judoUserRegistrationABI = [
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "storageAddress",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        }
-      ],
-      "name": "registerUser",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ];
-const judoBeltPromotionABI = [
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "storageAddress",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "judoka",
-          "type": "address"
-        }
-      ],
-      "name": "promoteJudoka",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]; 
+const judoBeltSystemABI = [
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "oldBeltLevel",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "newBeltLevel",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "BeltLevelUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "beltLevel",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "JudokaRegistered",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "judokaCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "judokaIds",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "judokas",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "beltLevel",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_walletAddress",
+        "type": "address"
+      }
+    ],
+    "name": "registerBlackBelt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_walletAddress",
+        "type": "address"
+      }
+    ],
+    "name": "registerJudoka",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBeltLevel",
+    "outputs": [
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "name": "_newBeltLevel",
+        "type": "uint8"
+      }
+    ],
+    "name": "promoteJudoka",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "isBlackBelt",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  }
+];
 
-
-// Contract instances
-let judoBeltStorage, judoUserRegistration, judoBeltPromotion;
+let judoBeltSystem;
 
 // Initialize Web3 and contracts
 async function initWeb3() {
@@ -213,52 +277,102 @@ async function initWeb3() {
 }
 
 function setupContracts() {
-    judoBeltStorage = new web3.eth.Contract(judoBeltStorageABI, judoBeltStorageAddress);
-    judoUserRegistration = new web3.eth.Contract(judoUserRegistrationABI, judoUserRegistrationAddress);
-    judoBeltPromotion = new web3.eth.Contract(judoBeltPromotionABI, judoBeltPromotionAddress);
-    console.log('Contracts are set up and ready to interact with.');
+    judoBeltSystem = new web3.eth.Contract(judoBeltSystemABI, judoBeltSystemAddress);
+    console.log('Contract is set up and ready to interact with.');
 }
 
-// Function to register user
-async function registerUser() {
-  const userAddress = document.getElementById('walletAddress').value; // Address of the user being registered
+// Function to register black belt
+async function registerBlackBelt(name, walletAddress) {
+    try {
+        const accounts = await web3.eth.getAccounts();
+        await judoBeltSystem.methods.registerBlackBelt(name, walletAddress).send({ from: accounts[0] });
+        displayMessage('Black belt registration successful.');
+    } catch (error) {
+        console.error('Error registering black belt:', error);
+        displayError('Error registering black belt.');
+    }
+}
+
+// Function to register judoka
+async function registerJudoka() {
+    const name = document.getElementById('judokaName').value;
+    const walletAddress = document.getElementById('judokaAddress').value;
+
+    try {
+        const accounts = await web3.eth.getAccounts();
+        await judoBeltSystem.methods.registerJudoka(name, walletAddress).send({ from: accounts[0] });
+        displayMessage('Judoka registration successful.');
+    } catch (error) {
+        console.error('Error registering judoka:', error);
+        displayError('Error registering judoka.');
+    }
+}
+
+// Function to promote judoka
+async function promoteJudoka() {
+  const judokaIdInput = document.getElementById('judokaId').value;
+  const newBeltLevelInput = document.getElementById('newBeltLevel').value;
+
+  // Ensure that the inputs are not empty and are numbers
+  if (!judokaIdInput || !newBeltLevelInput) {
+      displayError('Please ensure all fields are filled correctly.');
+      return;
+  }
+
+  const judokaId = parseInt(judokaIdInput);
+  const newBeltLevel = parseInt(newBeltLevelInput);
+
+  // Check if the parsed values are valid numbers
+  if (isNaN(judokaId) || isNaN(newBeltLevel)) {
+      displayError('Invalid input. Please enter valid numbers.');
+      return;
+  }
 
   try {
-      await judoUserRegistration.methods.registerUser(userAddress).send({ from: userAddress });
-      displayMessage('Registration successful.');
+      const accounts = await web3.eth.getAccounts();
+      await judoBeltSystem.methods.promoteJudoka(judokaId, newBeltLevel).send({ from: accounts[0] });
+      displayMessage('Judoka promotion successful.');
   } catch (error) {
-      console.error('Error registering user:', error);
-      displayError('Error registering user.');
+      console.error('Error promoting judoka:', error);
+      displayError('Error promoting judoka.');
   }
 }
 
 
-
-// Function to promote student
-async function promoteStudent() {
-    const studentAddress = document.getElementById('studentAddress').value;
-    const fromAddress = document.getElementById('walletAddress').value; 
-
-    try {
-        await judoBeltPromotion.methods.promoteStudent(studentAddress).send({ from: fromAddress });
-        displayMessage('Promotion successful.');
-    } catch (error) {
-        console.error('Error promoting student:', error);
-        displayError('Error promoting student.');
-    }
+// Function to get the belt level of a judoka
+async function getBeltLevel() {
+  const judokaAddress = document.getElementById('judokaBeltAddress').value;
+  try {
+      const judokaId = await judoBeltSystem.methods.judokaIds(judokaAddress).call();
+      const beltLevel = await judoBeltSystem.methods.getBeltLevel(judokaId).call();
+      displayBeltLevel(beltLevel, judokaId); // Pass judokaId as a second argument
+  } catch (error) {
+      console.error('Error fetching belt level:', error);
+      displayError('Error fetching belt level.');
+  }
 }
 
-// Function to get user belt level
-async function getStudentBeltLevel() {
-    const userAddress = document.getElementById('studentBeltAddress').value;
+// Function to display belt level and judoka ID
+function displayBeltLevel(beltLevel, judokaId) { // Add judokaId as a parameter
+  let beltLevelText = '';
+  switch(beltLevel) {
+      case '0': beltLevelText = 'White Belt'; break;
+      case '1': beltLevelText = 'Yellow Belt'; break;
+      case '2': beltLevelText = 'Orange Belt'; break;
+      case '3': beltLevelText = 'Green Belt'; break;
+      case '4': beltLevelText = 'Blue Belt'; break;
+      case '5': beltLevelText = 'Brown Belt'; break;
+      case '6': beltLevelText = 'Black Belt'; break;
+      default: beltLevelText = 'Unknown';
+  }
+  // Display both the belt level and the judoka ID
+  document.getElementById('beltLevelDisplay').innerText = `Belt Level: ${beltLevelText}, Judoka ID: ${judokaId}`;
+}
 
-    try {
-        const beltLevel = await judoBeltStorage.methods.getBeltLevel(userAddress).call();
-        displayMessage(`The user's belt level is: ${beltLevel}`);
-    } catch (error) {
-        console.error('Error getting user belt level:', error);
-        displayError('Error getting user belt level.');
-    }
+function registerBlackBeltFromInput() {
+    const name = document.getElementById('blackBeltName').value;
+    const walletAddress = document.getElementById('blackBeltAddress').value;
+    registerBlackBelt(name, walletAddress);
 }
 
 // Helper functions to display messages
@@ -268,8 +382,8 @@ function displayMessage(message) {
 }
 
 function displayError(message) {
-  document.getElementById('errorMessage').innerText = message;
-  document.getElementById('resultMessage').innerText = '';
+    document.getElementById('errorMessage').innerText = message;
+    document.getElementById('resultMessage').innerText = '';
 }
 
 window.addEventListener('load', initWeb3);
