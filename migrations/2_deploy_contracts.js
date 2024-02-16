@@ -8,7 +8,7 @@ module.exports = async function(deployer) {
         const beltSystemInstance = await JudoBeltSystem.deployed();
 
         // Deploy the JudoCompetition contract
-        await deployer.deploy(JudoCompetition, beltSystemInstance.address);
+        await deployer.deploy(JudoCompetition); // Removed the parameter
         const competitionInstance = await JudoCompetition.deployed();
     
         // Output the addresses of the deployed contracts
