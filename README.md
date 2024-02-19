@@ -1,49 +1,46 @@
-# Ethereum Judo Belt System dApp
+# Judo dApp Version 3: Case Study
 
-## Description
+## Introduction
+Welcome to Version 3 of the Judo dApp! This version is a major step forward in our journey to revolutionize how judo practitioners and gyms interact with the sport. We are introducing a case study with a focus on practicality, usability, and scalability. Our goal is to eventually launch this dApp on the Ethereum mainnet, making it a real-world application for judo communities globally.
 
-The Ethereum Judo Belt System dApp is a decentralized application that leverages the Ethereum blockchain to manage and track students' progress in a Judo Belt System. It allows senseis (black belt instructors) to register new students, promote them to higher belt levels, and view their current belt levels in real-time.
+## Project Overview
+In this version, we aim to create a more structured, user-friendly, and efficient decentralized application (dApp) for judo practitioners. We will focus on:
 
-## Technologies Used
+- Enhancing judoka registration with additional details.
+- Improving data retrieval and management.
+- Structuring the web application for easy and intuitive use.
+- Upgrading smart contracts for better performance and security.
+- Collecting and implementing feedback for continuous improvement.
 
-- Solidity (Smart Contract Development)
-- HTML/CSS/JavaScript (Front-end)
-- Truffle (Development Framework)
-- Ganache (Local Blockchain for Testing)
-- Web3.js (Library for Interacting with the Ethereum Network)
-- MetaMask (Ethereum Wallet Integration)
+## Case Study Scope
+We will test this version with a select group of up to 10 judokas from a local gym. This will allow us to gather valuable insights and make necessary adjustments before a broader launch.
 
-## Smart Contract
+## Sprint Plan
+Our development process will follow the Scrum methodology, divided into two-week sprints. Here's a brief overview of each sprint's objectives:
 
-The core of the dApp is the smart contract (JudoBeltSystem.sol), responsible for storing student data and managing promotions. Here are the main functions in the smart contract:
+### Sprint 1: Initial Setup and Basic Framework
+Setting up the development environment and starting the basic structure of the dApp.
 
-1. `constructor`: The constructor function is called when the contract is deployed. It takes an array of addresses (`senseiWallets`) representing the black belt senseis.
+### Sprint 2: Judoka Registration Backend
+Developing backend functionality for judoka registration.
 
-2. `registerUser`: This function allows senseis to register new students with their initial belt level. It takes the initial belt level as an argument and adds the student's address and belt level to the `users` mapping.
+### Sprint 3: Front-end Development for Viewing Judokas
+Creating a user-friendly interface for viewing registered judokas.
 
-3. `promoteStudent`: Senseis can use this function to promote a registered student to a higher belt level. It takes the student's address and the new belt level as arguments and updates the student's belt level in the `users` mapping.
+### Sprint 4: Smart Contract Enhancement and Data Retrieval
+Enhancing smart contract for efficient data retrieval and admin functions.
 
-4. `getBeltLevel`: This function allows anyone to query a student's current belt level by providing the student's address.
+### Sprint 5: Completion of Judoka Profile and Feedback Integration
+Finalizing individual judoka profiles and starting to integrate user feedback.
 
-## Front-End
+### Sprint 6: Competition Management and Additional Features
+Beginning work on competition management and additional features.
 
-The front-end consists of an `index.html` file and an `app.js` file. The HTML provides the user interface, while the JavaScript code interacts with the smart contract and updates the UI based on blockchain data.
+### Sprint 7: Testing, Refinement, and Documentation
+Conducting extensive testing, refining features, and documenting the project.
 
-### Installation
+### Sprint 8: Preparation for Mainnet Launch
+Final preparations for launching the dApp on the main Ethereum network.
 
-1. Clone the repository to your local machine.
-2. Install Truffle and Ganache to set up a local blockchain environment.
-3. Compile and deploy the smart contract to the local blockchain.
-4. Update the `contractAddress` variable in the `app.js` file with the deployed contract address.
-
-### Usage
-
-1. Open the `index.html` file in a web browser.
-2. Connect your MetaMask wallet to the dApp (make sure you have some test Ether on the local blockchain).
-3. Register new students, promote existing students, and check their belt levels.
-
-### Roadmap
-
-- Enhance user authentication and access control for more secure interactions.
-- Implement additional features, such as student profiles, achievements, and certificates.
-- Improve the UI/UX with styling and interactive elements.
+## Conclusion
+This project is not only a portfolio piece but also a stepping stone towards a fully functional application on the Ethereum mainnet. We are committed to creating a product that truly serves the judo community and showcases the potential of blockchain technology in sports management.
