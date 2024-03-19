@@ -1,0 +1,43 @@
+Proposed Website Structure
+1. Home Page
+Overview: A brief introduction to the dApp, its purpose, and how users can benefit from it.
+Call-to-Action (CTA): Direct links or buttons to key actions like registering a judoka or viewing the list of judokas.
+
+2. Navigation Bar
+Home: Link back to the home page.
+Register Judoka: A straightforward form for judoka registration.
+View Judokas: A section where users can see a list of all registered judokas.
+Judoka Profiles: This might be a dynamic part of the 'View Judokas' section, where clicking on a judoka's name takes you to their detailed profile.
+Manage Competitions: (For future expansion) A place for organizing and tracking competitions.
+About: Information about the dApp, its goals, and the team behind it.
+Help/FAQ: For user support, frequently asked questions, and guides on how to use the dApp.
+Settings: User preferences, admin settings (if applicable), and other configurations.
+
+3. Register Judoka Page
+Form Fields: Name, date of birth, gender, contact information, belt level, club affiliation, etc.
+Submission Button: To submit the form data to the smart contract.
+Feedback: A message to confirm successful registration or report any errors.
+
+4. View Judokas Page
+List/Table View: Display all registered judokas with basic information.
+Filtering and Sorting: Options to filter and sort the judoka list (e.g., by belt level, age, gender).
+Search Functionality: To quickly find specific judokas.
+Profile Link: Clickable names or buttons to view detailed profiles.
+
+5. Judoka Profile Page
+Detailed Information: All the data available for a judoka, including competitive records if available.
+Edit Option: For admins to update information like belt level.
+
+6. Competition Management (Future Feature)
+Competition Listing: Current and upcoming judo competitions.
+Registration for Competitions: Allowing judokas to sign up for events.
+Results and Statistics: Past competition results and judoka performance stats.
+
+7. Settings/Help Page
+User Settings: Account settings, notification preferences, etc.
+Help and Support: Guides, contact support, and FAQ.
+
+8. Footer
+Contact Information: Email, social media links, etc.
+Legal: Terms of service, privacy policy, etc.
+Credits: Acknowledgments, technology used, etc.
