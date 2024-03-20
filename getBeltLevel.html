@@ -1,0 +1,26 @@
+<head>
+    <title>Judo Belt System dApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+        <body>
+            <!-- Navigation Bar -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+                    <li><a href="registerJudoka.html">Register Judoka</a></li>
+                    <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+                    <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+                </ul>
+            </nav>
+        
+        <!-- Get Judoka Belt Level Section -->
+        <div id="getBeltLevelSection">
+            <label for="judokaBeltAddress">Judoka's Wallet Address:</label>
+            <input type="text" id="judokaBeltAddress" class="input-field" placeholder="Enter judoka's wallet address"/>
+            <button class="button" onclick="getBeltLevel()">Get Belt Level</button>
+        </div><br />
+
+        <div id="beltLevelDisplay" class="message"></div>
+        </body>
+        

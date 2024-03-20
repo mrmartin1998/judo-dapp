@@ -13,6 +13,20 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+            <li><a href="registerJudoka.html">Register Judoka</a></li>
+            <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+            <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container" id="home">
+        <!-- ... rest of your existing code ... -->
+    </div>
     <div class="container">
         <h1>Judo Belt System dApp</h1>
         <p>Welcome to the Judo Belt System! Please register or promote students.</p>
@@ -70,5 +84,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
     <script src="app.js"></script>
+
+    <style>
+        /* Existing styles ... */
+    
+        /* Navigation bar styles */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            margin: 0;
+        }
+    
+        nav ul li {
+            float: left;
+        }
+    
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+    
+        nav ul li a:hover {
+            background-color: #111;
+        }
+    </style>
 </body>
 </html>

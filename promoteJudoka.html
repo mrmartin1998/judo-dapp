@@ -1,0 +1,34 @@
+<head>
+    <title>Judo Belt System dApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+        <body>
+            <!-- Navigation Bar -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+                    <li><a href="registerJudoka.html">Register Judoka</a></li>
+                    <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+                    <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+                </ul>
+            </nav>
+        <!-- Promote Judoka Section -->
+        <div id="promotionSection">
+            <label for="judokaId">Judoka's ID:</label>
+            <input type="number" id="judokaId" class="input-field" placeholder="Enter judoka's ID"/>
+            <label for="newBeltLevel">Select New Belt Level:</label>
+            <select id="newBeltLevel" class="input-field">
+                <option value="0">White Belt</option>
+                <option value="1">Yellow Belt</option>
+                <option value="2">Orange Belt</option>
+                <option value="3">Green Belt</option>
+                <option value="4">Blue Belt</option>
+                <option value="5">Brown Belt</option>
+                <option value="6">Black Belt</option>
+            </select>
+            <button class="button" onclick="promoteJudoka()">Promote Judoka</button>
+        </div><br />
+
+        </body>
+        
