@@ -1,14 +1,25 @@
+html {
+    height: 100%;
+}
+
 body { 
     font-family: Arial, sans-serif; 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh;
     margin: 0;
-    padding-top: 50px; /* Space for the fixed navbar */
+    padding-top: 50px; /* Adjust if needed based on the nav bar height */
+}
+
+main {
+    flex: 1; /* Allows main content to grow and shrink as needed */
 }
 
 .container { 
     width: 80%; 
     margin: auto; 
-    padding: 20px;
-    padding-top: 60px; /* Add more space on the top of the container */
+    padding: 0px;
+    padding-top: 0px; /* Increase this value if the content is too low */
 }
 
 .button { 
@@ -64,4 +75,15 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: #111;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333; /* Matching nav background */
+    color: white; /* Text color */
+    text-align: center; /* Center the text */
+    padding: 10px 0; /* Some padding top and bottom */
+    position: relative; /* Position relative to the layout */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
 }
