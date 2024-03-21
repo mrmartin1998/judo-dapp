@@ -1,0 +1,30 @@
+<head>
+    <title>Judo Belt System dApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+        <body>
+            <!-- Navigation Bar -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+                    <li><a href="registerJudoka.html">Register Judoka</a></li>
+                    <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+                    <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+                </ul>
+            </nav>
+        
+        <!-- Register Black Belt Section -->
+        <div id="blackBeltRegistrationSection">
+            <label for="blackBeltName">Black Belt's Name:</label>
+            <input type="text" id="blackBeltName" class="input-field" placeholder="Enter black belt's name"/>
+            <label for="blackBeltAddress">Black Belt's Wallet Address:</label>
+            <input type="text" id="blackBeltAddress" class="input-field" placeholder="Enter black belt's wallet address"/>
+            <button class="button" onclick="registerBlackBeltFromInput()">Register Black Belt</button>
+        </div><br />
+        <div id="beltLevelDisplay" class="message"></div>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+        <script src="app.js"></script>
+        </body>
+        

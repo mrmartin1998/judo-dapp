@@ -13,18 +13,48 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+            <li><a href="registerJudoka.html">Register Judoka</a></li>
+            <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+            <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container" id="home">
+        <!-- ... rest of your existing code ... -->
+    </div>
     <div class="container">
         <h1>Judo Belt System dApp</h1>
         <p>Welcome to the Judo Belt System! Please register or promote students.</p>
 
-        <div id="walletAddressSection">
-            <label for="walletAddress">Your Wallet Address:</label>
-            <input type="text" id="walletAddress" class="input-field" placeholder="Enter your wallet address"/>
+        <!-- Register Black Belt Section -->
+        <div id="blackBeltRegistrationSection">
+            <label for="blackBeltName">Black Belt's Name:</label>
+            <input type="text" id="blackBeltName" class="input-field" placeholder="Enter black belt's name"/>
+            <label for="blackBeltAddress">Black Belt's Wallet Address:</label>
+            <input type="text" id="blackBeltAddress" class="input-field" placeholder="Enter black belt's wallet address"/>
+            <button class="button" onclick="registerBlackBeltFromInput()">Register Black Belt</button>
         </div><br />
 
-        <div id="registrationSection">
-            <label for="beltLevel">Select Belt Level:</label>
-            <select id="beltLevel" class="input-field">
+        <!-- Register Judoka Section -->
+        <div id="judokaRegistrationSection">
+            <label for="judokaName">Judoka's Name:</label>
+            <input type="text" id="judokaName" class="input-field" placeholder="Enter judoka's name"/>
+            <label for="judokaAddress">Judoka's Wallet Address:</label>
+            <input type="text" id="judokaAddress" class="input-field" placeholder="Enter judoka's wallet address"/>
+            <button class="button" onclick="registerJudoka()">Register Judoka</button>
+        </div><br />
+
+        <!-- Promote Judoka Section -->
+        <div id="promotionSection">
+            <label for="judokaId">Judoka's ID:</label>
+            <input type="number" id="judokaId" class="input-field" placeholder="Enter judoka's ID"/>
+            <label for="newBeltLevel">Select New Belt Level:</label>
+            <select id="newBeltLevel" class="input-field">
                 <option value="0">White Belt</option>
                 <option value="1">Yellow Belt</option>
                 <option value="2">Orange Belt</option>
@@ -33,28 +63,55 @@
                 <option value="5">Brown Belt</option>
                 <option value="6">Black Belt</option>
             </select>
-            <button class="button" onclick="registerUser()">Register</button>
+            <button class="button" onclick="promoteJudoka()">Promote Judoka</button>
         </div><br />
 
-        <div id="promotionSection">
-            <label for="studentAddress">Student's Wallet Address:</label>
-            <input type="text" id="studentAddress" class="input-field" placeholder="Enter student's wallet address"/>
-            <button class="button" onclick="promoteStudent()">Promote Student</button>
+
+        <!-- Get Judoka Belt Level Section -->
+        <div id="getBeltLevelSection">
+            <label for="judokaBeltAddress">Judoka's Wallet Address:</label>
+            <input type="text" id="judokaBeltAddress" class="input-field" placeholder="Enter judoka's wallet address"/>
+            <button class="button" onclick="getBeltLevel()">Get Belt Level</button>
         </div><br />
 
-        <div id="checkBeltLevelSection">
-            <label for="studentBeltAddress">Get Student's Belt Level:</label>
-            <input type="text" id="studentBeltAddress" class="input-field" placeholder="Enter student's wallet address"/>
-            <button class="button" onclick="getStudentBeltLevel()">Get Student's Belt Level</button>
-        </div><br />
+        <div id="beltLevelDisplay" class="message"></div>
+
+        <!-- Other sections as before -->
 
         <div id="resultMessage" class="message"></div>
         <div id="errorMessage" class="error"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js">
-// ...continuing the script inclusion
-</script>
-<script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+
+    <style>
+        /* Existing styles ... */
+    
+        /* Navigation bar styles */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            margin: 0;
+        }
+    
+        nav ul li {
+            float: left;
+        }
+    
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+    
+        nav ul li a:hover {
+            background-color: #111;
+        }
+    </style>
 </body>
 </html>
