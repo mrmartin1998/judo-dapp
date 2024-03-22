@@ -5440,15 +5440,15 @@
     "absolutePath": "project:/contracts/JudoCompetition.sol",
     "exportedSymbols": {
       "JudoCompetition": [
-        462
+        580
       ]
     },
-    "id": 463,
+    "id": 581,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 288,
+        "id": 406,
         "literals": [
           "solidity",
           "^",
@@ -5464,24 +5464,24 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 462,
+        "id": 580,
         "linearizedBaseContracts": [
-          462
+          580
         ],
         "name": "JudoCompetition",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "JudoCompetition.Competition",
-            "id": 302,
+            "id": 420,
             "members": [
               {
                 "constant": false,
-                "id": 290,
+                "id": 408,
                 "mutability": "mutable",
                 "name": "id",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "122:10:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5490,7 +5490,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 289,
+                  "id": 407,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "122:7:1",
@@ -5503,11 +5503,11 @@
               },
               {
                 "constant": false,
-                "id": 292,
+                "id": 410,
                 "mutability": "mutable",
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "143:11:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5516,7 +5516,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 291,
+                  "id": 409,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "143:6:1",
@@ -5529,11 +5529,11 @@
               },
               {
                 "constant": false,
-                "id": 294,
+                "id": 412,
                 "mutability": "mutable",
                 "name": "date",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "165:12:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5542,7 +5542,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 293,
+                  "id": 411,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "165:7:1",
@@ -5555,11 +5555,11 @@
               },
               {
                 "constant": false,
-                "id": 297,
+                "id": 415,
                 "mutability": "mutable",
                 "name": "participants",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "231:22:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5569,7 +5569,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 295,
+                    "id": 413,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "231:7:1",
@@ -5579,7 +5579,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 296,
+                  "id": 414,
                   "nodeType": "ArrayTypeName",
                   "src": "231:9:1",
                   "typeDescriptions": {
@@ -5591,11 +5591,11 @@
               },
               {
                 "constant": false,
-                "id": 299,
+                "id": 417,
                 "mutability": "mutable",
                 "name": "completed",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "264:14:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5604,7 +5604,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 298,
+                  "id": 416,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "264:4:1",
@@ -5617,11 +5617,11 @@
               },
               {
                 "constant": false,
-                "id": 301,
+                "id": 419,
                 "mutability": "mutable",
                 "name": "winner",
                 "nodeType": "VariableDeclaration",
-                "scope": 302,
+                "scope": 420,
                 "src": "289:14:1",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5630,7 +5630,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 300,
+                  "id": 418,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "289:7:1",
@@ -5645,18 +5645,18 @@
             ],
             "name": "Competition",
             "nodeType": "StructDefinition",
-            "scope": 462,
+            "scope": 580,
             "src": "92:219:1",
             "visibility": "public"
           },
           {
             "constant": false,
             "functionSelector": "a1681770",
-            "id": 304,
+            "id": 422,
             "mutability": "mutable",
             "name": "competitionCount",
             "nodeType": "VariableDeclaration",
-            "scope": 462,
+            "scope": 580,
             "src": "319:31:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -5665,7 +5665,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 303,
+              "id": 421,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "319:7:1",
@@ -5679,22 +5679,22 @@
           {
             "constant": false,
             "functionSelector": "9f6828d9",
-            "id": 309,
+            "id": 427,
             "mutability": "mutable",
             "name": "competitions",
             "nodeType": "VariableDeclaration",
-            "scope": 462,
+            "scope": 580,
             "src": "357:51:1",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
               "typeString": "mapping(uint256 => struct JudoCompetition.Competition)"
             },
             "typeName": {
-              "id": 308,
+              "id": 426,
               "keyType": {
-                "id": 305,
+                "id": 423,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "365:7:1",
@@ -5706,23 +5706,23 @@
               "nodeType": "Mapping",
               "src": "357:31:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                 "typeString": "mapping(uint256 => struct JudoCompetition.Competition)"
               },
               "valueType": {
-                "id": 307,
+                "id": 425,
                 "nodeType": "UserDefinedTypeName",
                 "pathNode": {
-                  "id": 306,
+                  "id": 424,
                   "name": "Competition",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 302,
+                  "referencedDeclaration": 420,
                   "src": "376:11:1"
                 },
-                "referencedDeclaration": 302,
+                "referencedDeclaration": 420,
                 "src": "376:11:1",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Competition_$302_storage_ptr",
+                  "typeIdentifier": "t_struct$_Competition_$420_storage_ptr",
                   "typeString": "struct JudoCompetition.Competition"
                 }
               }
@@ -5732,11 +5732,11 @@
           {
             "constant": false,
             "functionSelector": "f851a440",
-            "id": 311,
+            "id": 429,
             "mutability": "mutable",
             "name": "admin",
             "nodeType": "VariableDeclaration",
-            "scope": 462,
+            "scope": 580,
             "src": "415:20:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -5745,7 +5745,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 310,
+              "id": 428,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "415:7:1",
@@ -5759,21 +5759,21 @@
           },
           {
             "anonymous": false,
-            "id": 319,
+            "id": 437,
             "name": "CompetitionCreated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 318,
+              "id": 436,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 313,
+                  "id": 431,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 319,
+                  "scope": 437,
                   "src": "469:18:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5782,7 +5782,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 312,
+                    "id": 430,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "469:7:1",
@@ -5795,12 +5795,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 315,
+                  "id": 433,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 319,
+                  "scope": 437,
                   "src": "489:11:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5809,7 +5809,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 314,
+                    "id": 432,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "489:6:1",
@@ -5822,12 +5822,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 317,
+                  "id": 435,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "date",
                   "nodeType": "VariableDeclaration",
-                  "scope": 319,
+                  "scope": 437,
                   "src": "502:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5836,7 +5836,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 316,
+                    "id": 434,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "502:7:1",
@@ -5854,21 +5854,21 @@
           },
           {
             "anonymous": false,
-            "id": 325,
+            "id": 443,
             "name": "ParticipantAdded",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 324,
+              "id": 442,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 321,
+                  "id": 439,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "competitionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 325,
+                  "scope": 443,
                   "src": "545:29:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5877,7 +5877,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 320,
+                    "id": 438,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "545:7:1",
@@ -5890,12 +5890,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 323,
+                  "id": 441,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "participant",
                   "nodeType": "VariableDeclaration",
-                  "scope": 325,
+                  "scope": 443,
                   "src": "576:19:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5904,7 +5904,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 322,
+                    "id": 440,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "576:7:1",
@@ -5923,21 +5923,21 @@
           },
           {
             "anonymous": false,
-            "id": 331,
+            "id": 449,
             "name": "CompetitionResultRecorded",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 330,
+              "id": 448,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 327,
+                  "id": 445,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "competitionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 331,
+                  "scope": 449,
                   "src": "635:29:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5946,7 +5946,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 326,
+                    "id": 444,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "635:7:1",
@@ -5959,12 +5959,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 329,
+                  "id": 447,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "winner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 331,
+                  "scope": 449,
                   "src": "666:14:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5973,7 +5973,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 328,
+                    "id": 446,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "666:7:1",
@@ -5992,23 +5992,23 @@
           },
           {
             "body": {
-              "id": 339,
+              "id": 457,
               "nodeType": "Block",
               "src": "704:37:1",
               "statements": [
                 {
                   "expression": {
-                    "id": 337,
+                    "id": 455,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 334,
+                      "id": 452,
                       "name": "admin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 311,
+                      "referencedDeclaration": 429,
                       "src": "715:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -6019,7 +6019,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
-                        "id": 335,
+                        "id": 453,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -6030,7 +6030,7 @@
                           "typeString": "msg"
                         }
                       },
-                      "id": 336,
+                      "id": 454,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -6049,31 +6049,31 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 338,
+                  "id": 456,
                   "nodeType": "ExpressionStatement",
                   "src": "715:18:1"
                 }
               ]
             },
-            "id": 340,
+            "id": 458,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 332,
+              "id": 450,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "701:2:1"
             },
             "returnParameters": {
-              "id": 333,
+              "id": 451,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "704:0:1"
             },
-            "scope": 462,
+            "scope": 580,
             "src": "690:51:1",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -6081,7 +6081,7 @@
           },
           {
             "body": {
-              "id": 351,
+              "id": 469,
               "nodeType": "Block",
               "src": "770:97:1",
               "statements": [
@@ -6093,14 +6093,14 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 346,
+                        "id": 464,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
-                            "id": 343,
+                            "id": 461,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -6111,7 +6111,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 344,
+                          "id": 462,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -6127,11 +6127,11 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
-                          "id": 345,
+                          "id": 463,
                           "name": "admin",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 311,
+                          "referencedDeclaration": 429,
                           "src": "803:5:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -6146,7 +6146,7 @@
                       },
                       {
                         "hexValue": "4f6e6c792061646d696e2063616e20706572666f726d207468697320616374696f6e",
-                        "id": 347,
+                        "id": 465,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -6172,7 +6172,7 @@
                           "typeString": "literal_string \"Only admin can perform this action\""
                         }
                       ],
-                      "id": 342,
+                      "id": 460,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -6186,7 +6186,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 348,
+                    "id": 466,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6201,22 +6201,22 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 349,
+                  "id": 467,
                   "nodeType": "ExpressionStatement",
                   "src": "781:66:1"
                 },
                 {
-                  "id": 350,
+                  "id": 468,
                   "nodeType": "PlaceholderStatement",
                   "src": "858:1:1"
                 }
               ]
             },
-            "id": 352,
+            "id": 470,
             "name": "onlyAdmin",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 341,
+              "id": 459,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "767:2:1"
@@ -6227,13 +6227,13 @@
           },
           {
             "body": {
-              "id": 390,
+              "id": 508,
               "nodeType": "Block",
               "src": "955:227:1",
               "statements": [
                 {
                   "expression": {
-                    "id": 362,
+                    "id": 480,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6243,11 +6243,11 @@
                     "prefix": false,
                     "src": "966:18:1",
                     "subExpression": {
-                      "id": 361,
+                      "id": 479,
                       "name": "competitionCount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 304,
+                      "referencedDeclaration": 422,
                       "src": "966:16:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -6259,37 +6259,37 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 363,
+                  "id": 481,
                   "nodeType": "ExpressionStatement",
                   "src": "966:18:1"
                 },
                 {
                   "expression": {
-                    "id": 382,
+                    "id": 500,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 364,
+                        "id": 482,
                         "name": "competitions",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 309,
+                        "referencedDeclaration": 427,
                         "src": "995:12:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                           "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                         }
                       },
-                      "id": 366,
+                      "id": 484,
                       "indexExpression": {
-                        "id": 365,
+                        "id": 483,
                         "name": "competitionCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 304,
+                        "referencedDeclaration": 422,
                         "src": "1008:16:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6303,7 +6303,7 @@
                       "nodeType": "IndexAccess",
                       "src": "995:30:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Competition_$302_storage",
+                        "typeIdentifier": "t_struct$_Competition_$420_storage",
                         "typeString": "struct JudoCompetition.Competition storage ref"
                       }
                     },
@@ -6312,11 +6312,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 368,
+                          "id": 486,
                           "name": "competitionCount",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 304,
+                          "referencedDeclaration": 422,
                           "src": "1040:16:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -6324,11 +6324,11 @@
                           }
                         },
                         {
-                          "id": 369,
+                          "id": 487,
                           "name": "_name",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 354,
+                          "referencedDeclaration": 472,
                           "src": "1058:5:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -6336,11 +6336,11 @@
                           }
                         },
                         {
-                          "id": 370,
+                          "id": 488,
                           "name": "_date",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 356,
+                          "referencedDeclaration": 474,
                           "src": "1065:5:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -6351,7 +6351,7 @@
                           "arguments": [
                             {
                               "hexValue": "30",
-                              "id": 374,
+                              "id": 492,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -6373,7 +6373,7 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 373,
+                            "id": 491,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -6386,7 +6386,7 @@
                             },
                             "typeName": {
                               "baseType": {
-                                "id": 371,
+                                "id": 489,
                                 "name": "address",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "1076:7:1",
@@ -6396,7 +6396,7 @@
                                   "typeString": "address"
                                 }
                               },
-                              "id": 372,
+                              "id": 490,
                               "nodeType": "ArrayTypeName",
                               "src": "1076:9:1",
                               "typeDescriptions": {
@@ -6405,7 +6405,7 @@
                               }
                             }
                           },
-                          "id": 375,
+                          "id": 493,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -6422,7 +6422,7 @@
                         },
                         {
                           "hexValue": "66616c7365",
-                          "id": 376,
+                          "id": 494,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -6440,7 +6440,7 @@
                           "arguments": [
                             {
                               "hexValue": "30",
-                              "id": 379,
+                              "id": 497,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -6462,7 +6462,7 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 378,
+                            "id": 496,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -6474,14 +6474,14 @@
                               "typeString": "type(address)"
                             },
                             "typeName": {
-                              "id": 377,
+                              "id": 495,
                               "name": "address",
                               "nodeType": "ElementaryTypeName",
                               "src": "1097:7:1",
                               "typeDescriptions": {}
                             }
                           },
-                          "id": 380,
+                          "id": 498,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -6524,18 +6524,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 367,
+                        "id": 485,
                         "name": "Competition",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 302,
+                        "referencedDeclaration": 420,
                         "src": "1028:11:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_Competition_$302_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_Competition_$420_storage_ptr_$",
                           "typeString": "type(struct JudoCompetition.Competition storage pointer)"
                         }
                       },
-                      "id": 381,
+                      "id": 499,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -6546,17 +6546,17 @@
                       "src": "1028:80:1",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Competition_$302_memory_ptr",
+                        "typeIdentifier": "t_struct$_Competition_$420_memory_ptr",
                         "typeString": "struct JudoCompetition.Competition memory"
                       }
                     },
                     "src": "995:113:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Competition_$302_storage",
+                      "typeIdentifier": "t_struct$_Competition_$420_storage",
                       "typeString": "struct JudoCompetition.Competition storage ref"
                     }
                   },
-                  "id": 383,
+                  "id": 501,
                   "nodeType": "ExpressionStatement",
                   "src": "995:113:1"
                 },
@@ -6564,11 +6564,11 @@
                   "eventCall": {
                     "arguments": [
                       {
-                        "id": 385,
+                        "id": 503,
                         "name": "competitionCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 304,
+                        "referencedDeclaration": 422,
                         "src": "1143:16:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6576,11 +6576,11 @@
                         }
                       },
                       {
-                        "id": 386,
+                        "id": 504,
                         "name": "_name",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 354,
+                        "referencedDeclaration": 472,
                         "src": "1161:5:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -6588,11 +6588,11 @@
                         }
                       },
                       {
-                        "id": 387,
+                        "id": 505,
                         "name": "_date",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 356,
+                        "referencedDeclaration": 474,
                         "src": "1168:5:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6615,18 +6615,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 384,
+                      "id": 502,
                       "name": "CompetitionCreated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 319,
+                      "referencedDeclaration": 437,
                       "src": "1124:18:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,string memory,uint256)"
                       }
                     },
-                    "id": 388,
+                    "id": 506,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6641,24 +6641,24 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 389,
+                  "id": 507,
                   "nodeType": "EmitStatement",
                   "src": "1119:55:1"
                 }
               ]
             },
             "functionSelector": "1d91d322",
-            "id": 391,
+            "id": 509,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 359,
+                "id": 477,
                 "modifierName": {
-                  "id": 358,
+                  "id": 476,
                   "name": "onlyAdmin",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 352,
+                  "referencedDeclaration": 470,
                   "src": "945:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -6668,16 +6668,16 @@
             "name": "createCompetition",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 357,
+              "id": 475,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 354,
+                  "id": 472,
                   "mutability": "mutable",
                   "name": "_name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 391,
+                  "scope": 509,
                   "src": "902:19:1",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -6686,7 +6686,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 353,
+                    "id": 471,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "902:6:1",
@@ -6699,11 +6699,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 356,
+                  "id": 474,
                   "mutability": "mutable",
                   "name": "_date",
                   "nodeType": "VariableDeclaration",
-                  "scope": 391,
+                  "scope": 509,
                   "src": "923:13:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6712,7 +6712,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 355,
+                    "id": 473,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "923:7:1",
@@ -6727,12 +6727,12 @@
               "src": "901:36:1"
             },
             "returnParameters": {
-              "id": 360,
+              "id": 478,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "955:0:1"
             },
-            "scope": 462,
+            "scope": 580,
             "src": "875:307:1",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -6740,7 +6740,7 @@
           },
           {
             "body": {
-              "id": 422,
+              "id": 540,
               "nodeType": "Block",
               "src": "1277:233:1",
               "statements": [
@@ -6748,7 +6748,7 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 405,
+                        "id": 523,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -6760,24 +6760,24 @@
                         "subExpression": {
                           "expression": {
                             "baseExpression": {
-                              "id": 401,
+                              "id": 519,
                               "name": "competitions",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 309,
+                              "referencedDeclaration": 427,
                               "src": "1297:12:1",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                                 "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                               }
                             },
-                            "id": 403,
+                            "id": 521,
                             "indexExpression": {
-                              "id": 402,
+                              "id": 520,
                               "name": "_competitionId",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 393,
+                              "referencedDeclaration": 511,
                               "src": "1310:14:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -6791,18 +6791,18 @@
                             "nodeType": "IndexAccess",
                             "src": "1297:28:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_Competition_$302_storage",
+                              "typeIdentifier": "t_struct$_Competition_$420_storage",
                               "typeString": "struct JudoCompetition.Competition storage ref"
                             }
                           },
-                          "id": 404,
+                          "id": 522,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "completed",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 299,
+                          "referencedDeclaration": 417,
                           "src": "1297:38:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -6816,7 +6816,7 @@
                       },
                       {
                         "hexValue": "436f6d7065746974696f6e20616c726561647920636f6d706c65746564",
-                        "id": 406,
+                        "id": 524,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -6842,7 +6842,7 @@
                           "typeString": "literal_string \"Competition already completed\""
                         }
                       ],
-                      "id": 400,
+                      "id": 518,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -6856,7 +6856,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 407,
+                    "id": 525,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6871,7 +6871,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 408,
+                  "id": 526,
                   "nodeType": "ExpressionStatement",
                   "src": "1288:81:1"
                 },
@@ -6879,11 +6879,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 414,
+                        "id": 532,
                         "name": "_participant",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 395,
+                        "referencedDeclaration": 513,
                         "src": "1427:12:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -6901,24 +6901,24 @@
                       "expression": {
                         "expression": {
                           "baseExpression": {
-                            "id": 409,
+                            "id": 527,
                             "name": "competitions",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 309,
+                            "referencedDeclaration": 427,
                             "src": "1380:12:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                               "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                             }
                           },
-                          "id": 411,
+                          "id": 529,
                           "indexExpression": {
-                            "id": 410,
+                            "id": 528,
                             "name": "_competitionId",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 393,
+                            "referencedDeclaration": 511,
                             "src": "1393:14:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -6932,25 +6932,25 @@
                           "nodeType": "IndexAccess",
                           "src": "1380:28:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_Competition_$302_storage",
+                            "typeIdentifier": "t_struct$_Competition_$420_storage",
                             "typeString": "struct JudoCompetition.Competition storage ref"
                           }
                         },
-                        "id": 412,
+                        "id": 530,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "participants",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 297,
+                        "referencedDeclaration": 415,
                         "src": "1380:41:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_array$_t_address_$dyn_storage",
                           "typeString": "address[] storage ref"
                         }
                       },
-                      "id": 413,
+                      "id": 531,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -6963,7 +6963,7 @@
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 415,
+                    "id": 533,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6978,7 +6978,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 416,
+                  "id": 534,
                   "nodeType": "ExpressionStatement",
                   "src": "1380:60:1"
                 },
@@ -6986,11 +6986,11 @@
                   "eventCall": {
                     "arguments": [
                       {
-                        "id": 418,
+                        "id": 536,
                         "name": "_competitionId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 393,
+                        "referencedDeclaration": 511,
                         "src": "1473:14:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6998,11 +6998,11 @@
                         }
                       },
                       {
-                        "id": 419,
+                        "id": 537,
                         "name": "_participant",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 395,
+                        "referencedDeclaration": 513,
                         "src": "1489:12:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -7021,18 +7021,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 417,
+                      "id": 535,
                       "name": "ParticipantAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 325,
+                      "referencedDeclaration": 443,
                       "src": "1456:16:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address)"
                       }
                     },
-                    "id": 420,
+                    "id": 538,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7047,24 +7047,24 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 421,
+                  "id": 539,
                   "nodeType": "EmitStatement",
                   "src": "1451:51:1"
                 }
               ]
             },
             "functionSelector": "18d85e53",
-            "id": 423,
+            "id": 541,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 398,
+                "id": 516,
                 "modifierName": {
-                  "id": 397,
+                  "id": 515,
                   "name": "onlyAdmin",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 352,
+                  "referencedDeclaration": 470,
                   "src": "1267:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -7074,16 +7074,16 @@
             "name": "addParticipant",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 396,
+              "id": 514,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 393,
+                  "id": 511,
                   "mutability": "mutable",
                   "name": "_competitionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 423,
+                  "scope": 541,
                   "src": "1214:22:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7092,7 +7092,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 392,
+                    "id": 510,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1214:7:1",
@@ -7105,11 +7105,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 395,
+                  "id": 513,
                   "mutability": "mutable",
                   "name": "_participant",
                   "nodeType": "VariableDeclaration",
-                  "scope": 423,
+                  "scope": 541,
                   "src": "1238:20:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7118,7 +7118,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 394,
+                    "id": 512,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1238:7:1",
@@ -7134,12 +7134,12 @@
               "src": "1213:46:1"
             },
             "returnParameters": {
-              "id": 399,
+              "id": 517,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1277:0:1"
             },
-            "scope": 462,
+            "scope": 580,
             "src": "1190:320:1",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -7147,7 +7147,7 @@
           },
           {
             "body": {
-              "id": 460,
+              "id": 578,
               "nodeType": "Block",
               "src": "1609:374:1",
               "statements": [
@@ -7155,7 +7155,7 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 437,
+                        "id": 555,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -7167,24 +7167,24 @@
                         "subExpression": {
                           "expression": {
                             "baseExpression": {
-                              "id": 433,
+                              "id": 551,
                               "name": "competitions",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 309,
+                              "referencedDeclaration": 427,
                               "src": "1629:12:1",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                                 "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                               }
                             },
-                            "id": 435,
+                            "id": 553,
                             "indexExpression": {
-                              "id": 434,
+                              "id": 552,
                               "name": "_competitionId",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 425,
+                              "referencedDeclaration": 543,
                               "src": "1642:14:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -7198,18 +7198,18 @@
                             "nodeType": "IndexAccess",
                             "src": "1629:28:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_Competition_$302_storage",
+                              "typeIdentifier": "t_struct$_Competition_$420_storage",
                               "typeString": "struct JudoCompetition.Competition storage ref"
                             }
                           },
-                          "id": 436,
+                          "id": 554,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "completed",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 299,
+                          "referencedDeclaration": 417,
                           "src": "1629:38:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -7223,7 +7223,7 @@
                       },
                       {
                         "hexValue": "436f6d7065746974696f6e20616c726561647920636f6d706c65746564",
-                        "id": 438,
+                        "id": 556,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -7249,7 +7249,7 @@
                           "typeString": "literal_string \"Competition already completed\""
                         }
                       ],
-                      "id": 432,
+                      "id": 550,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -7263,7 +7263,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 439,
+                    "id": 557,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7278,13 +7278,13 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 440,
+                  "id": 558,
                   "nodeType": "ExpressionStatement",
                   "src": "1620:81:1"
                 },
                 {
                   "expression": {
-                    "id": 446,
+                    "id": 564,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7292,24 +7292,24 @@
                     "leftHandSide": {
                       "expression": {
                         "baseExpression": {
-                          "id": 441,
+                          "id": 559,
                           "name": "competitions",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 309,
+                          "referencedDeclaration": 427,
                           "src": "1712:12:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                             "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                           }
                         },
-                        "id": 443,
+                        "id": 561,
                         "indexExpression": {
-                          "id": 442,
+                          "id": 560,
                           "name": "_competitionId",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 425,
+                          "referencedDeclaration": 543,
                           "src": "1725:14:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -7323,18 +7323,18 @@
                         "nodeType": "IndexAccess",
                         "src": "1712:28:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Competition_$302_storage",
+                          "typeIdentifier": "t_struct$_Competition_$420_storage",
                           "typeString": "struct JudoCompetition.Competition storage ref"
                         }
                       },
-                      "id": 444,
+                      "id": 562,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "completed",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 299,
+                      "referencedDeclaration": 417,
                       "src": "1712:38:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -7345,7 +7345,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "74727565",
-                      "id": 445,
+                      "id": 563,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -7365,13 +7365,13 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 447,
+                  "id": 565,
                   "nodeType": "ExpressionStatement",
                   "src": "1712:45:1"
                 },
                 {
                   "expression": {
-                    "id": 453,
+                    "id": 571,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7379,24 +7379,24 @@
                     "leftHandSide": {
                       "expression": {
                         "baseExpression": {
-                          "id": 448,
+                          "id": 566,
                           "name": "competitions",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 309,
+                          "referencedDeclaration": 427,
                           "src": "1768:12:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$302_storage_$",
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Competition_$420_storage_$",
                             "typeString": "mapping(uint256 => struct JudoCompetition.Competition storage ref)"
                           }
                         },
-                        "id": 450,
+                        "id": 568,
                         "indexExpression": {
-                          "id": 449,
+                          "id": 567,
                           "name": "_competitionId",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 425,
+                          "referencedDeclaration": 543,
                           "src": "1781:14:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -7410,18 +7410,18 @@
                         "nodeType": "IndexAccess",
                         "src": "1768:28:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Competition_$302_storage",
+                          "typeIdentifier": "t_struct$_Competition_$420_storage",
                           "typeString": "struct JudoCompetition.Competition storage ref"
                         }
                       },
-                      "id": 451,
+                      "id": 569,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "winner",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 301,
+                      "referencedDeclaration": 419,
                       "src": "1768:35:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -7431,11 +7431,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 452,
+                      "id": 570,
                       "name": "_winner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 427,
+                      "referencedDeclaration": 545,
                       "src": "1806:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -7448,7 +7448,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 454,
+                  "id": 572,
                   "nodeType": "ExpressionStatement",
                   "src": "1768:45:1"
                 },
@@ -7456,11 +7456,11 @@
                   "eventCall": {
                     "arguments": [
                       {
-                        "id": 456,
+                        "id": 574,
                         "name": "_competitionId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 425,
+                        "referencedDeclaration": 543,
                         "src": "1855:14:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -7468,11 +7468,11 @@
                         }
                       },
                       {
-                        "id": 457,
+                        "id": 575,
                         "name": "_winner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 427,
+                        "referencedDeclaration": 545,
                         "src": "1871:7:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -7491,18 +7491,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 455,
+                      "id": 573,
                       "name": "CompetitionResultRecorded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 331,
+                      "referencedDeclaration": 449,
                       "src": "1829:25:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address)"
                       }
                     },
-                    "id": 458,
+                    "id": 576,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7517,24 +7517,24 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 459,
+                  "id": 577,
                   "nodeType": "EmitStatement",
                   "src": "1824:55:1"
                 }
               ]
             },
             "functionSelector": "72fc8c1f",
-            "id": 461,
+            "id": 579,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 430,
+                "id": 548,
                 "modifierName": {
-                  "id": 429,
+                  "id": 547,
                   "name": "onlyAdmin",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 352,
+                  "referencedDeclaration": 470,
                   "src": "1599:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -7544,16 +7544,16 @@
             "name": "recordCompetitionResult",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 428,
+              "id": 546,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 425,
+                  "id": 543,
                   "mutability": "mutable",
                   "name": "_competitionId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 461,
+                  "scope": 579,
                   "src": "1551:22:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7562,7 +7562,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 424,
+                    "id": 542,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1551:7:1",
@@ -7575,11 +7575,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 427,
+                  "id": 545,
                   "mutability": "mutable",
                   "name": "_winner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 461,
+                  "scope": 579,
                   "src": "1575:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7588,7 +7588,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 426,
+                    "id": 544,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1575:7:1",
@@ -7604,19 +7604,19 @@
               "src": "1550:41:1"
             },
             "returnParameters": {
-              "id": 431,
+              "id": 549,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1609:0:1"
             },
-            "scope": 462,
+            "scope": 580,
             "src": "1518:465:1",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 463,
+        "scope": 581,
         "src": "60:1974:1"
       }
     ],
@@ -7630,12 +7630,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xea2746F0dfA08509dFB130b46a0a743b01cF048a",
-      "transactionHash": "0x54dccd7875d5d857ef0fc612d270509c59270b004b260b5d26770a546e66b44c"
+      "address": "0x3F920CbDA11AB1AC452CaD8bace9F2D4cB0515c4",
+      "transactionHash": "0x7fdc211f30d67f58ba531285383d589ed28a646bd6516f881056242f2203fcdd"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-02-16T10:00:20.999Z",
+  "updatedAt": "2024-03-22T10:42:23.560Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

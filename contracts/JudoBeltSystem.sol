@@ -10,10 +10,10 @@ contract JudoBeltSystem {
         string name;
         address walletAddress;
         BeltLevel beltLevel;
-        uint256 dateOfBirth; // Unix timestamp format
+        uint256 dateOfBirth;
         Gender gender;
         string email;
-        string phoneNumber; // Optional
+        string phoneNumber;
     }
 
     uint256 public judokaCount;
@@ -32,6 +32,7 @@ contract JudoBeltSystem {
         string phoneNumber,
         uint256 timestamp
     );
+
     event BeltLevelUpdated(
         uint256 indexed id, 
         BeltLevel oldBeltLevel, 
@@ -47,21 +48,23 @@ contract JudoBeltSystem {
         string memory _name, 
         address _walletAddress, 
         uint256 _dateOfBirth, 
-        Gender _gender, 
+        uint8 _gender,
         string memory _email, 
         string memory _phoneNumber
     ) public {
         require(msg.sender == admin, "Only admin can add black belts");
         require(_walletAddress != address(0), "Invalid wallet address");
+
+        Gender gender = Gender(_gender); // Casting uint8 to Gender enum
         judokaCount++;
         judokas[judokaCount] = Judoka(
             judokaCount, 
             _name, 
             _walletAddress, 
-            BeltLevel.Black,
+            BeltLevel.Black, 
             _dateOfBirth,
-            _gender,
-            _email,
+            gender, // Using the casted enum value
+            _email, 
             _phoneNumber
         );
         judokaIds[_walletAddress] = judokaCount;
@@ -71,8 +74,8 @@ contract JudoBeltSystem {
             _walletAddress, 
             BeltLevel.Black, 
             _dateOfBirth,
-            _gender,
-            _email,
+            gender, 
+            _email, 
             _phoneNumber,
             block.timestamp
         );
@@ -82,21 +85,23 @@ contract JudoBeltSystem {
         string memory _name, 
         address _walletAddress, 
         uint256 _dateOfBirth, 
-        Gender _gender, 
+        uint8 _gender, // Accepting uint8 for gender
         string memory _email, 
         string memory _phoneNumber
     ) public {
         require(_walletAddress != address(0), "Invalid wallet address");
         require(judokaIds[_walletAddress] == 0, "Judoka already registered");
+
+        Gender gender = Gender(_gender); // Casting uint8 to Gender enum
         judokaCount++;
         judokas[judokaCount] = Judoka(
             judokaCount, 
             _name, 
             _walletAddress, 
-            BeltLevel.White,
+            BeltLevel.White, 
             _dateOfBirth,
-            _gender,
-            _email,
+            gender, // Using the casted enum value
+            _email, 
             _phoneNumber
         );
         judokaIds[_walletAddress] = judokaCount;
@@ -106,12 +111,18 @@ contract JudoBeltSystem {
             _walletAddress, 
             BeltLevel.White, 
             _dateOfBirth,
-            _gender,
-            _email,
+            gender, 
+            _email, 
             _phoneNumber,
             block.timestamp
         );
     }
+
+        // In your Solidity contract, there should be something like this:
+    function getJudokaInfo(uint256 _id) public view returns (Judoka memory) {
+        return judokas[_id];
+    }
+
 
     function getBeltLevel(uint256 _id) public view returns (BeltLevel) {
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
@@ -119,9 +130,15 @@ contract JudoBeltSystem {
     }
 
     function promoteJudoka(uint256 _id, BeltLevel _newBeltLevel) public {
-        require(isBlackBelt(msg.sender), "Only black belts can promote judokas");
+        require(
+            isBlackBelt(msg.sender) || msg.sender == admin,
+            "Only black belts or admin can promote judokas"
+        );
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
-        require(_newBeltLevel > judokas[_id].beltLevel, "New level must be higher");
+        require(
+            _newBeltLevel > judokas[_id].beltLevel,
+            "New level must be higher"
+        );
 
         BeltLevel oldBeltLevel = judokas[_id].beltLevel;
         judokas[_id].beltLevel = _newBeltLevel;
@@ -132,28 +149,11 @@ contract JudoBeltSystem {
         return judokas[judokaIds[_address]].beltLevel == BeltLevel.Black;
     }
 
-    // New function to retrieve detailed information of a Judoka
-    function getJudokaInfo(uint256 _id) public view returns (
-        uint256, 
-        string memory, 
-        address, 
-        BeltLevel, 
-        uint256, 
-        Gender, 
-        string memory, 
-        string memory
-    ) {
-        require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
-        Judoka memory judoka = judokas[_id];
-        return (
-            judoka.id, 
-            judoka.name, 
-            judoka.walletAddress, 
-            judoka.beltLevel, 
-            judoka.dateOfBirth, 
-            judoka.gender, 
-            judoka.email, 
-            judoka.phoneNumber
-        );
+    function isAuthorized(uint256 _id, address _sender) public view returns(bool) {
+        return _sender == judokas[_id].walletAddress || _sender == admin;
+    }
+
+    function isAdmin(address _sender) public view returns(bool) {
+        return _sender == admin;
     }
 }

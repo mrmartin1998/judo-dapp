@@ -1,6 +1,6 @@
 // app.js
 
-const judoBeltSystemAddress = '0xBDF6E2f379ba491B1B3deC1B2342bea3B8139b86'; // Replace with your JudoBeltSystem contract address
+const judoBeltSystemAddress = '0x3CB6fDc33d9dE9FAbbB37CC480A823dcEdf451d9'; // Replace with your JudoBeltSystem contract address
 
 const judoBeltSystemABI = [
   {
@@ -65,6 +65,30 @@ const judoBeltSystemABI = [
         "internalType": "enum JudoBeltSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "dateOfBirth",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoBeltSystem.Gender",
+        "name": "gender",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "phoneNumber",
+        "type": "string"
       },
       {
         "indexed": false,
@@ -153,6 +177,26 @@ const judoBeltSystemABI = [
         "internalType": "enum JudoBeltSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dateOfBirth",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum JudoBeltSystem.Gender",
+        "name": "gender",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "phoneNumber",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -170,6 +214,26 @@ const judoBeltSystemABI = [
         "internalType": "address",
         "name": "_walletAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_dateOfBirth",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_gender",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "_email",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_phoneNumber",
+        "type": "string"
       }
     ],
     "name": "registerBlackBelt",
@@ -188,12 +252,94 @@ const judoBeltSystemABI = [
         "internalType": "address",
         "name": "_walletAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_dateOfBirth",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_gender",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "_email",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_phoneNumber",
+        "type": "string"
       }
     ],
     "name": "registerJudoka",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getJudokaInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "enum JudoBeltSystem.BeltLevel",
+            "name": "beltLevel",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "dateOfBirth",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum JudoBeltSystem.Gender",
+            "name": "gender",
+            "type": "uint8"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "phoneNumber",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct JudoBeltSystem.Judoka",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -252,6 +398,51 @@ const judoBeltSystemABI = [
     "stateMutability": "view",
     "type": "function",
     "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_sender",
+        "type": "address"
+      }
+    ],
+    "name": "isAuthorized",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_sender",
+        "type": "address"
+      }
+    ],
+    "name": "isAdmin",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ];
 
@@ -293,19 +484,23 @@ async function registerBlackBelt(name, walletAddress) {
     }
 }
 
-// Function to register judoka
+// Function to register judoka with additional fields
 async function registerJudoka() {
-    const name = document.getElementById('judokaName').value;
-    const walletAddress = document.getElementById('judokaAddress').value;
+  const name = document.getElementById('judokaName').value;
+  const walletAddress = document.getElementById('judokaAddress').value;
+  const dob = document.getElementById('judokaDOB').value;
+  const gender = document.getElementById('judokaGender').value;
+  const email = document.getElementById('judokaEmail').value;
+  const phone = document.getElementById('judokaPhone').value;
 
-    try {
-        const accounts = await web3.eth.getAccounts();
-        await judoBeltSystem.methods.registerJudoka(name, walletAddress).send({ from: accounts[0] });
-        displayMessage('Judoka registration successful.');
-    } catch (error) {
-        console.error('Error registering judoka:', error);
-        displayError('Error registering judoka.');
-    }
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoBeltSystem.methods.registerJudoka(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      displayMessage('Judoka registration successful.');
+  } catch (error) {
+      console.error('Error registering judoka:', error);
+      displayError('Error registering judoka.');
+  }
 }
 
 // Function to promote judoka
@@ -338,7 +533,6 @@ async function promoteJudoka() {
   }
 }
 
-
 // Function to get the belt level of a judoka
 async function getBeltLevel() {
   const judokaAddress = document.getElementById('judokaBeltAddress').value;
@@ -369,10 +563,84 @@ function displayBeltLevel(beltLevel, judokaId) { // Add judokaId as a parameter
   document.getElementById('beltLevelDisplay').innerText = `Belt Level: ${beltLevelText}, Judoka ID: ${judokaId}`;
 }
 
-function registerBlackBeltFromInput() {
-    const name = document.getElementById('blackBeltName').value;
-    const walletAddress = document.getElementById('blackBeltAddress').value;
-    registerBlackBelt(name, walletAddress);
+// Convert belt level to text
+function getBeltLevelText(beltLevel) {
+  switch(beltLevel) {
+      case '0': return 'White Belt';
+      case '1': return 'Yellow Belt';
+      case '2': return 'Orange Belt';
+      case '3': return 'Green Belt';
+      case '4': return 'Blue Belt';
+      case '5': return 'Brown Belt';
+      case '6': return 'Black Belt';
+      default: return 'Unknown';
+  }
+}
+
+async function registerBlackBeltFromInput() {
+  const name = document.getElementById('blackBeltName').value;
+  const walletAddress = document.getElementById('blackBeltAddress').value;
+  const dob = document.getElementById('blackBeltDOB').value;
+  const gender = document.getElementById('blackBeltGender').value;
+  const email = document.getElementById('blackBeltEmail').value;
+  const phone = document.getElementById('blackBeltPhone').value;
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoBeltSystem.methods.registerBlackBelt(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      displayMessage('Black belt registration successful.');
+  } catch (error) {
+      console.error('Error registering black belt:', error);
+      displayError('Error registering black belt.');
+  }
+}
+
+// Function to get a judoka's profile information
+async function getJudokaProfile() {
+  const judokaIdInput = document.getElementById('judokaId').value;
+
+  if (!judokaIdInput) {
+      displayError('Please enter a valid judoka ID.');
+      return;
+  }
+
+  const judokaId = parseInt(judokaIdInput);
+  if (isNaN(judokaId)) {
+      displayError('Invalid input. Please enter a valid judoka ID.');
+      return;
+  }
+
+  try {
+      const judokaInfo = await judoBeltSystem.methods.getJudokaInfo(judokaId).call();
+      displayJudokaProfile(judokaInfo);
+  } catch (error) {
+      console.error('Error fetching judoka information:', error);
+      displayError('Error fetching judoka information.');
+  }
+}
+
+// Function to display a judoka's profile information
+function displayJudokaProfile(judokaInfo) {
+  // judokaInfo will be an array if it comes from a smart contract call
+  const [id, name, walletAddress, beltLevel, dateOfBirth, gender, email, phoneNumber] = judokaInfo;
+
+  let genderText = gender === '0' ? 'Male' : 'Female';
+  let beltLevelText = getBeltLevelText(beltLevel);
+
+  // Format date of birth correctly
+  let dob = new Date(dateOfBirth * 1000).toLocaleDateString();
+
+  // Update HTML elements to show the judoka's profile
+  document.getElementById('judokaProfileDisplay').innerHTML = `
+    <p>ID: ${id}</p>
+    <p>Name: ${name}</p>
+    <p>Wallet Address: ${walletAddress}</p>
+    <p>Belt Level: ${beltLevelText}</p>
+    <p>Date of Birth: ${dob}</p>
+    <p>Gender: ${genderText}</p>
+    <p>Email: ${email}</p>
+    <p>Phone: ${phoneNumber}</p>
+  `;
 }
 
 // Helper functions to display messages
