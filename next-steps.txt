@@ -1,43 +1,87 @@
-Proposed Website Structure
-1. Home Page
-Overview: A brief introduction to the dApp, its purpose, and how users can benefit from it.
-Call-to-Action (CTA): Direct links or buttons to key actions like registering a judoka or viewing the list of judokas.
+1. Judoka Ranking System: Create a leaderboard that ranks judokas based on their belt level, competitions won, and other achievements. This would encourage a competitive and engaging environment.
 
-2. Navigation Bar
-Home: Link back to the home page.
-Register Judoka: A straightforward form for judoka registration.
-View Judokas: A section where users can see a list of all registered judokas.
-Judoka Profiles: This might be a dynamic part of the 'View Judokas' section, where clicking on a judoka's name takes you to their detailed profile.
-Manage Competitions: (For future expansion) A place for organizing and tracking competitions.
-About: Information about the dApp, its goals, and the team behind it.
-Help/FAQ: For user support, frequently asked questions, and guides on how to use the dApp.
-Settings: User preferences, admin settings (if applicable), and other configurations.
+2. Competition Management: Implement a feature to manage judo competitions, including registration, match scheduling, and result tracking.
 
-3. Register Judoka Page
-Form Fields: Name, date of birth, gender, contact information, belt level, club affiliation, etc.
-Submission Button: To submit the form data to the smart contract.
-Feedback: A message to confirm successful registration or report any errors.
+3. Attendance Tracking: Develop a system for dojos to track attendance at training sessions, which could be useful for determining promotion eligibility.
 
-4. View Judokas Page
-List/Table View: Display all registered judokas with basic information.
-Filtering and Sorting: Options to filter and sort the judoka list (e.g., by belt level, age, gender).
-Search Functionality: To quickly find specific judokas.
-Profile Link: Clickable names or buttons to view detailed profiles.
+4. Event Calendar: Integrate an event calendar where upcoming competitions, seminars, and belt tests are listed. Users can register their interest or participation.
 
-5. Judoka Profile Page
-Detailed Information: All the data available for a judoka, including competitive records if available.
-Edit Option: For admins to update information like belt level.
+5. Skill Progression Tracking: Allow judokas to log specific skills or techniques they're working on and track their progress over time.
 
-6. Competition Management (Future Feature)
-Competition Listing: Current and upcoming judo competitions.
-Registration for Competitions: Allowing judokas to sign up for events.
-Results and Statistics: Past competition results and judoka performance stats.
+6. Belt Test Scheduling: Enable scheduling and management of belt tests, allowing users to sign up for testing and instructors to manage the roster.
 
-7. Settings/Help Page
-User Settings: Account settings, notification preferences, etc.
-Help and Support: Guides, contact support, and FAQ.
+7. Dojo Locator: Include a feature where users can find dojos near them, complete with reviews and ratings from other users.
 
-8. Footer
-Contact Information: Email, social media links, etc.
-Legal: Terms of service, privacy policy, etc.
-Credits: Acknowledgments, technology used, etc.
+8. Injury Reporting and Tracking: A section to report injuries sustained during training or competition and track recovery progress.
+
+9. Automated Certificate Generation: After a judoka is promoted, automatically generate a digital certificate of belt advancement that can be printed or shared.
+
+10. Online Learning Resources: Provide a repository of training materials, videos, or articles that can be accessed by judokas for self-improvement.
+
+11. Match Video Analysis: Integrate a feature for coaches to upload and analyze match videos, mark important moments, and provide feedback.
+
+12. Financial Management: For dojos, have a section for managing membership fees, dues, and other expenses.
+
+13. Insurance Management: If applicable, a module to help manage insurance policies for athletes and dojos.
+
+14. API Integration: Open up an API for other services to integrate with your dApp, such as fitness trackers or competition management systems.
+
+15. Social Engagement: Include a social feature for judokas to connect, share experiences, and maybe even find sparring partners.
+
+
+Phase 1: Core Functionality Enhancement
+
+Skill Progression Tracking:
+    - Develop a feature for judokas to log and monitor their progress.
+    - Include options for coaches to review and provide feedback.
+
+Attendance Tracking:
+    - Implement an attendance system integrated with the user profiles for monitoring and promotion eligibility.
+
+Event Calendar:
+    - Create a centralized calendar for events, seminars, and belt tests.
+    - Enable registration and reminders for upcoming events.
+
+Phase 2: Competition and Ranking Expansion
+
+Competition Management:
+    - Develop a system to create, manage, and track judo competitions.
+    - Introduce registration for participants and scheduling matches.
+
+Judoka Ranking System:
+    - Introduce a leaderboard based on points from competitions, belt level, and achievements.
+
+Phase 3: Community and Learning Development
+
+Online Learning Resources:
+    - Curate and provide access to a variety of training materials and resources.
+
+Dojo Locator:
+    - Implement a feature for finding local dojos with information and reviews.
+
+Social Engagement:
+    - Develop a platform within the app for users to interact, share, and network.
+
+Phase 4: Administrative and Support Tools
+
+Financial Management:
+    - Build tools for dojos to manage finances including memberships and dues.
+
+Insurance Management:
+    - Create a module to help manage insurance policies.
+
+Phase 5: Advanced Features
+
+Match Video Analysis:
+    - Provide a tool for uploading and analyzing match videos with annotations.
+
+Automated Certificate Generation:
+    - Develop a system to generate digital certificates for promotions that can be printed or shared.
+
+Injury Reporting and Tracking:
+    - Include a feature for reporting injuries with recovery tracking.
+
+Phase 6: Extensibility and Integration
+
+API Integration:
+    - Open an API for integrating with external services and applications.

@@ -1,8 +1,8 @@
 // app.js
 
-const judoBeltSystemAddress = '0x3CB6fDc33d9dE9FAbbB37CC480A823dcEdf451d9'; // Replace with your JudoBeltSystem contract address
+const judoSystemAddress = '0x0098fE6B3f2BBC0adC8d686b7915388590bef651'; // Replace with your judoSystem contract address
 
-const judoBeltSystemABI = [
+const judoSystemABI = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -19,13 +19,13 @@ const judoBeltSystemABI = [
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "oldBeltLevel",
         "type": "uint8"
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "newBeltLevel",
         "type": "uint8"
       },
@@ -56,13 +56,57 @@ const judoBeltSystemABI = [
       },
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "CompetitionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "competitionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "winner",
+        "type": "address"
+      }
+    ],
+    "name": "CompetitionResultRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "walletAddress",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
       },
@@ -74,7 +118,7 @@ const judoBeltSystemABI = [
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.Gender",
+        "internalType": "enum JudoSystem.Gender",
         "name": "gender",
         "type": "uint8"
       },
@@ -101,12 +145,85 @@ const judoBeltSystemABI = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "competitionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "participant",
+        "type": "address"
+      }
+    ],
+    "name": "ParticipantAdded",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "admin",
     "outputs": [
       {
         "internalType": "address",
         "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "competitionCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "competitions",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "completed",
+        "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "winner",
         "type": "address"
       }
     ],
@@ -156,6 +273,26 @@ const judoBeltSystemABI = [
         "type": "uint256"
       }
     ],
+    "name": "judokaPoints",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "judokas",
     "outputs": [
       {
@@ -174,7 +311,7 @@ const judoBeltSystemABI = [
         "type": "address"
       },
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
       },
@@ -184,7 +321,7 @@ const judoBeltSystemABI = [
         "type": "uint256"
       },
       {
-        "internalType": "enum JudoBeltSystem.Gender",
+        "internalType": "enum JudoSystem.Gender",
         "name": "gender",
         "type": "uint8"
       },
@@ -307,7 +444,7 @@ const judoBeltSystemABI = [
             "type": "address"
           },
           {
-            "internalType": "enum JudoBeltSystem.BeltLevel",
+            "internalType": "enum JudoSystem.BeltLevel",
             "name": "beltLevel",
             "type": "uint8"
           },
@@ -317,7 +454,7 @@ const judoBeltSystemABI = [
             "type": "uint256"
           },
           {
-            "internalType": "enum JudoBeltSystem.Gender",
+            "internalType": "enum JudoSystem.Gender",
             "name": "gender",
             "type": "uint8"
           },
@@ -332,7 +469,7 @@ const judoBeltSystemABI = [
             "type": "string"
           }
         ],
-        "internalType": "struct JudoBeltSystem.Judoka",
+        "internalType": "struct JudoSystem.Judoka",
         "name": "",
         "type": "tuple"
       }
@@ -352,7 +489,7 @@ const judoBeltSystemABI = [
     "name": "getBeltLevel",
     "outputs": [
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "",
         "type": "uint8"
       }
@@ -369,7 +506,7 @@ const judoBeltSystemABI = [
         "type": "uint256"
       },
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "_newBeltLevel",
         "type": "uint8"
       }
@@ -443,10 +580,89 @@ const judoBeltSystemABI = [
     "stateMutability": "view",
     "type": "function",
     "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_points",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateJudokaPoints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_date",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCompetition",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_competitionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_participant",
+        "type": "address"
+      }
+    ],
+    "name": "addParticipant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_competitionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_winner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_points",
+        "type": "uint256"
+      }
+    ],
+    "name": "recordCompetitionResult",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ];
 
-let judoBeltSystem;
+
+
+let judoSystem;
 
 // Initialize Web3 and contracts
 async function initWeb3() {
@@ -468,15 +684,15 @@ async function initWeb3() {
 }
 
 function setupContracts() {
-    judoBeltSystem = new web3.eth.Contract(judoBeltSystemABI, judoBeltSystemAddress);
-    console.log('Contract is set up and ready to interact with.');
+  judoSystem = new web3.eth.Contract(judoSystemABI, judoSystemAddress);
+  console.log('Contract is set up and ready to interact with.');
 }
 
 // Function to register black belt
 async function registerBlackBelt(name, walletAddress) {
     try {
         const accounts = await web3.eth.getAccounts();
-        await judoBeltSystem.methods.registerBlackBelt(name, walletAddress).send({ from: accounts[0] });
+        await judoSystem.methods.registerBlackBelt(name, walletAddress).send({ from: accounts[0] });
         displayMessage('Black belt registration successful.');
     } catch (error) {
         console.error('Error registering black belt:', error);
@@ -495,7 +711,7 @@ async function registerJudoka() {
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoBeltSystem.methods.registerJudoka(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      await judoSystem.methods.registerJudoka(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
       displayMessage('Judoka registration successful.');
   } catch (error) {
       console.error('Error registering judoka:', error);
@@ -525,7 +741,7 @@ async function promoteJudoka() {
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoBeltSystem.methods.promoteJudoka(judokaId, newBeltLevel).send({ from: accounts[0] });
+      await judoSystem.methods.promoteJudoka(judokaId, newBeltLevel).send({ from: accounts[0] });
       displayMessage('Judoka promotion successful.');
   } catch (error) {
       console.error('Error promoting judoka:', error);
@@ -537,8 +753,8 @@ async function promoteJudoka() {
 async function getBeltLevel() {
   const judokaAddress = document.getElementById('judokaBeltAddress').value;
   try {
-      const judokaId = await judoBeltSystem.methods.judokaIds(judokaAddress).call();
-      const beltLevel = await judoBeltSystem.methods.getBeltLevel(judokaId).call();
+      const judokaId = await judoSystem.methods.judokaIds(judokaAddress).call();
+      const beltLevel = await judoSystem.methods.getBeltLevel(judokaId).call();
       displayBeltLevel(beltLevel, judokaId); // Pass judokaId as a second argument
   } catch (error) {
       console.error('Error fetching belt level:', error);
@@ -587,7 +803,7 @@ async function registerBlackBeltFromInput() {
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoBeltSystem.methods.registerBlackBelt(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      await judoSystem.methods.registerBlackBelt(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
       displayMessage('Black belt registration successful.');
   } catch (error) {
       console.error('Error registering black belt:', error);
@@ -611,7 +827,7 @@ async function getJudokaProfile() {
   }
 
   try {
-      const judokaInfo = await judoBeltSystem.methods.getJudokaInfo(judokaId).call();
+      const judokaInfo = await judoSystem.methods.getJudokaInfo(judokaId).call();
       displayJudokaProfile(judokaInfo);
   } catch (error) {
       console.error('Error fetching judoka information:', error);
@@ -652,6 +868,144 @@ function displayMessage(message) {
 function displayError(message) {
     document.getElementById('errorMessage').innerText = message;
     document.getElementById('resultMessage').innerText = '';
+}
+
+// Function to load the leaderboard
+async function loadLeaderboard() {
+  try {
+      const leaderboardDisplay = document.getElementById('leaderboardDisplay');
+      if (!leaderboardDisplay) return; // exit if not found
+
+      const judokaCount = await judoSystem.methods.judokaCount().call(); // Fetch the judoka count
+      let judokas = [];
+
+      for (let i = 1; i <= judokaCount; i++) {
+          const judoka = await judoSystem.methods.judokas(i).call();
+          const points = await judoSystem.methods.judokaPoints(judoka.id).call();
+          judokas.push({ 
+              id: judoka.id, 
+              name: judoka.name, 
+              points: points,
+              beltLevel: judoka.beltLevel // keeping belt level info for display
+          });
+      }
+
+      // Sort judokas by points (descending)
+      judokas.sort((a, b) => b.points - a.points);
+
+      displayLeaderboard(judokas);
+  } catch (error) {
+      console.error('Error loading leaderboard:', error);
+      displayError('Error loading leaderboard.');
+  }
+}
+
+// Function to display the leaderboard
+function displayLeaderboard(judokas) {
+  const leaderboardDisplay = document.getElementById('leaderboardDisplay');
+  leaderboardDisplay.innerHTML = '';
+
+  judokas.forEach(judoka => {
+      const beltLevelText = getBeltLevelText(judoka.beltLevel);
+      leaderboardDisplay.innerHTML += `<p>${judoka.name} - ${beltLevelText} (ID: ${judoka.id}) - Points: ${judoka.points}</p>`;
+  });
+}
+
+// Call this function when the leaderBoards.html page loads
+window.addEventListener('load', async () => {
+  await initWeb3();
+  await loadLeaderboard();
+});
+
+// Function to update a judoka's points
+async function updateJudokaPoints() {
+  const judokaIdInput = document.getElementById('judokaId').value;
+  const pointsInput = document.getElementById('judokaPoints').value;
+
+  if (!judokaIdInput || !pointsInput) {
+      displayError('Please enter a valid judoka ID and points.');
+      return;
+  }
+
+  const judokaId = parseInt(judokaIdInput);
+  const points = parseInt(pointsInput);
+
+  if (isNaN(judokaId) || isNaN(points)) {
+      displayError('Invalid input. Please enter valid numbers.');
+      return;
+  }
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoSystem.methods.updateJudokaPoints(judokaId, points).send({ from: accounts[0] });
+      displayMessage(`Judoka points updated successfully. ID: ${judokaId}, Points: ${points}`);
+  } catch (error) {
+      console.error('Error updating judoka points:', error);
+      displayError('Error updating judoka points.');
+  }
+}
+
+async function createCompetition() {
+  const name = document.getElementById('competitionName').value;
+  const date = document.getElementById('competitionDate').value;
+
+  // Parse the date input to a timestamp
+ // const date = new Date(dateInput).getTime() / 1000; // Convert to seconds
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoSystem.methods.createCompetition(name, date).send({ from: accounts[0] });
+      displayMessage('Competition created successfully.');
+  } catch (error) {
+      console.error('Error creating competition:', error);
+      displayError('Error creating competition: ' + error.message);
+  }
+}
+
+
+// Function to add a participant to a competition
+async function addParticipant() {
+  const competitionId = document.getElementById('competitionId').value;
+  const participantAddress = document.getElementById('participantAddress').value;
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoSystem.methods.addParticipant(competitionId, participantAddress).send({ from: accounts[0] });
+      displayMessage('Participant added successfully.');
+  } catch (error) {
+      console.error('Error adding participant:', error);
+      displayError('Error adding participant.');
+  }
+}
+
+// Function to record competition result
+async function recordCompetitionResult() {
+  const competitionId = document.getElementById('resultCompetitionId').value;
+  const winnerAddress = document.getElementById('winnerAddress').value;
+  const points = document.getElementById('pointsAwarded').value;
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoSystem.methods.recordCompetitionResult(competitionId, winnerAddress, points).send({ from: accounts[0] });
+      displayMessage('Competition result recorded successfully.');
+  } catch (error) {
+      console.error('Error recording competition result:', error);
+      displayError('Error recording competition result.');
+  }
+}
+
+function displayMessage(message) {
+  const resultMessageEl = document.getElementById('resultMessage');
+  const errorMessageEl = document.getElementById('errorMessage');
+  if (resultMessageEl) resultMessageEl.innerText = message;
+  if (errorMessageEl) errorMessageEl.innerText = '';
+}
+
+function displayError(message) {
+  const errorMessageEl = document.getElementById('errorMessage');
+  const resultMessageEl = document.getElementById('resultMessage');
+  if (errorMessageEl) errorMessageEl.innerText = message;
+  if (resultMessageEl) resultMessageEl.innerText = '';
 }
 
 window.addEventListener('load', initWeb3);

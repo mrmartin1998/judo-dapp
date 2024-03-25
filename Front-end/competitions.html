@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Judo Belt System dApp - Competitions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+            <li><a href="registerJudoka.html">Register Judoka</a></li>
+            <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+            <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+            <li><a href="judokaProfile.html">Judoka Profile</a></li>
+            <li><a href="leaderBoards.html">Leaderboards</a></li>
+            <li><a href="competitions.html">Competitions</a></li>
+        </ul>
+    </nav>
+
+    <!-- Leaderboard Section -->
+    <div class="container" id="leaderboardSection">
+        <h2>Leaderboard</h2>
+        <div id="leaderboardDisplay"></div>
+    </div>
+
+    <!-- Create Competition Section -->
+    <div class="container" id="createCompetitionSection">
+        <label for="competitionName">Competition Name:</label>
+        <input type="text" id="competitionName" class="input-field" placeholder="Enter competition name"/>
+
+        <label for="competitionDate">Competition Date:</label>
+        <input type="number" id="competitionDate" class="input-field" placeholder="Enter competition date"/>        
+
+        <button class="button" onclick="createCompetition()">Create Competition</button>
+    </div><br />
+
+    <!-- Add Participant Section -->
+    <div class="container" id="addParticipantSection">
+        <h2>Add Participant</h2>
+        <input type="number" id="competitionId" placeholder="Competition ID"/>
+        <input type="text" id="participantAddress" placeholder="Participant Wallet Address"/>
+        <button onclick="addParticipant()">Add Participant</button>
+    </div>
+
+    <!-- Record Competition Result Section -->
+    <div class="container" id="recordResultSection">
+        <h2>Record Competition Result</h2>
+        <input type="number" id="resultCompetitionId" placeholder="Competition ID"/>
+        <input type="text" id="winnerAddress" placeholder="Winner Wallet Address"/>
+        <input type="number" id="pointsAwarded" placeholder="Points Awarded"/>
+        <button onclick="recordCompetitionResult()">Record Result</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Judo Belt System dApp. All rights reserved.</p>
+        <p>Contact us at [email protected]</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

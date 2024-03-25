@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract JudoBeltSystem {
+contract JudoSystem {
     enum BeltLevel { White, Yellow, Orange, Green, Blue, Brown, Black }
     enum Gender { Male, Female }
 
@@ -16,35 +16,40 @@ contract JudoBeltSystem {
         string phoneNumber;
     }
 
+    struct Competition {
+        uint256 id;
+        string name;
+        uint256 date;
+        address[] participants;
+        bool completed;
+        address winner;
+    }
+
     uint256 public judokaCount;
+    uint256 public competitionCount;
     mapping(uint256 => Judoka) public judokas;
     mapping(address => uint256) public judokaIds;
+    mapping(uint256 => uint256) public judokaPoints;
+    mapping(uint256 => Competition) public competitions;
     address public admin;
 
-    event JudokaRegistered(
-        uint256 indexed id, 
-        string name, 
-        address walletAddress, 
-        BeltLevel beltLevel, 
-        uint256 dateOfBirth,
-        Gender gender,
-        string email,
-        string phoneNumber,
-        uint256 timestamp
-    );
-
-    event BeltLevelUpdated(
-        uint256 indexed id, 
-        BeltLevel oldBeltLevel, 
-        BeltLevel newBeltLevel, 
-        uint256 timestamp
-    );
+    event JudokaRegistered(uint256 indexed id, string name, address walletAddress, BeltLevel beltLevel, uint256 dateOfBirth, Gender gender, string email, string phoneNumber, uint256 timestamp);
+    event BeltLevelUpdated(uint256 indexed id, BeltLevel oldBeltLevel, BeltLevel newBeltLevel, uint256 timestamp);
+    event CompetitionCreated(uint256 indexed id, string name, uint256 date);
+    event ParticipantAdded(uint256 indexed competitionId, address participant);
+    event CompetitionResultRecorded(uint256 indexed competitionId, address winner);
 
     constructor() {
         admin = msg.sender;
     }
 
-    function registerBlackBelt(
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Only admin can perform this action");
+        _;
+    }
+
+    // Functions from JudoBeltSystem
+        function registerBlackBelt(
         string memory _name, 
         address _walletAddress, 
         uint256 _dateOfBirth, 
@@ -155,5 +160,48 @@ contract JudoBeltSystem {
 
     function isAdmin(address _sender) public view returns(bool) {
         return _sender == admin;
+    }
+
+    function updateJudokaPoints(uint256 _id, uint256 _points) public onlyAdmin {
+        require(_id > 0 && _id <= judokaCount, "Invalid Judoka ID");
+        judokaPoints[_id] += _points;
+    }
+
+    // Functions from JudoCompetition
+    function createCompetition(
+        string memory _name, 
+        uint256 _date
+        ) public {
+        require(msg.sender == admin, "Only admin can add competitions");
+        //require(_walletAddress != address(0), "Invalid wallet address");
+
+
+        competitionCount++;
+        competitions[competitionCount] = Competition(
+            competitionCount, 
+            _name, 
+            _date, 
+            new address[](0), 
+            false, 
+            address(0));
+        emit CompetitionCreated(competitionCount, _name, _date);
+    }
+
+
+    function addParticipant(uint256 _competitionId, address _participant) public onlyAdmin {
+        require(!competitions[_competitionId].completed, "Competition already completed");
+        competitions[_competitionId].participants.push(_participant);
+        emit ParticipantAdded(_competitionId, _participant);
+    }
+
+    function recordCompetitionResult(uint256 _competitionId, address _winner, uint256 _points) public onlyAdmin {
+        require(!competitions[_competitionId].completed, "Competition already completed");
+        competitions[_competitionId].completed = true;
+        competitions[_competitionId].winner = _winner;
+
+        uint256 winnerId = judokaIds[_winner];
+        updateJudokaPoints(winnerId, _points);
+
+        emit CompetitionResultRecorded(_competitionId, _winner);
     }
 }

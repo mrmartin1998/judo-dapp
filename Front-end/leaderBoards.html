@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Judo Belt System dApp - Leaderboards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registerBlackBelt.html">Register Black Belt</a></li>
+            <li><a href="registerJudoka.html">Register Judoka</a></li>
+            <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+            <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+            <li><a href="judokaProfile.html">Judoka Profile</a></li>
+            <li><a href="leaderBoards.html">Leaderboards</a></li>
+            <li><a href="competitions.html">Competitions</a></li>
+        </ul>
+    </nav>
+
+    <!-- Leaderboards Section -->
+    <div class="container" id="leaderBoards">
+        <h2>Judoka Leaderboards</h2>
+        <div id="leaderboardDisplay">
+            <!-- Leaderboard data will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Section to Update Judoka Points -->
+    <div class="container" id="updatePointsSection">
+        <input type="number" id="judokaId" placeholder="Enter judoka's ID"/>
+        <input type="number" id="judokaPoints" placeholder="Enter points to update"/>
+        <button onclick="updateJudokaPoints()">Update Points</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Judo Belt System dApp. All rights reserved.</p>
+        <p>Contact us at [email protected]</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
