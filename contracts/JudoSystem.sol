@@ -25,6 +25,12 @@ contract JudoSystem {
         address winner;
     }
 
+    struct BeltLevelChange {
+        BeltLevel oldBeltLevel;
+        BeltLevel newBeltLevel;
+        uint256 timestamp;
+    }
+
     uint256 public judokaCount;
     uint256 public competitionCount;
     mapping(uint256 => Judoka) public judokas;
@@ -49,66 +55,73 @@ contract JudoSystem {
     }
 
     // Functions from JudoBeltSystem
-        function registerBlackBelt(
-        string memory _name, 
-        address _walletAddress, 
-        uint256 _dateOfBirth, 
-        uint8 _gender,
-        string memory _email, 
-        string memory _phoneNumber
-    ) public {
-        require(msg.sender == admin, "Only admin can add black belts");
-        require(_walletAddress != address(0), "Invalid wallet address");
+function registerBlackBelt(
+    string memory _name, 
+    address _walletAddress, 
+    uint256 _dateOfBirth, 
+    uint8 _gender,
+    string memory _email, 
+    string memory _phoneNumber
+) public {
+    require(msg.sender == admin, "Only admin can add black belts");
+    require(_walletAddress != address(0), "Invalid wallet address");
 
-        Gender gender = Gender(_gender); // Casting uint8 to Gender enum
-        judokaCount++;
-        judokas[judokaCount] = Judoka(
-            judokaCount, 
-            _name, 
-            _walletAddress, 
-            BeltLevel.Black, 
-            _dateOfBirth,
-            gender, // Using the casted enum value
-            _email, 
-            _phoneNumber
-        );
-        judokaIds[_walletAddress] = judokaCount;
-        emit JudokaRegistered(
-            judokaCount, 
-            _name, 
-            _walletAddress, 
-            BeltLevel.Black, 
-            _dateOfBirth,
-            gender, 
-            _email, 
-            _phoneNumber,
-            block.timestamp
-        );
-    }
+    Gender gender = Gender(_gender);
+    judokaCount++;
+    judokas[judokaCount] = Judoka({
+        id: judokaCount,
+        name: _name,
+        walletAddress: _walletAddress,
+        beltLevel: BeltLevel.Black,
+        dateOfBirth: _dateOfBirth,
+        gender: gender,
+        email: _email,
+        phoneNumber: _phoneNumber
+        // No need to initialize the array fields here
+    });
 
-    function registerJudoka(
-        string memory _name, 
-        address _walletAddress, 
-        uint256 _dateOfBirth, 
-        uint8 _gender, // Accepting uint8 for gender
-        string memory _email, 
-        string memory _phoneNumber
-    ) public {
+    judokaIds[_walletAddress] = judokaCount;
+    emit JudokaRegistered(
+        judokaCount, 
+        _name, 
+        _walletAddress, 
+        BeltLevel.Black, 
+        _dateOfBirth,
+        gender, 
+        _email, 
+        _phoneNumber,
+        block.timestamp
+    );
+}
+
+
+
+function registerJudoka(
+    string memory _name, 
+    address _walletAddress, 
+    uint256 _dateOfBirth, 
+    uint8 _gender, 
+    string memory _email, 
+    string memory _phoneNumber
+) public {
         require(_walletAddress != address(0), "Invalid wallet address");
         require(judokaIds[_walletAddress] == 0, "Judoka already registered");
 
-        Gender gender = Gender(_gender); // Casting uint8 to Gender enum
-        judokaCount++;
-        judokas[judokaCount] = Judoka(
-            judokaCount, 
-            _name, 
-            _walletAddress, 
-            BeltLevel.White, 
-            _dateOfBirth,
-            gender, // Using the casted enum value
-            _email, 
-            _phoneNumber
-        );
+    Gender gender = Gender(_gender);
+    judokaCount++;
+    judokas[judokaCount] = Judoka({
+        id: judokaCount,
+        name: _name,
+        walletAddress: _walletAddress,
+        beltLevel: BeltLevel.Black,
+        dateOfBirth: _dateOfBirth,
+        gender: gender,
+        email: _email,
+        phoneNumber: _phoneNumber
+        // No need to initialize the array fields here
+    });
+
+
         judokaIds[_walletAddress] = judokaCount;
         emit JudokaRegistered(
             judokaCount, 
@@ -123,11 +136,10 @@ contract JudoSystem {
         );
     }
 
-        // In your Solidity contract, there should be something like this:
+
     function getJudokaInfo(uint256 _id) public view returns (Judoka memory) {
         return judokas[_id];
     }
-
 
     function getBeltLevel(uint256 _id) public view returns (BeltLevel) {
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
