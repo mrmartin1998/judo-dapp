@@ -950,7 +950,7 @@ async function createCompetition() {
   const date = document.getElementById('competitionDate').value;
 
   // Parse the date input to a timestamp
- // const date = new Date(dateInput).getTime() / 1000; // Convert to seconds
+ //const date = new Date(dateInput).getTime() / 1000; // Convert to seconds
 
   try {
       const accounts = await web3.eth.getAccounts();
@@ -961,7 +961,6 @@ async function createCompetition() {
       displayError('Error creating competition: ' + error.message);
   }
 }
-
 
 // Function to add a participant to a competition
 async function addParticipant() {
@@ -1007,5 +1006,51 @@ function displayError(message) {
   if (errorMessageEl) errorMessageEl.innerText = message;
   if (resultMessageEl) resultMessageEl.innerText = '';
 }
+
+// Function to load active competitions
+async function loadActiveCompetitions() {
+  try {
+      const activeCompetitionsDisplay = document.getElementById('activeCompetitionsDisplay');
+      if (!activeCompetitionsDisplay) return;
+
+      const competitionCount = await judoSystem.methods.competitionCount().call();
+      let activeCompetitions = [];
+
+      for (let i = 1; i <= competitionCount; i++) {
+          const competition = await judoSystem.methods.competitions(i).call();
+          if (!competition.completed) {
+              activeCompetitions.push({
+                  id: competition.id,
+                  name: competition.name,
+                  date: competition.date // You may format the date as needed
+              });
+          }
+      }
+
+      displayActiveCompetitions(activeCompetitions);
+  } catch (error) {
+      console.error('Error loading active competitions:', error);
+      displayError('Error loading active competitions.');
+  }
+}
+
+// Function to display active competitions
+function displayActiveCompetitions(competitions) {
+  const activeCompetitionsDisplay = document.getElementById('activeCompetitionsDisplay');
+  activeCompetitionsDisplay.innerHTML = '';
+
+  competitions.forEach(competition => {
+      // Format the date correctly
+      let compDate = new Date(competition.date * 1000).toLocaleDateString();
+      activeCompetitionsDisplay.innerHTML += `<p>${competition.name} - Date: ${compDate} (ID: ${competition.id})</p>`;
+  });
+}
+
+// Call this function when the competitions.html page loads
+window.addEventListener('load', async () => {
+  await initWeb3();
+  await loadLeaderboard();
+  await loadActiveCompetitions(); // Load active competitions
+});
 
 window.addEventListener('load', initWeb3);
