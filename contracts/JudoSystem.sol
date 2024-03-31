@@ -16,6 +16,7 @@ contract JudoSystem {
         string phoneNumber;
     }
 
+
     struct Competition {
         uint256 id;
         string name;
@@ -77,7 +78,6 @@ function registerBlackBelt(
         gender: gender,
         email: _email,
         phoneNumber: _phoneNumber
-        // No need to initialize the array fields here
     });
 
     judokaIds[_walletAddress] = judokaCount;
@@ -113,7 +113,7 @@ function registerJudoka(
         id: judokaCount,
         name: _name,
         walletAddress: _walletAddress,
-        beltLevel: BeltLevel.Black,
+        beltLevel: BeltLevel.White,
         dateOfBirth: _dateOfBirth,
         gender: gender,
         email: _email,
