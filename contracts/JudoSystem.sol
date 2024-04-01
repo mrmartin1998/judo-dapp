@@ -14,8 +14,17 @@ contract JudoSystem {
         Gender gender;
         string email;
         string phoneNumber;
+        uint256 age;
+        uint256 weight;
+        string club;
     }
 
+    struct CompetitionResult {
+    address firstPlace;
+    address secondPlace;
+    address thirdPlace;
+    address fourthPlace;
+}
 
     struct Competition {
         uint256 id;
@@ -23,7 +32,7 @@ contract JudoSystem {
         uint256 date;
         address[] participants;
         bool completed;
-        address winner;
+        CompetitionResult results;
     }
 
     struct BeltLevelChange {
@@ -44,7 +53,7 @@ contract JudoSystem {
     event BeltLevelUpdated(uint256 indexed id, BeltLevel oldBeltLevel, BeltLevel newBeltLevel, uint256 timestamp);
     event CompetitionCreated(uint256 indexed id, string name, uint256 date);
     event ParticipantAdded(uint256 indexed competitionId, address participant);
-    event CompetitionResultRecorded(uint256 indexed competitionId, address winner);
+    event CompetitionResultRecorded(uint256 indexed competitionId, address firstPlace, address secondPlace, address thirdPlace, address fourthPlace);
 
     constructor() {
         admin = msg.sender;
@@ -63,6 +72,9 @@ function registerBlackBelt(
     uint8 _gender,
     string memory _email, 
     string memory _phoneNumber
+    uint256 _age,
+    uint256 _weight,
+    string memory _club
 ) public {
     require(msg.sender == admin, "Only admin can add black belts");
     require(_walletAddress != address(0), "Invalid wallet address");
@@ -77,7 +89,10 @@ function registerBlackBelt(
         dateOfBirth: _dateOfBirth,
         gender: gender,
         email: _email,
-        phoneNumber: _phoneNumber
+        phoneNumber: _phoneNumber,
+        age: _age,
+        weight: _weight,
+        club: _club
     });
 
     judokaIds[_walletAddress] = judokaCount;
@@ -102,7 +117,10 @@ function registerJudoka(
     uint256 _dateOfBirth, 
     uint8 _gender, 
     string memory _email, 
-    string memory _phoneNumber
+    string memory _phoneNumber,
+    uint256 _age,
+    uint256 _weight,
+    string memory _club
 ) public {
         require(_walletAddress != address(0), "Invalid wallet address");
         require(judokaIds[_walletAddress] == 0, "Judoka already registered");
@@ -118,7 +136,9 @@ function registerJudoka(
         gender: gender,
         email: _email,
         phoneNumber: _phoneNumber
-        // No need to initialize the array fields here
+        age: _age,
+        weight: _weight,
+        club: _club
     });
 
 
@@ -206,14 +226,43 @@ function registerJudoka(
         emit ParticipantAdded(_competitionId, _participant);
     }
 
-    function recordCompetitionResult(uint256 _competitionId, address _winner, uint256 _points) public onlyAdmin {
-        require(!competitions[_competitionId].completed, "Competition already completed");
-        competitions[_competitionId].completed = true;
-        competitions[_competitionId].winner = _winner;
+    function recordCompetitionResult(
+    uint256 _competitionId, 
+    address _firstPlace, 
+    address _secondPlace, 
+    address _thirdPlace, 
+    address _fourthPlace,
+    uint256 _firstPlacePoints,
+    uint256 _secondPlacePoints,
+    uint256 _thirdPlacePoints,
+    uint256 _fourthPlacePoints
+) public onlyAdmin {
+    require(!competitions[_competitionId].completed, "Competition already completed");
+    require(competitions[_competitionId].participants.length > 0, "No participants in competition");
 
-        uint256 winnerId = judokaIds[_winner];
-        updateJudokaPoints(winnerId, _points);
+    // Validating that the winners are registered judokas
+    require(judokaIds[_firstPlace] != 0, "First place winner not registered");
+    require(judokaIds[_secondPlace] != 0, "Second place winner not registered");
+    require(judokaIds[_thirdPlace] != 0, "Third place winner not registered");
+    require(judokaIds[_fourthPlace] != 0, "Fourth place winner not registered");
 
-        emit CompetitionResultRecorded(_competitionId, _winner);
+    competitions[_competitionId].completed = true;
+    competitions[_competitionId].results = CompetitionResult(_firstPlace, _secondPlace, _thirdPlace, _fourthPlace);
+
+    // Updating points for each position
+    if(_firstPlacePoints > 0) {
+        updateJudokaPoints(judokaIds[_firstPlace], _firstPlacePoints);
     }
+    if(_secondPlacePoints > 0) {
+        updateJudokaPoints(judokaIds[_secondPlace], _secondPlacePoints);
+    }
+    if(_thirdPlacePoints > 0) {
+        updateJudokaPoints(judokaIds[_thirdPlace], _thirdPlacePoints);
+    }
+    if(_fourthPlacePoints > 0) {
+        updateJudokaPoints(judokaIds[_fourthPlace], _fourthPlacePoints);
+    }
+
+    emit CompetitionResultRecorded(_competitionId, _firstPlace, _secondPlace, _thirdPlace, _fourthPlace);
 }
+
