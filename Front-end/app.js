@@ -1,6 +1,6 @@
 // app.js
 
-const judoSystemAddress = '0x22F094d1E0799C352ea6908e611D62Adbe60DD08'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0x1a009d6C926069eb83427b18E9711DB77678AEc1'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -19,13 +19,13 @@ const judoSystemABI = [
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "oldBeltLevel",
         "type": "uint8"
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "newBeltLevel",
         "type": "uint8"
       },
@@ -56,13 +56,57 @@ const judoSystemABI = [
       },
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "CompetitionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "competitionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "winner",
+        "type": "address"
+      }
+    ],
+    "name": "CompetitionResultRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "walletAddress",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
       },
@@ -74,7 +118,7 @@ const judoSystemABI = [
       },
       {
         "indexed": false,
-        "internalType": "enum JudoBeltSystem.Gender",
+        "internalType": "enum JudoSystem.Gender",
         "name": "gender",
         "type": "uint8"
       },
@@ -101,6 +145,25 @@ const judoSystemABI = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "competitionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "participant",
+        "type": "address"
+      }
+    ],
+    "name": "ParticipantAdded",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "admin",
     "outputs": [
@@ -111,7 +174,62 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "competitionCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "competitions",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "completed",
+        "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "winner",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -124,7 +242,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -143,7 +262,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -162,7 +282,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -190,7 +311,7 @@ const judoSystemABI = [
         "type": "address"
       },
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "beltLevel",
         "type": "uint8"
       },
@@ -200,7 +321,7 @@ const judoSystemABI = [
         "type": "uint256"
       },
       {
-        "internalType": "enum JudoBeltSystem.Gender",
+        "internalType": "enum JudoSystem.Gender",
         "name": "gender",
         "type": "uint8"
       },
@@ -216,7 +337,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -322,7 +444,7 @@ const judoSystemABI = [
             "type": "address"
           },
           {
-            "internalType": "enum JudoBeltSystem.BeltLevel",
+            "internalType": "enum JudoSystem.BeltLevel",
             "name": "beltLevel",
             "type": "uint8"
           },
@@ -332,7 +454,7 @@ const judoSystemABI = [
             "type": "uint256"
           },
           {
-            "internalType": "enum JudoBeltSystem.Gender",
+            "internalType": "enum JudoSystem.Gender",
             "name": "gender",
             "type": "uint8"
           },
@@ -347,13 +469,14 @@ const judoSystemABI = [
             "type": "string"
           }
         ],
-        "internalType": "struct JudoBeltSystem.Judoka",
+        "internalType": "struct JudoSystem.Judoka",
         "name": "",
         "type": "tuple"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -366,13 +489,14 @@ const judoSystemABI = [
     "name": "getBeltLevel",
     "outputs": [
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "",
         "type": "uint8"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -382,7 +506,7 @@ const judoSystemABI = [
         "type": "uint256"
       },
       {
-        "internalType": "enum JudoBeltSystem.BeltLevel",
+        "internalType": "enum JudoSystem.BeltLevel",
         "name": "_newBeltLevel",
         "type": "uint8"
       }
@@ -409,7 +533,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -433,7 +558,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -452,7 +578,8 @@ const judoSystemABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -468,6 +595,65 @@ const judoSystemABI = [
       }
     ],
     "name": "updateJudokaPoints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_date",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCompetition",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_competitionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_participant",
+        "type": "address"
+      }
+    ],
+    "name": "addParticipant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_competitionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_winner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_points",
+        "type": "uint256"
+      }
+    ],
+    "name": "recordCompetitionResult",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
