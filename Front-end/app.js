@@ -1,6 +1,6 @@
 // app.js
 
-const judoSystemAddress = '0x1a009d6C926069eb83427b18E9711DB77678AEc1'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0x6422Aee5D022141DB6CAe8bAd0281fb6418e12a1'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -76,7 +76,25 @@ const judoSystemABI = [
       {
         "indexed": false,
         "internalType": "address",
-        "name": "winner",
+        "name": "firstPlace",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "secondPlace",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "thirdPlace",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "fourthPlace",
         "type": "address"
       }
     ],
@@ -222,9 +240,31 @@ const judoSystemABI = [
         "type": "bool"
       },
       {
-        "internalType": "address",
-        "name": "winner",
-        "type": "address"
+        "components": [
+          {
+            "internalType": "address",
+            "name": "firstPlace",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "secondPlace",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "thirdPlace",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "fourthPlace",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct JudoSystem.CompetitionResult",
+        "name": "results",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -334,6 +374,21 @@ const judoSystemABI = [
         "internalType": "string",
         "name": "phoneNumber",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "age",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "club",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -370,6 +425,21 @@ const judoSystemABI = [
       {
         "internalType": "string",
         "name": "_phoneNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_age",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_club",
         "type": "string"
       }
     ],
@@ -408,6 +478,21 @@ const judoSystemABI = [
       {
         "internalType": "string",
         "name": "_phoneNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_age",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_club",
         "type": "string"
       }
     ],
@@ -466,6 +551,21 @@ const judoSystemABI = [
           {
             "internalType": "string",
             "name": "phoneNumber",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "age",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "club",
             "type": "string"
           }
         ],
@@ -644,12 +744,42 @@ const judoSystemABI = [
       },
       {
         "internalType": "address",
-        "name": "_winner",
+        "name": "_firstPlace",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_secondPlace",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_thirdPlace",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_fourthPlace",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "_points",
+        "name": "_firstPlacePoints",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_secondPlacePoints",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_thirdPlacePoints",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fourthPlacePoints",
         "type": "uint256"
       }
     ],
@@ -982,21 +1112,39 @@ async function addParticipant() {
   }
 }
 
-// Function to record competition result
+// Function to record competition result with all places
 async function recordCompetitionResult() {
   const competitionId = document.getElementById('resultCompetitionId').value;
-  const winnerAddress = document.getElementById('winnerAddress').value;
-  const points = document.getElementById('pointsAwarded').value;
+  const firstPlaceAddress = document.getElementById('firstPlaceAddress').value;
+  const firstPlacePoints = document.getElementById('firstPlacePoints').value;
+  const secondPlaceAddress = document.getElementById('secondPlaceAddress').value;
+  const secondPlacePoints = document.getElementById('secondPlacePoints').value;
+  const thirdPlaceAddress = document.getElementById('thirdPlaceAddress').value;
+  const thirdPlacePoints = document.getElementById('thirdPlacePoints').value;
+  const fourthPlaceAddress = document.getElementById('fourthPlaceAddress').value;
+  const fourthPlacePoints = document.getElementById('fourthPlacePoints').value;
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.recordCompetitionResult(competitionId, winnerAddress, points).send({ from: accounts[0] });
+      // Assuming the contract method to record results has been updated to accept multiple participants and points
+      await judoSystem.methods.recordCompetitionResult(
+          competitionId, 
+          firstPlaceAddress, 
+          secondPlaceAddress, 
+          thirdPlaceAddress, 
+          fourthPlaceAddress,
+          firstPlacePoints, 
+          secondPlacePoints, 
+          thirdPlacePoints, 
+          fourthPlacePoints
+      ).send({ from: accounts[0] });
       displayMessage('Competition result recorded successfully.');
   } catch (error) {
       console.error('Error recording competition result:', error);
       displayError('Error recording competition result.');
   }
 }
+
 
 function displayMessage(message) {
   const resultMessageEl = document.getElementById('resultMessage');

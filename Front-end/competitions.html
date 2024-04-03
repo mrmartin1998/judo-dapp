@@ -51,13 +51,34 @@
     </div>
 
     <!-- Record Competition Result Section -->
-    <div class="container" id="recordResultSection">
-        <h2>Record Competition Result</h2>
-        <input type="number" id="resultCompetitionId" placeholder="Competition ID"/>
-        <input type="text" id="winnerAddress" placeholder="Winner Wallet Address"/>
-        <input type="number" id="pointsAwarded" placeholder="Points Awarded"/>
-        <button onclick="recordCompetitionResult()">Record Result</button>
+<!-- Record Competition Result Section -->
+<div class="container" id="recordResultSection">
+    <h2>Record Competition Result</h2>
+    <input type="number" id="resultCompetitionId" placeholder="Competition ID"/>
+
+    <div>
+        <input type="text" id="firstPlaceAddress" placeholder="First Place Wallet Address"/>
+        <input type="number" id="firstPlacePoints" placeholder="Points for First Place"/>
     </div>
+
+    <div>
+        <input type="text" id="secondPlaceAddress" placeholder="Second Place Wallet Address"/>
+        <input type="number" id="secondPlacePoints" placeholder="Points for Second Place"/>
+    </div>
+
+    <div>
+        <input type="text" id="thirdPlaceAddress" placeholder="Third Place Wallet Address"/>
+        <input type="number" id="thirdPlacePoints" placeholder="Points for Third Place"/>
+    </div>
+
+    <div>
+        <input type="text" id="fourthPlaceAddress" placeholder="Fourth Place Wallet Address"/>
+        <input type="number" id="fourthPlacePoints" placeholder="Points for Fourth Place"/>
+    </div>
+
+    <button onclick="recordCompetitionResult()">Record Result</button>
+</div>
+
 
     <!-- Footer -->
     <footer>
