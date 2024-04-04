@@ -65,98 +65,99 @@ contract JudoSystem {
     }
 
     // Functions from JudoBeltSystem
-function registerBlackBelt(
-    string memory _name, 
-    address _walletAddress, 
-    uint256 _dateOfBirth, 
-    uint8 _gender,
-    string memory _email, 
-    string memory _phoneNumber,
-    uint256 _age,
-    uint256 _weight,
-    string memory _club
-) public {
-    require(msg.sender == admin, "Only admin can add black belts");
-    require(_walletAddress != address(0), "Invalid wallet address");
+    function registerBlackBelt(
+        string memory _name, 
+        address _walletAddress, 
+        uint256 _dateOfBirth, 
+        uint8 _gender, 
+        string memory _email, 
+        string memory _phoneNumber,
+        uint256 _age,
+        uint256 _weight,
+        string memory _club
+        ) public {
+            require(msg.sender == admin, "Only admin can add black belts");
+            require(_walletAddress != address(0), "Invalid wallet address");
 
-    Gender gender = Gender(_gender);
-    judokaCount++;
-    judokas[judokaCount] = Judoka({
-        id: judokaCount,
-        name: _name,
-        walletAddress: _walletAddress,
-        beltLevel: BeltLevel.Black,
-        dateOfBirth: _dateOfBirth,
-        gender: gender,
-        email: _email,
-        phoneNumber: _phoneNumber,
-        age: _age,
-        weight: _weight,
-        club: _club
-    });
+            Gender gender = Gender(_gender);
+            judokaCount++;
+            judokas[judokaCount] = Judoka({
+                id: judokaCount,
+                name: _name,
+                walletAddress: _walletAddress,
+                beltLevel: BeltLevel.Black,
+                dateOfBirth: _dateOfBirth,
+                gender: gender,
+                email: _email,
+                phoneNumber: _phoneNumber,
+                age: _age,
+                weight: _weight,
+                club: _club
+            });
 
-    judokaIds[_walletAddress] = judokaCount;
-    emit JudokaRegistered(
-        judokaCount, 
-        _name, 
-        _walletAddress, 
-        BeltLevel.Black, 
-        _dateOfBirth,
-        gender, 
-        _email, 
-        _phoneNumber,
-        block.timestamp
-    );
-}
-
-
-
-function registerJudoka(
-    string memory _name, 
-    address _walletAddress, 
-    uint256 _dateOfBirth, 
-    uint8 _gender, 
-    string memory _email, 
-    string memory _phoneNumber,
-    uint256 _age,
-    uint256 _weight,
-    string memory _club
-) public {
-        require(_walletAddress != address(0), "Invalid wallet address");
-        require(judokaIds[_walletAddress] == 0, "Judoka already registered");
-
-    Gender gender = Gender(_gender);
-    judokaCount++;
-    judokas[judokaCount] = Judoka({
-        id: judokaCount,
-        name: _name,
-        walletAddress: _walletAddress,
-        beltLevel: BeltLevel.White,
-        dateOfBirth: _dateOfBirth,
-        gender: gender,
-        email: _email,
-        phoneNumber: _phoneNumber,
-        age: _age,
-        weight: _weight,
-        club: _club
-    });
-
-
-        judokaIds[_walletAddress] = judokaCount;
-        emit JudokaRegistered(
-            judokaCount, 
-            _name, 
-            _walletAddress, 
-            BeltLevel.White, 
-            _dateOfBirth,
-            gender, 
-            _email, 
-            _phoneNumber,
-            block.timestamp
-        );
+            judokaIds[_walletAddress] = judokaCount;
+            emit JudokaRegistered(
+                judokaCount, 
+                _name, 
+                _walletAddress, 
+                BeltLevel.Black, 
+                _dateOfBirth,
+                gender, 
+                _email, 
+                _phoneNumber,
+                block.timestamp
+            );
     }
 
 
+
+    function registerJudoka(
+        string memory _name, 
+        address _walletAddress, 
+        uint256 _dateOfBirth, 
+        uint8 _gender, 
+        string memory _email, 
+        string memory _phoneNumber,
+        uint256 _age,
+        uint256 _weight,
+        string memory _club
+        ) public {
+                require(_walletAddress != address(0), "Invalid wallet address");
+                require(judokaIds[_walletAddress] == 0, "Judoka already registered");
+
+            Gender gender = Gender(_gender);
+            judokaCount++;
+            judokas[judokaCount] = Judoka({
+                id: judokaCount,
+                name: _name,
+                walletAddress: _walletAddress,
+                beltLevel: BeltLevel.White,
+                dateOfBirth: _dateOfBirth,
+                gender: gender,
+                email: _email,
+                phoneNumber: _phoneNumber,
+                age: _age,
+                weight: _weight,
+                club: _club
+            });
+
+
+                judokaIds[_walletAddress] = judokaCount;
+                emit JudokaRegistered(
+                    judokaCount, 
+                    _name, 
+                    _walletAddress, 
+                    BeltLevel.White, 
+                    _dateOfBirth,
+                    gender, 
+                    _email, 
+                    _phoneNumber,
+                    block.timestamp
+                );
+        }
+
+
+    
     function getJudokaInfo(uint256 _id) public view returns (Judoka memory) {
         return judokas[_id];
     }

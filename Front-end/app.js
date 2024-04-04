@@ -1,6 +1,6 @@
 // app.js
 
-const judoSystemAddress = '0x6422Aee5D022141DB6CAe8bAd0281fb6418e12a1'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0x61940d2fc34bf555417B3f146a22a238A51e357A'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -824,16 +824,33 @@ async function registerBlackBeltFromInput() {
   const gender = document.getElementById('blackBeltGender').value;
   const email = document.getElementById('blackBeltEmail').value;
   const phone = document.getElementById('blackBeltPhone').value;
+  const age = parseInt(document.getElementById('blackBeltAge').value);
+  const weight = parseInt(document.getElementById('blackBeltWeight').value);
+  const club = document.getElementById('blackBeltClub').value;
+
+  // Add console.log here to inspect the values
+  console.log(name, walletAddress, dob, gender, email, phone, age, weight, club);
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.registerBlackBelt(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      await judoSystem.methods.registerBlackBelt(
+          name, 
+          walletAddress, 
+          dob, 
+          gender, 
+          email, 
+          phone,
+          age, 
+          weight, 
+          club
+      ).send({ from: accounts[0] });
       displayMessage('Black belt registration successful.');
   } catch (error) {
       console.error('Error registering black belt:', error);
       displayError('Error registering black belt: ' + error.message);
   }
 }
+
 
 // Function to register judoka with additional fields
 async function registerJudoka() {
@@ -842,11 +859,14 @@ async function registerJudoka() {
   const dob = document.getElementById('judokaDOB').value;
   const gender = document.getElementById('judokaGender').value;
   const email = document.getElementById('judokaEmail').value;
-  const phone = document.getElementById('judokaPhone').value;  
+  const phone = document.getElementById('judokaPhone').value;
+  const age = parseInt(document.getElementById('judokaAge').value);
+  const weight = parseInt(document.getElementById('judokaWeight').value);
+  const club = document.getElementById('judokaClub').value;  
 
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.registerJudoka(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
+      await judoSystem.methods.registerJudoka(name, walletAddress, dob, gender, email, phone, age, weight, club).send({ from: accounts[0] });
       displayMessage('Judoka registration successful.');
   } catch (error) {
       console.error('Error registering judoka:', error);
@@ -928,24 +948,6 @@ function getBeltLevelText(beltLevel) {
   }
 }
 
-async function registerBlackBeltFromInput() {
-  const name = document.getElementById('blackBeltName').value;
-  const walletAddress = document.getElementById('blackBeltAddress').value;
-  const dob = document.getElementById('blackBeltDOB').value;
-  const gender = document.getElementById('blackBeltGender').value;
-  const email = document.getElementById('blackBeltEmail').value;
-  const phone = document.getElementById('blackBeltPhone').value;
-
-  try {
-      const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.registerBlackBelt(name, walletAddress, dob, gender, email, phone).send({ from: accounts[0] });
-      displayMessage('Black belt registration successful.');
-  } catch (error) {
-      console.error('Error registering black belt:', error);
-      displayError('Error registering black belt.');
-  }
-}
-
 // Function to get a judoka's profile information
 async function getJudokaProfile() {
   const judokaIdInput = document.getElementById('judokaId').value;
@@ -973,7 +975,7 @@ async function getJudokaProfile() {
 // Function to display a judoka's profile information
 function displayJudokaProfile(judokaInfo) {
   // judokaInfo will be an array if it comes from a smart contract call
-  const [id, name, walletAddress, beltLevel, dateOfBirth, gender, email, phoneNumber] = judokaInfo;
+  const [id, name, walletAddress, beltLevel, dateOfBirth, gender, email, phoneNumber, age, weight, club] = judokaInfo;
 
   let genderText = gender === '0' ? 'Male' : 'Female';
   let beltLevelText = getBeltLevelText(beltLevel);
@@ -983,14 +985,17 @@ function displayJudokaProfile(judokaInfo) {
 
   // Update HTML elements to show the judoka's profile
   document.getElementById('judokaProfileDisplay').innerHTML = `
-    <p>ID: ${id}</p>
-    <p>Name: ${name}</p>
-    <p>Wallet Address: ${walletAddress}</p>
-    <p>Belt Level: ${beltLevelText}</p>
-    <p>Date of Birth: ${dob}</p>
-    <p>Gender: ${genderText}</p>
-    <p>Email: ${email}</p>
-    <p>Phone: ${phoneNumber}</p>
+        <p>ID: ${id}</p>
+        <p>Name: ${name}</p>
+        <p>Wallet Address: ${walletAddress}</p>
+        <p>Belt Level: ${beltLevelText}</p>
+        <p>Date of Birth: ${dob}</p>
+        <p>Gender: ${genderText}</p>
+        <p>Email: ${email}</p>
+        <p>Phone: ${phoneNumber}</p>
+        <p>Age: ${age}</p>
+        <p>Weight: ${weight}</p>
+        <p>Club: ${club}</p>
   `;
 }
 
@@ -1144,7 +1149,6 @@ async function recordCompetitionResult() {
       displayError('Error recording competition result.');
   }
 }
-
 
 function displayMessage(message) {
   const resultMessageEl = document.getElementById('resultMessage');
