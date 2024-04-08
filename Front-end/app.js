@@ -874,6 +874,14 @@ async function registerJudoka() {
   }
 }
 
+// Function to convert date string to Unix timestamp
+function parseDate(dateStr) {
+  const year = dateStr.substring(0, 4);
+  const month = dateStr.substring(4, 6);
+  const day = dateStr.substring(6, 8);
+  return new Date(year, month - 1, day).toLocaleDateString(); // Month is 0-indexed
+}
+
 // Function to promote judoka
 async function promoteJudoka() {
   const judokaIdInput = document.getElementById('judokaId').value;
@@ -974,29 +982,28 @@ async function getJudokaProfile() {
 
 // Function to display a judoka's profile information
 function displayJudokaProfile(judokaInfo) {
-  // judokaInfo will be an array if it comes from a smart contract call
   const [id, name, walletAddress, beltLevel, dateOfBirth, gender, email, phoneNumber, age, weight, club] = judokaInfo;
 
   let genderText = gender === '0' ? 'Male' : 'Female';
   let beltLevelText = getBeltLevelText(beltLevel);
 
-  // Format date of birth correctly
-  let dob = new Date(dateOfBirth * 1000).toLocaleDateString();
+  let dob = parseDate(dateOfBirth.toString()); // Convert and parse DOB
 
-  // Update HTML elements to show the judoka's profile
-  document.getElementById('judokaProfileDisplay').innerHTML = `
-        <p>ID: ${id}</p>
-        <p>Name: ${name}</p>
-        <p>Wallet Address: ${walletAddress}</p>
-        <p>Belt Level: ${beltLevelText}</p>
-        <p>Date of Birth: ${dob}</p>
-        <p>Gender: ${genderText}</p>
-        <p>Email: ${email}</p>
-        <p>Phone: ${phoneNumber}</p>
-        <p>Age: ${age}</p>
-        <p>Weight: ${weight}</p>
-        <p>Club: ${club}</p>
+  let profileHTML = `
+    <p>ID: ${id}</p>
+    <p>Name: ${name}</p>
+    <p>Wallet Address: ${walletAddress}</p>
+    <p>Belt Level: ${beltLevelText}</p>
+    <p>Date of Birth: ${dob}</p>
+    <p>Gender: ${genderText}</p>
+    <p>Email: ${email}</p>
+    <p>Phone: ${phoneNumber}</p>
+    <p>Age: ${age}</p>
+    <p>Weight: ${weight}</p>
+    <p>Club: ${club}</p>
   `;
+
+  document.getElementById('judokaProfileDisplay').innerHTML = profileHTML;
 }
 
 // Helper functions to display messages
