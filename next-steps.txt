@@ -1,27 +1,29 @@
-Roadmap for Enhancing the Judo dApp
-Phase 1: Comprehensive Judoka Profiles
-Task 1: Define additional data fields for the Judoka struct (e.g., list of competitions participated, list of awards, detailed belt promotion history).
-Task 2: Update smart contract functions to record and update these additional fields.
-Task 3: Design and implement an enhanced user interface in the dApp for displaying comprehensive profiles.
-Task 4: Test the updated system thoroughly to ensure data integrity and accuracy.
-Phase 2: Decentralized Identity Verification
-Task 1: Research decentralized identity solutions (e.g., uPort, Sovrin) compatible with Ethereum.
-Task 2: Integrate chosen decentralized identity platform into the dApp.
-Task 3: Update registration and login processes to incorporate identity verification.
-Task 4: Test the identity verification process for security and reliability.
-Phase 3: Community Engagement Features
-Task 1: Research and select a suitable forum and chat software (considering decentralization and integration aspects).
-Task 2: Develop or integrate the forum and chat system into the dApp.
-Task 3: Enable user interaction features such as posting, commenting, and real-time chatting.
-Task 4: Test these features for user experience and data security.
-Phase 4: Training and Resources Section
-Task 1: Plan and structure the type of content (training materials, videos, articles) to be included.
-Task 2: Develop a content management system (CMS) within the dApp for uploading and managing this content.
-Task 3: Design and implement a user-friendly interface for accessing these resources.
-Task 4: Continuously update and curate content, ensuring quality and relevance.
-Phase 5: E-commerce Integration
-Task 1: Research and decide on e-commerce integration strategy (building a new system or integrating an existing platform).
-Task 2: Develop or integrate e-commerce functionality, including product listing, shopping cart, and secure checkout processes.
-Task 3: Set up a system for handling inventory, orders, and shipping.
-Task 4: Ensure secure payment processing methods are in place.
-Task 5: Test the e-commerce platform rigorously for functionality and security.
+# Roadmap for Enhancing the Judo dApp
+
+## Phase 1: Unified Registration and Immediate Feedback
+- **Task 1**: Merge Black Belt and Judoka registration forms into a single, streamlined process.
+- **Task 2**: Implement backend logic to distinguish between Black Belt and regular Judoka registrations.
+- **Task 3**: Develop the frontend to display Judoka profile information immediately after registration.
+- **Task 4**: Thorough testing to ensure that the unified registration process works smoothly and displays the data correctly.
+
+## Phase 2: Admin Capabilities for Black Belts
+- **Task 1**: Define and implement the logic to grant admin capabilities to Black Belts.
+- **Task 2**: Update the smart contract to handle different permission levels.
+- **Task 3**: Test the system for security and access control to ensure only authorized users have admin capabilities.
+
+## Phase 3: Adding Age and Weight Class Categories
+- **Task 1**: Define age and weight class categories within the smart contract.
+- **Task 2**: Implement changes in the registration form to include age and weight class selection.
+- **Task 3**: Update frontend display and filtering systems to accommodate new categories.
+- **Task 4**: Perform extensive testing to ensure accurate categorization and data consistency.
+
+## Phase 4: Enhancing Community Engagement
+- **Task 1**: Research tools and technologies to implement community features (e.g., forums, chats).
+- **Task 2**: Integrate selected community features into the dApp.
+- **Task 3**: Develop user interfaces for community interaction.
+- **Task 4**: Test for user experience and data security in community engagement features.
+
+## Phase 5: Additional Enhancements
+- **Task 1**: Continuously gather user feedback for further improvements.
+- **Task 2**: Implement regular updates and maintenance routines for the dApp.
+- **Task 3**: Explore and potentially integrate other features based on user demand and technological advancements.
