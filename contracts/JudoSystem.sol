@@ -47,8 +47,9 @@ contract JudoSystem {
     mapping(address => uint256) public judokaIds;
     mapping(uint256 => uint256) public judokaPoints;
     mapping(uint256 => Competition) public competitions;
+    mapping(address => bool) public blackBeltAdmins;
     address public admin;
-
+    
     event JudokaRegistered(uint256 indexed id, string name, address walletAddress, BeltLevel beltLevel, uint256 dateOfBirth, Gender gender, string email, string phoneNumber, uint256 timestamp);
     event BeltLevelUpdated(uint256 indexed id, BeltLevel oldBeltLevel, BeltLevel newBeltLevel, uint256 timestamp);
     event CompetitionCreated(uint256 indexed id, string name, uint256 date);
@@ -57,106 +58,62 @@ contract JudoSystem {
 
     constructor() {
         admin = msg.sender;
+        blackBeltAdmins[msg.sender] = true;
     }
 
     modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin can perform this action");
+        require(isAdmin(msg.sender), "Only admin can perform this action");
         _;
     }
 
-    // Functions from JudoBeltSystem
-    function registerBlackBelt(
-        string memory _name, 
-        address _walletAddress, 
-        uint256 _dateOfBirth, 
-        uint8 _gender, 
-        string memory _email, 
-        string memory _phoneNumber,
-        uint256 _age,
-        uint256 _weight,
-        string memory _club
-        ) public {
-            require(msg.sender == admin, "Only admin can add black belts");
-            require(_walletAddress != address(0), "Invalid wallet address");
-
-            Gender gender = Gender(_gender);
-            judokaCount++;
-            judokas[judokaCount] = Judoka({
-                id: judokaCount,
-                name: _name,
-                walletAddress: _walletAddress,
-                beltLevel: BeltLevel.Black,
-                dateOfBirth: _dateOfBirth,
-                gender: gender,
-                email: _email,
-                phoneNumber: _phoneNumber,
-                age: _age,
-                weight: _weight,
-                club: _club
-            });
-
-            judokaIds[_walletAddress] = judokaCount;
-            emit JudokaRegistered(
-                judokaCount, 
-                _name, 
-                _walletAddress, 
-                BeltLevel.Black, 
-                _dateOfBirth,
-                gender, 
-                _email, 
-                _phoneNumber,
-                block.timestamp
-            );
-    }
-
-
-
     function registerJudoka(
-        string memory _name, 
-        address _walletAddress, 
-        uint256 _dateOfBirth, 
-        uint8 _gender, 
-        string memory _email, 
-        string memory _phoneNumber,
-        uint256 _age,
-        uint256 _weight,
-        string memory _club
-        ) public {
-                require(_walletAddress != address(0), "Invalid wallet address");
-                require(judokaIds[_walletAddress] == 0, "Judoka already registered");
+    string memory _name, 
+    address _walletAddress, 
+    uint256 _dateOfBirth, 
+    uint8 _gender, 
+    string memory _email, 
+    string memory _phoneNumber,
+    uint256 _age,
+    uint256 _weight,
+    string memory _club
+) public {
+    require(_walletAddress != address(0), "Invalid wallet address");
+    require(judokaIds[_walletAddress] == 0, "Judoka already registered");
 
-            Gender gender = Gender(_gender);
-            judokaCount++;
-            judokas[judokaCount] = Judoka({
-                id: judokaCount,
-                name: _name,
-                walletAddress: _walletAddress,
-                beltLevel: BeltLevel.White,
-                dateOfBirth: _dateOfBirth,
-                gender: gender,
-                email: _email,
-                phoneNumber: _phoneNumber,
-                age: _age,
-                weight: _weight,
-                club: _club
-            });
+    Gender gender = Gender(_gender);
+    judokaCount++;
+    judokas[judokaCount] = Judoka({
+        id: judokaCount,
+        name: _name,
+        walletAddress: _walletAddress,
+        beltLevel: BeltLevel.White, // All judokas start as White Belt
+        dateOfBirth: _dateOfBirth,
+        gender: gender,
+        email: _email,
+        phoneNumber: _phoneNumber,
+        age: _age,
+        weight: _weight,
+        club: _club
+    });
+
+    judokaIds[_walletAddress] = judokaCount;
+    emit JudokaRegistered(
+        judokaCount, 
+        _name, 
+        _walletAddress, 
+        BeltLevel.White, 
+        _dateOfBirth,
+        gender, 
+        _email, 
+        _phoneNumber,
+        block.timestamp
+    );
+}
 
 
-                judokaIds[_walletAddress] = judokaCount;
-                emit JudokaRegistered(
-                    judokaCount, 
-                    _name, 
-                    _walletAddress, 
-                    BeltLevel.White, 
-                    _dateOfBirth,
-                    gender, 
-                    _email, 
-                    _phoneNumber,
-                    block.timestamp
-                );
-        }
-
-
+    function isAdmin(address _sender) public view returns(bool) {
+        return _sender == admin || blackBeltAdmins[_sender];
+    }
     
     function getJudokaInfo(uint256 _id) public view returns (Judoka memory) {
         return judokas[_id];
@@ -167,21 +124,21 @@ contract JudoSystem {
         return judokas[_id].beltLevel;
     }
 
-    function promoteJudoka(uint256 _id, BeltLevel _newBeltLevel) public {
-        require(
-            isBlackBelt(msg.sender) || msg.sender == admin,
-            "Only black belts or admin can promote judokas"
-        );
-        require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
-        require(
-            _newBeltLevel > judokas[_id].beltLevel,
-            "New level must be higher"
-        );
+    function promoteJudoka(uint256 _id, BeltLevel _newBeltLevel) public onlyAdmin {
+    require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
+    require(_newBeltLevel > judokas[_id].beltLevel, "New level must be higher");
 
-        BeltLevel oldBeltLevel = judokas[_id].beltLevel;
-        judokas[_id].beltLevel = _newBeltLevel;
-        emit BeltLevelUpdated(_id, oldBeltLevel, _newBeltLevel, block.timestamp);
+    BeltLevel oldBeltLevel = judokas[_id].beltLevel;
+    judokas[_id].beltLevel = _newBeltLevel;
+
+    // Grant admin privileges if promoted to Black Belt
+    if(_newBeltLevel == BeltLevel.Black) {
+        blackBeltAdmins[judokas[_id].walletAddress] = true;
     }
+
+    emit BeltLevelUpdated(_id, oldBeltLevel, _newBeltLevel, block.timestamp);
+}
+
 
     function isBlackBelt(address _address) public view returns(bool) {
         return judokas[judokaIds[_address]].beltLevel == BeltLevel.Black;
@@ -189,10 +146,6 @@ contract JudoSystem {
 
     function isAuthorized(uint256 _id, address _sender) public view returns(bool) {
         return _sender == judokas[_id].walletAddress || _sender == admin;
-    }
-
-    function isAdmin(address _sender) public view returns(bool) {
-        return _sender == admin;
     }
 
     function updateJudokaPoints(uint256 _id, uint256 _points) public onlyAdmin {
@@ -225,16 +178,6 @@ function createCompetition(
     });
     emit CompetitionCreated(competitionCount, _name, _date);
 }
-
-
-
-
-
-
-
-
-
-
 
     function addParticipant(uint256 _competitionId, address _participant) public onlyAdmin {
         require(!competitions[_competitionId].completed, "Competition already completed");

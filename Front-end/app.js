@@ -1,6 +1,5 @@
-// app.js
 
-const judoSystemAddress = '0x61940d2fc34bf555417B3f146a22a238A51e357A'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0xd913DcBABfCB95e673408abFf3CFa1c261B5F04c'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -189,6 +188,26 @@ const judoSystemABI = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "blackBeltAdmins",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -443,7 +462,7 @@ const judoSystemABI = [
         "type": "string"
       }
     ],
-    "name": "registerBlackBelt",
+    "name": "registerJudoka",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -451,55 +470,22 @@ const judoSystemABI = [
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
         "internalType": "address",
-        "name": "_walletAddress",
+        "name": "_sender",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_dateOfBirth",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint8",
-        "name": "_gender",
-        "type": "uint8"
-      },
-      {
-        "internalType": "string",
-        "name": "_email",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_phoneNumber",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_age",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_weight",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_club",
-        "type": "string"
       }
     ],
-    "name": "registerJudoka",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "isAdmin",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -664,26 +650,6 @@ const judoSystemABI = [
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_sender",
-        "type": "address"
-      }
-    ],
-    "name": "isAdmin",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "_id",
         "type": "uint256"
@@ -815,42 +781,6 @@ function setupContracts() {
   judoSystem = new web3.eth.Contract(judoSystemABI, judoSystemAddress);
   console.log('Contract is set up and ready to interact with.');
 }
-
-// Function to register black belt
-async function registerBlackBeltFromInput() {
-  const name = document.getElementById('blackBeltName').value;
-  const walletAddress = document.getElementById('blackBeltAddress').value;
-  const dob = document.getElementById('blackBeltDOB').value;
-  const gender = document.getElementById('blackBeltGender').value;
-  const email = document.getElementById('blackBeltEmail').value;
-  const phone = document.getElementById('blackBeltPhone').value;
-  const age = parseInt(document.getElementById('blackBeltAge').value);
-  const weight = parseInt(document.getElementById('blackBeltWeight').value);
-  const club = document.getElementById('blackBeltClub').value;
-
-  // Add console.log here to inspect the values
-  console.log(name, walletAddress, dob, gender, email, phone, age, weight, club);
-
-  try {
-      const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.registerBlackBelt(
-          name, 
-          walletAddress, 
-          dob, 
-          gender, 
-          email, 
-          phone,
-          age, 
-          weight, 
-          club
-      ).send({ from: accounts[0] });
-      displayMessage('Black belt registration successful.');
-  } catch (error) {
-      console.error('Error registering black belt:', error);
-      displayError('Error registering black belt: ' + error.message);
-  }
-}
-
 
 // Function to register judoka with additional fields
 async function registerJudoka() {
