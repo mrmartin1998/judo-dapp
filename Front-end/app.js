@@ -1,5 +1,5 @@
 
-const judoSystemAddress = '0xEa4F6368A5e138E4AF3FA406EE87349Fd5Ec8b8A'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0xf39A0F6f00386C4325ccA2030759ecaf2D0e2884'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -499,29 +499,68 @@ function setupContracts() {
   console.log('Contract is set up and ready to interact with.');
 }
 
-// Function to register judoka with additional fields
+function parseDateOfBirth(dob) {
+  if (dob.length !== 8 || isNaN(Number(dob))) {
+    console.error('Invalid date format. Date should be in YYYYMMDD format.');
+    return null; // Ensure that invalid dates are caught.
+  }
+
+  const year = parseInt(dob.substring(0, 4), 10);
+  const month = parseInt(dob.substring(4, 6), 10) - 1; // JavaScript months are zero-indexed.
+  const day = parseInt(dob.substring(6, 8), 10);
+
+  const date = new Date(year, month, day);
+  return Math.floor(date.getTime() / 1000); // Convert to Unix timestamp in seconds.
+}
+
 async function registerJudoka() {
+  // Retrieve values from form fields
   const name = document.getElementById('judokaName').value;
   const walletAddress = document.getElementById('judokaAddress').value;
   const dob = document.getElementById('judokaDOB').value;
-  const gender = document.getElementById('judokaGender').value;
-  const email = document.getElementById('judokaEmail').value;
-  const phone = document.getElementById('judokaPhone').value;
-  const age = parseInt(document.getElementById('judokaAge').value);
+  let gender = document.getElementById('judokaGender').value;
   const weight = parseInt(document.getElementById('judokaWeight').value);
   const club = document.getElementById('judokaClub').value;
-  const dobTimestamp = new Date(dob).getTime() / 1000;
+
+  // Convert the date of birth to a Unix timestamp (in seconds)
+  const dobTimestamp = parseDateOfBirth(dob);
+
+  // Log the date of birth timestamp to debug
+  console.log(`Date of Birth Timestamp: ${dobTimestamp}`); // Add this line
+
+  // Validate and process inputs
+  if (dobTimestamp === null) {
+    displayError('Invalid date of birth. Please ensure it is in YYYYMMDD format.');
+    return;
+  }
+
+  gender = parseInt(gender);
+
+  try {
+      const accounts = await web3.eth.getAccounts();
+      await judoSystem.methods.registerJudoka(name, walletAddress, dobTimestamp, gender, weight, club).send({ from: accounts[0] });
+      displayMessage('Judoka registration successful.');
+  } catch (error) {
+      console.error('Error registering judoka:', error);
+      displayError('Error registering judoka: ' + error.message);
+  }
+}
+
+
+async function updateJudokaContactDetails() {
+  // Retrieve judoka ID and contact info
+  const judokaId = document.getElementById('judokaId').value; // Add an input field to get judoka ID
+  const email = document.getElementById('judokaEmail').value;
+  const phone = document.getElementById('judokaPhone').value;
 
   try {
     const accounts = await web3.eth.getAccounts();
-    await judoSystem.methods.registerJudoka(
-        name, walletAddress, dobTimestamp, gender, email, phone, age, weight, club
-    ).send({ from: accounts[0] });
-    displayMessage('Judoka registration successful.');
-} catch (error) {
-    console.error('Error registering judoka:', error);
-    displayError('Error registering judoka.');
-}
+    await judoSystem.methods.updateJudokaContactDetails(judokaId, email, phone).send({ from: accounts[0] });
+    displayMessage('Contact details updated successfully.');
+  } catch (error) {
+    console.error('Error updating contact details:', error);
+    displayError('Error updating contact details.');
+  }
 }
 
 // Function to convert date string to Unix timestamp

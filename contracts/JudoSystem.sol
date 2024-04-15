@@ -12,7 +12,7 @@ contract JudoSystem {
         string name;
         address walletAddress;
         BeltLevel beltLevel;
-        uint256 dateOfBirth;
+        uint32 dateOfBirth;
         Gender gender;
     }
 
@@ -74,7 +74,8 @@ contract JudoSystem {
     event CompetitionCreated(uint256 indexed id, string name, uint256 date);
     event ParticipantAdded(uint256 indexed competitionId, address participant);
     event CompetitionResultRecorded(uint256 indexed competitionId, address firstPlace, address secondPlace, address thirdPlace, address fourthPlace);
-
+    event JudokaContactUpdated(uint256 indexed id, string email, string phoneNumber);
+    
     constructor() {
         admin = msg.sender;
         blackBeltAdmins[msg.sender] = true;
@@ -85,15 +86,30 @@ contract JudoSystem {
         _;
     }
 
-    function getAgeCategory(uint256 _dateOfBirth) public view returns (AgeCategory) {
-        uint256 age = calculateAge(_dateOfBirth);
-        if (age >= 13 && age <= 14) {
+    function isAdmin(address _address) public view returns (bool) {
+    return _address == admin || blackBeltAdmins[_address];
+    }
+
+    // Utility functions for date packing and unpacking
+    function packDate(uint16 year, uint8 month, uint8 day) public pure returns (uint32) {
+        return (uint32(year) << 16) | (uint32(month) << 8) | uint32(day);
+    }
+
+    function unpackDate(uint32 packedDate) public pure returns (uint16 year, uint8 month, uint8 day) {
+        year = uint16(packedDate / 10000);
+        month = uint8((packedDate / 100) % 100);
+        day = uint8(packedDate % 100);
+    }
+
+
+    function getAgeCategory(uint256 _age) public pure returns (AgeCategory) {
+        if (_age >= 13 && _age <= 14) {
             return AgeCategory.Juveniles;
-        } else if (age >= 15 && age <= 17) {
+        } else if (_age >= 15 && _age <= 17) {
             return AgeCategory.Cadets;
-        } else if (age >= 18 && age <= 20) {
+        } else if (_age >= 18 && _age <= 20) {
             return AgeCategory.Juniors;
-        } else if (age >= 21 && age <= 30) {
+        } else if (_age >= 21 && _age <= 30) {
             return AgeCategory.Seniors;
         } else {
             return AgeCategory.Veterans;
@@ -118,77 +134,97 @@ contract JudoSystem {
         }
     }
 
-    function calculateAge(uint256 _dateOfBirth) public view returns (uint256) {
-        if (_dateOfBirth > block.timestamp) {
+    function calculateAge(uint32 _dateOfBirth) public view returns (uint256) {
+        (uint16 year, uint8 month, uint8 day) = unpackDate(_dateOfBirth);
+        uint256 dobInSeconds = uint256(year) * 365 days + uint256(month) * 30 days + uint256(day) * 1 days;
+        if (dobInSeconds > block.timestamp) {
             return 0;
         }
-        uint256 secondsPerYear = 365.25 * 24 * 60 * 60;
-        return (block.timestamp - _dateOfBirth) / secondsPerYear;
+        return (block.timestamp - dobInSeconds) / 365 days;
     }
 
-    function registerJudoka(
-        string memory _name, 
-        address _walletAddress, 
-        uint256 _dateOfBirth, 
-        Gender _gender
-    ) public {
-        require(_walletAddress != address(0), "Invalid wallet address");
-        require(judokaIds[_walletAddress] == 0, "Judoka already registered");
+function registerJudoka(
+    string memory _name, 
+    address _walletAddress, 
+    uint32 _dateOfBirth, // Ensure this is uint32 as per your date packing
+    Gender _gender,
+    uint256 _weight,
+    string memory _club
+) public {
+    require(_walletAddress != address(0), "Invalid wallet address");
+    require(judokaIds[_walletAddress] == 0, "Judoka already registered");
 
-        judokaCount++;
+    uint256 age = calculateAge(_dateOfBirth);
+    AgeCategory ageCategory = getAgeCategory(age);
+    WeightCategory weightCategory = getWeightCategory(_weight);
 
-        judokasBasic[judokaCount] = JudokaBasic({
-            id: judokaCount,
-            name: _name,
-            walletAddress: _walletAddress,
-            beltLevel: BeltLevel.White,
-            dateOfBirth: _dateOfBirth,
-            gender: _gender
-        });
+    judokaCount++;
 
-        judokasContact[judokaCount] = JudokaContact({
-            email: '',
-            phoneNumber: ''
-        });
+    judokasBasic[judokaCount] = JudokaBasic({
+        id: judokaCount,
+        name: _name,
+        walletAddress: _walletAddress,
+        beltLevel: BeltLevel.White,
+        dateOfBirth: _dateOfBirth, // Assuming this is correctly formatted as uint32
+        gender: _gender
+    });
 
-        judokasPhysical[judokaCount] = JudokaPhysical({
-            age: calculateAge(_dateOfBirth),
-            weight: 0,
-            club: '',
-            ageCategory: getAgeCategory(_dateOfBirth), 
-            weightCategory: WeightCategory.Under60
-        });
+    judokasContact[judokaCount] = JudokaContact({
+        email: '',
+        phoneNumber: ''
+    });
 
-        judokaIds[_walletAddress] = judokaCount;
-        emit JudokaRegistered(judokaCount, _name, _walletAddress, BeltLevel.White, _dateOfBirth, _gender, '', '', calculateAge(_dateOfBirth), 0, '', getAgeCategory(_dateOfBirth), WeightCategory.Under60, block.timestamp);
+    judokasPhysical[judokaCount] = JudokaPhysical({
+        age: age,
+        weight: _weight,
+        club: _club,
+        ageCategory: ageCategory,
+        weightCategory: weightCategory
+    });
+
+    judokaIds[_walletAddress] = judokaCount;
+
+    emit JudokaRegistered(
+        judokaCount, 
+        _name, 
+        _walletAddress, 
+        BeltLevel.White, 
+        _dateOfBirth, 
+        _gender, 
+        '',  // email placeholder
+        '',  // phone placeholder
+        age, 
+        _weight, 
+        _club, 
+        ageCategory, 
+        weightCategory,
+        block.timestamp  // Missing timestamp added
+    );
+}
+
+
+function getJudokaDOB(uint256 _id) public view returns (uint16 year, uint8 month, uint8 day) {
+        (year, month, day) = unpackDate(judokasBasic[_id].dateOfBirth);
     }
 
-    function updateJudokaDetails(
-        uint256 _id,
-        string memory _email,
-        string memory _phoneNumber,
-        uint256 _weight,
-        string memory _club
-    ) public {
-        require(_id > 0 && _id <= judokaCount, "Judoka does not exist");
+function updateJudokaContactDetails(
+    uint256 _id,
+    string memory _email,
+    string memory _phoneNumber
+) public {
+    require(_id > 0 && _id <= judokaCount, "Judoka does not exist");
+    require(msg.sender == judokasBasic[_id].walletAddress || isAdmin(msg.sender), "Not authorized");
 
-        judokasContact[_id] = JudokaContact({
-            email: _email,
-            phoneNumber: _phoneNumber
-        });
+    judokasContact[_id] = JudokaContact({
+        email: _email,
+        phoneNumber: _phoneNumber
+    });
 
-        judokasPhysical[_id] = JudokaPhysical({
-            age: judokasPhysical[_id].age,
-            weight: _weight,
-            club: _club,
-            ageCategory: getAgeCategory(judokasBasic[_id].dateOfBirth),
-            weightCategory: getWeightCategory(_weight)
-        });
-    }
+    emit JudokaContactUpdated(_id, _email, _phoneNumber);
+}
 
-    function isAdmin(address _sender) public view returns (bool) {
-        return _sender == admin || blackBeltAdmins[_sender];
-    }
+
+
 
     function getJudokaInfo(uint256 _id) public view returns (FullJudokaInfo memory) {
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
