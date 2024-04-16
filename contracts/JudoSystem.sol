@@ -45,7 +45,7 @@ contract JudoSystem {
     struct Competition {
         uint256 id;
         string name;
-        uint256 date;
+        uint16 date;
         address[] participants;
         bool completed;
         CompetitionResult results;
@@ -91,14 +91,12 @@ contract JudoSystem {
     }
 
     // Utility functions for date packing and unpacking
-    function packDate(uint16 year, uint8 month, uint8 day) public pure returns (uint32) {
+    function packDateForJudoka(uint16 year, uint8 month, uint8 day) public pure returns (uint32) {
         return (uint32(year) << 16) | (uint32(month) << 8) | uint32(day);
     }
 
-    function unpackDate(uint32 packedDate) public pure returns (uint16 year, uint8 month, uint8 day) {
-        year = uint16(packedDate / 10000);
-        month = uint8((packedDate / 100) % 100);
-        day = uint8(packedDate % 100);
+    function packDateForCompetition(uint8 month, uint8 day) public pure returns (uint16) {
+        return (uint16(month) << 8) | uint16(day);
     }
 
 
@@ -143,10 +141,20 @@ contract JudoSystem {
         return (block.timestamp - dobInSeconds) / 365 days;
     }
 
+    // Function to unpack date from uint32 format
+    function unpackDate(uint32 _packedDate) public pure returns (uint16 year, uint8 month, uint8 day) {
+        year = uint16(_packedDate >> 16);
+        month = uint8(_packedDate >> 8 & 0xFF);
+        day = uint8(_packedDate & 0xFF);
+    }
+
+// Correct usage in registerJudoka (and similar adjustment in other relevant functions)
 function registerJudoka(
     string memory _name, 
     address _walletAddress, 
-    uint32 _dateOfBirth, // Ensure this is uint32 as per your date packing
+    uint16 year, 
+    uint8 month, 
+    uint8 day, 
     Gender _gender,
     uint256 _weight,
     string memory _club
@@ -154,18 +162,20 @@ function registerJudoka(
     require(_walletAddress != address(0), "Invalid wallet address");
     require(judokaIds[_walletAddress] == 0, "Judoka already registered");
 
-    uint256 age = calculateAge(_dateOfBirth);
+    uint32 packedDate = packDateForJudoka(year, month, day);
+    uint256 dobInSeconds = calculateDOBInSeconds(packedDate);
+    uint256 age = calculateAgeFromSeconds(dobInSeconds);
+
     AgeCategory ageCategory = getAgeCategory(age);
     WeightCategory weightCategory = getWeightCategory(_weight);
 
     judokaCount++;
-
     judokasBasic[judokaCount] = JudokaBasic({
         id: judokaCount,
         name: _name,
         walletAddress: _walletAddress,
         beltLevel: BeltLevel.White,
-        dateOfBirth: _dateOfBirth, // Assuming this is correctly formatted as uint32
+        dateOfBirth: packedDate,
         gender: _gender
     });
 
@@ -183,25 +193,24 @@ function registerJudoka(
     });
 
     judokaIds[_walletAddress] = judokaCount;
-
     emit JudokaRegistered(
-        judokaCount, 
-        _name, 
-        _walletAddress, 
-        BeltLevel.White, 
-        _dateOfBirth, 
-        _gender, 
-        '',  // email placeholder
-        '',  // phone placeholder
-        age, 
-        _weight, 
-        _club, 
-        ageCategory, 
-        weightCategory,
-        block.timestamp  // Missing timestamp added
+        judokaCount, _name, _walletAddress, BeltLevel.White, packedDate, _gender, '', '', age, _weight, _club, ageCategory, weightCategory, block.timestamp
     );
 }
 
+// Helper functions to calculate age from seconds and DOB in seconds
+function calculateDOBInSeconds(uint32 packedDate) private pure returns (uint256) {
+    (uint16 year, uint8 month, uint8 day) = unpackDate(packedDate);
+    return uint256(year) * 365 days + uint256(month) * 30 days + uint256(day) * 1 days;
+}
+
+// Ensure this function is marked as view if using block.timestamp
+function calculateAgeFromSeconds(uint256 dobInSeconds) private view returns (uint256) {
+    if (dobInSeconds > block.timestamp) {
+        return 0;
+    }
+    return (block.timestamp - dobInSeconds) / 365 days;
+}
 
 function getJudokaDOB(uint256 _id) public view returns (uint16 year, uint8 month, uint8 day) {
         (year, month, day) = unpackDate(judokasBasic[_id].dateOfBirth);
@@ -221,10 +230,7 @@ function updateJudokaContactDetails(
     });
 
     emit JudokaContactUpdated(_id, _email, _phoneNumber);
-}
-
-
-
+    }
 
     function getJudokaInfo(uint256 _id) public view returns (FullJudokaInfo memory) {
         require(_id > 0 && _id <= judokaCount, "Judoka does not exist.");
@@ -267,10 +273,14 @@ function updateJudokaContactDetails(
         judokaPoints[_id] += _points;
     }
 
+    // Updated createCompetition function to correctly handle date parameters
     function createCompetition(
-        string memory _name, 
-        uint256 _date
+        string memory _name,
+        uint8 month, 
+        uint8 day
     ) public onlyAdmin {
+        uint16 packedDate = packDateForCompetition(month, day); // This packs the date correctly
+
         CompetitionResult memory defaultResults = CompetitionResult({
             firstPlace: address(0),
             secondPlace: address(0),
@@ -282,13 +292,13 @@ function updateJudokaContactDetails(
         competitions[competitionCount] = Competition({
             id: competitionCount,
             name: _name,
-            date: _date,
-            participants: new address[](0)  ,
+            date: packedDate, // Use the packed date
+            participants: new address[](0) ,
             completed: false,
             results: defaultResults
         });
 
-        emit CompetitionCreated(competitionCount, _name, _date);
+    emit CompetitionCreated(competitionCount, _name, packedDate); // Updated to use packedDate
     }
 
     function addParticipant(uint256 _competitionId, address _participant) public onlyAdmin {
