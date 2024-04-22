@@ -1128,22 +1128,40 @@ async function registerJudoka() {
   const weight = parseInt(document.getElementById('judokaWeight').value);
   const club = document.getElementById('judokaClub').value;
 
-  const dobTimestamp = parseDateOfBirth(dob);
+  const year = parseInt(dob.substring(0, 4), 10);
+  const month = parseInt(dob.substring(4, 6), 10);
+  const day = parseInt(dob.substring(6, 8), 10);
+  gender = parseInt(gender);
 
-  if (!dobTimestamp) {
-      displayError('Invalid date of birth. Please ensure it is in YYYYMMDD format.');
+  if (!walletAddress || isNaN(year) || isNaN(month) || isNaN(day) || isNaN(gender) || isNaN(weight)) {
+      displayError('Please ensure all fields are correctly filled.');
       return;
   }
 
-  gender = parseInt(gender);
-
   try {
       const accounts = await web3.eth.getAccounts();
-      await judoSystem.methods.registerJudoka(name, walletAddress, dobTimestamp, gender, weight, club).send({ from: accounts[0] });
-      displayMessage('Judoka registered successfully.');
+      const transaction = judoSystem.methods.registerJudoka(
+          name, walletAddress, year, month, day, gender, weight, club
+      );
+
+      transaction.send({ from: accounts[0] })
+        .on('receipt', function(receipt) {
+            if (receipt.events.JudokaRegistered && receipt.events.JudokaRegistered.returnValues) {
+                const judokaId = receipt.events.JudokaRegistered.returnValues.id;  // Get the Judoka ID from the event
+                displayMessage(`Judoka registered successfully. ID: ${judokaId}`);
+                document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`; // Display ID in HTML
+            } else {
+                displayError('Judoka registered, but no ID was returned.');
+            }
+        })
+        .on('error', function(error) {
+            console.error('Error registering judoka:', error);
+            displayError('Error registering judoka: ' + error.message);
+        });
+
   } catch (error) {
-      console.error('Error registering judoka:', error);
-      displayError('Error registering judoka: ' + error.message);
+      console.error('Unhandled error during registration:', error);
+      displayError('Unhandled error: ' + error.message);
   }
 }
 

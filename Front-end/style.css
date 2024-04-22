@@ -44,6 +44,12 @@ main {
     border-left: 6px solid #4CAF50; /* Thick left border */
 }
 
+.display-info {
+    margin-top: 20px;
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+}
 
 /* Navigation bar styles */
 nav ul {
