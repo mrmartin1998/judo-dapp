@@ -1,5 +1,5 @@
 
-const judoSystemAddress = '0xe6E9829D5109f192094cf0678ff3f75219E77881'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0x28b1d3A759530e8a58949952c32B53D9145F537f'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -98,6 +98,43 @@ const judoSystemABI = [
       }
     ],
     "name": "CompetitionResultRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "age",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "weight",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoSystem.AgeCategory",
+        "name": "ageCategory",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JudoSystem.WeightCategory",
+        "name": "weightCategory",
+        "type": "uint8"
+      }
+    ],
+    "name": "DebugInfo",
     "type": "event"
   },
   {
@@ -304,9 +341,26 @@ const judoSystemABI = [
         "type": "string"
       },
       {
-        "internalType": "uint16",
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "day",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "month",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint16",
+            "name": "year",
+            "type": "uint16"
+          }
+        ],
+        "internalType": "struct JudoSystem.Date",
         "name": "date",
-        "type": "uint16"
+        "type": "tuple"
       },
       {
         "internalType": "bool",
@@ -430,9 +484,26 @@ const judoSystemABI = [
         "type": "uint8"
       },
       {
-        "internalType": "uint32",
-        "name": "dateOfBirth",
-        "type": "uint32"
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "day",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "month",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint16",
+            "name": "year",
+            "type": "uint16"
+          }
+        ],
+        "internalType": "struct JudoSystem.Date",
+        "name": "birthDate",
+        "type": "tuple"
       },
       {
         "internalType": "enum JudoSystem.Gender",
@@ -533,18 +604,8 @@ const judoSystemABI = [
     "inputs": [
       {
         "internalType": "uint16",
-        "name": "year",
+        "name": "_birthYear",
         "type": "uint16"
-      },
-      {
-        "internalType": "uint8",
-        "name": "month",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint8",
-        "name": "day",
-        "type": "uint8"
       }
     ],
     "name": "packDateForJudoka",
@@ -563,12 +624,12 @@ const judoSystemABI = [
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "month",
+        "name": "_month",
         "type": "uint8"
       },
       {
         "internalType": "uint8",
-        "name": "day",
+        "name": "_day",
         "type": "uint8"
       }
     ],
@@ -627,9 +688,26 @@ const judoSystemABI = [
   {
     "inputs": [
       {
-        "internalType": "uint32",
-        "name": "_dateOfBirth",
-        "type": "uint32"
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "day",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "month",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint16",
+            "name": "year",
+            "type": "uint16"
+          }
+        ],
+        "internalType": "struct JudoSystem.Date",
+        "name": "_birthDate",
+        "type": "tuple"
       }
     ],
     "name": "calculateAge",
@@ -687,19 +765,26 @@ const judoSystemABI = [
         "type": "address"
       },
       {
-        "internalType": "uint16",
-        "name": "year",
-        "type": "uint16"
-      },
-      {
-        "internalType": "uint8",
-        "name": "month",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint8",
-        "name": "day",
-        "type": "uint8"
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "day",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "month",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint16",
+            "name": "year",
+            "type": "uint16"
+          }
+        ],
+        "internalType": "struct JudoSystem.Date",
+        "name": "_birthDate",
+        "type": "tuple"
       },
       {
         "internalType": "enum JudoSystem.Gender",
@@ -810,9 +895,26 @@ const judoSystemABI = [
                 "type": "uint8"
               },
               {
-                "internalType": "uint32",
-                "name": "dateOfBirth",
-                "type": "uint32"
+                "components": [
+                  {
+                    "internalType": "uint8",
+                    "name": "day",
+                    "type": "uint8"
+                  },
+                  {
+                    "internalType": "uint8",
+                    "name": "month",
+                    "type": "uint8"
+                  },
+                  {
+                    "internalType": "uint16",
+                    "name": "year",
+                    "type": "uint16"
+                  }
+                ],
+                "internalType": "struct JudoSystem.Date",
+                "name": "birthDate",
+                "type": "tuple"
               },
               {
                 "internalType": "enum JudoSystem.Gender",
@@ -993,13 +1095,18 @@ const judoSystemABI = [
       },
       {
         "internalType": "uint8",
-        "name": "month",
+        "name": "_day",
         "type": "uint8"
       },
       {
         "internalType": "uint8",
-        "name": "day",
+        "name": "_month",
         "type": "uint8"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_year",
+        "type": "uint16"
       }
     ],
     "name": "createCompetition",
@@ -1120,34 +1227,46 @@ function parseDateOfBirth(dob) {
   return Math.floor(date.getTime() / 1000); // Convert to Unix timestamp in seconds.
 }
 
+function calculateAge(dob) { // dob is in UNIX timestamp
+  var diff_ms = Date.now() - dob * 1000;
+  var age_dt = new Date(diff_ms); 
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+
 async function registerJudoka() {
   const name = document.getElementById('judokaName').value;
   const walletAddress = document.getElementById('judokaAddress').value;
   const dob = document.getElementById('judokaDOB').value;
-  let gender = document.getElementById('judokaGender').value;
+  const gender = document.getElementById('judokaGender').value;
   const weight = parseInt(document.getElementById('judokaWeight').value, 10);
   const club = document.getElementById('judokaClub').value;
 
   const year = parseInt(dob.substring(0, 4), 10);
-  const month = parseInt(dob.substring(4, 6), 10); // month should be 1-based for the smart contract
+  const month = parseInt(dob.substring(4, 6), 10);
   const day = parseInt(dob.substring(6, 8), 10);
-  gender = parseInt(gender, 10); // Convert gender to an integer to match the smart contract expected type
 
   if (!walletAddress || isNaN(year) || isNaN(month) || isNaN(day) || isNaN(gender) || isNaN(weight)) {
       displayError('Please ensure all fields are correctly filled.');
       return;
   }
 
+  const birthDate = { year, month, day }; // Struct for the smart contract
+
   try {
       const accounts = await web3.eth.getAccounts();
       await judoSystem.methods.registerJudoka(
-          name, walletAddress, year, month, day, gender, weight, club
+          name, 
+          walletAddress, 
+          birthDate,
+          parseInt(gender, 10), 
+          weight, 
+          club
       ).send({ from: accounts[0] })
       .on('receipt', function(receipt) {
           if (receipt.events.JudokaRegistered && receipt.events.JudokaRegistered.returnValues) {
-              const judokaId = receipt.events.JudokaRegistered.returnValues.id;  // Get the Judoka ID from the event
+              const judokaId = receipt.events.JudokaRegistered.returnValues.id;
               displayMessage(`Judoka registered successfully. ID: ${judokaId}`);
-              document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`; // Display ID in HTML
+              document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`;
           } else {
               displayError('Judoka registered, but no ID was returned.');
           }
@@ -1161,6 +1280,18 @@ async function registerJudoka() {
       displayError('Unhandled error: ' + error.message);
   }
 }
+
+function calculateAgeFromStruct(birthDate) {
+  const today = new Date();
+  const birthDateObj = new Date(birthDate.year, birthDate.month - 1, birthDate.day); // JS months are zero-indexed
+  let age = today.getFullYear() - birthDate.year;
+  const m = today.getMonth() - birthDate.month + 1;
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.day)) {
+    age--;
+  }
+  return age;
+}
+
 
 async function updateJudokaContactDetails() {
   // Retrieve judoka ID and contact info
@@ -1246,21 +1377,6 @@ function displayBeltLevel(beltLevel, judokaId) { // Add judokaId as a parameter
   document.getElementById('beltLevelDisplay').innerText = `Belt Level: ${beltLevelText}, Judoka ID: ${judokaId}`;
 }
 
-// Convert belt level to text
-function getBeltLevelText(beltLevel) {
-  switch(beltLevel) {
-      case '0': return 'White Belt';
-      case '1': return 'Yellow Belt';
-      case '2': return 'Orange Belt';
-      case '3': return 'Green Belt';
-      case '4': return 'Blue Belt';
-      case '5': return 'Brown Belt';
-      case '6': return 'Black Belt';
-      default: return 'Unknown';
-  }
-}
-
-// Function to get a judoka's profile information
 async function getJudokaProfile() {
   const judokaIdInput = document.getElementById('judokaId').value;
 
@@ -1277,8 +1393,9 @@ async function getJudokaProfile() {
 
   try {
       const judokaInfo = await judoSystem.methods.getJudokaInfo(judokaId).call();
-      if (judokaInfo) {
-          displayJudokaProfile(judokaInfo);
+      const beltLevel = await judoSystem.methods.getBeltLevel(judokaId).call(); // Fetch belt level directly
+      if (judokaInfo && beltLevel != null) {
+          displayJudokaProfile(judokaInfo, beltLevel);
       } else {
           displayError('No judoka information found. Check the judoka ID.');
       }
@@ -1288,39 +1405,49 @@ async function getJudokaProfile() {
   }
 }
 
-// Function to display a judoka's profile information
-function displayJudokaProfile(judokaInfo) {
+function displayJudokaProfile(judokaInfo, beltLevel) {
   const {
-      basic: { id, name, walletAddress, beltLevel, dateOfBirth, gender },
+      basic: { id, name, walletAddress, birthDate, gender },
       contact: { email, phoneNumber },
-      physical: { age, weight, club, ageCategory, weightCategory }
+      physical: { weight, club }
   } = judokaInfo;
 
+  let beltLevelText = getBeltLevelText(beltLevel); // Convert belt level number to color name
   let genderText = gender == 0 ? 'Male' : 'Female';
-  let beltLevelText = getBeltLevelText(beltLevel);
-  let dob = new Date(dateOfBirth * 1000).toLocaleDateString(); // Assuming Unix timestamp in seconds
-
-  let ageCategoryText = convertAgeCategory(ageCategory);
-  let weightCategoryText = convertWeightCategory(weightCategory);
+  let age = calculateAgeFromStruct(birthDate);
 
   let profileHTML = `
       <p>ID: ${id}</p>
       <p>Name: ${name}</p>
       <p>Wallet Address: ${walletAddress}</p>
-      <p>Belt Level: ${beltLevelText}</p>
-      <p>Date of Birth: ${dob}</p>
+      <p>Belt Level: ${beltLevelText}</p> <!-- Displaying belt level as color name -->
+      <p>Date of Birth: ${birthDate.day}/${birthDate.month}/${birthDate.year}</p>
+      <p>Age: ${age}</p>
       <p>Gender: ${genderText}</p>
       <p>Email: ${email}</p>
       <p>Phone: ${phoneNumber}</p>
-      <p>Age: ${age}</p>
       <p>Weight: ${weight}</p>
       <p>Club: ${club}</p>
-      <p>Age Category: ${ageCategoryText}</p>
-      <p>Weight Category: ${weightCategoryText}</p>
   `;
 
   document.getElementById('judokaProfileDisplay').innerHTML = profileHTML;
 }
+
+// Utility function to convert belt level from numeric to text description
+function getBeltLevelText(beltLevel) {
+  switch (beltLevel) {
+      case '0': return 'White Belt';
+      case '1': return 'Yellow Belt';
+      case '2': return 'Orange Belt';
+      case '3': return 'Green Belt';
+      case '4': return 'Blue Belt';
+      case '5': return 'Brown Belt';
+      case '6': return 'Black Belt';
+      default: return 'Unknown Belt Level';
+  }
+}
+
+
 
 function convertAgeCategory(ageCategory) {
   switch(ageCategory) {
@@ -1343,19 +1470,6 @@ function convertWeightCategory(weightCategory) {
       case 5: return 'Under 100kg';
       case 6: return 'Over 100kg';
       default: return 'Unknown Category';
-  }
-}
-
-function getBeltLevelText(beltLevel) {
-  switch(beltLevel) {
-      case 0: return 'White';
-      case 1: return 'Yellow';
-      case 2: return 'Orange';
-      case 3: return 'Green';
-      case 4: return 'Blue';
-      case 5: return 'Brown';
-      case 6: return 'Black';
-      default: return 'Unknown';
   }
 }
 
