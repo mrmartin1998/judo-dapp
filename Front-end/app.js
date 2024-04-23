@@ -1,5 +1,5 @@
 
-const judoSystemAddress = '0xeF508149E3d0975B9bFe1Ab790Eb640D58d93961'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0xe6E9829D5109f192094cf0678ff3f75219E77881'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -1125,13 +1125,13 @@ async function registerJudoka() {
   const walletAddress = document.getElementById('judokaAddress').value;
   const dob = document.getElementById('judokaDOB').value;
   let gender = document.getElementById('judokaGender').value;
-  const weight = parseInt(document.getElementById('judokaWeight').value);
+  const weight = parseInt(document.getElementById('judokaWeight').value, 10);
   const club = document.getElementById('judokaClub').value;
 
   const year = parseInt(dob.substring(0, 4), 10);
-  const month = parseInt(dob.substring(4, 6), 10);
+  const month = parseInt(dob.substring(4, 6), 10); // month should be 1-based for the smart contract
   const day = parseInt(dob.substring(6, 8), 10);
-  gender = parseInt(gender);
+  gender = parseInt(gender, 10); // Convert gender to an integer to match the smart contract expected type
 
   if (!walletAddress || isNaN(year) || isNaN(month) || isNaN(day) || isNaN(gender) || isNaN(weight)) {
       displayError('Please ensure all fields are correctly filled.');
@@ -1140,25 +1140,22 @@ async function registerJudoka() {
 
   try {
       const accounts = await web3.eth.getAccounts();
-      const transaction = judoSystem.methods.registerJudoka(
+      await judoSystem.methods.registerJudoka(
           name, walletAddress, year, month, day, gender, weight, club
-      );
-
-      transaction.send({ from: accounts[0] })
-        .on('receipt', function(receipt) {
-            if (receipt.events.JudokaRegistered && receipt.events.JudokaRegistered.returnValues) {
-                const judokaId = receipt.events.JudokaRegistered.returnValues.id;  // Get the Judoka ID from the event
-                displayMessage(`Judoka registered successfully. ID: ${judokaId}`);
-                document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`; // Display ID in HTML
-            } else {
-                displayError('Judoka registered, but no ID was returned.');
-            }
-        })
-        .on('error', function(error) {
-            console.error('Error registering judoka:', error);
-            displayError('Error registering judoka: ' + error.message);
-        });
-
+      ).send({ from: accounts[0] })
+      .on('receipt', function(receipt) {
+          if (receipt.events.JudokaRegistered && receipt.events.JudokaRegistered.returnValues) {
+              const judokaId = receipt.events.JudokaRegistered.returnValues.id;  // Get the Judoka ID from the event
+              displayMessage(`Judoka registered successfully. ID: ${judokaId}`);
+              document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`; // Display ID in HTML
+          } else {
+              displayError('Judoka registered, but no ID was returned.');
+          }
+      })
+      .on('error', function(error) {
+          console.error('Error registering judoka:', error);
+          displayError('Error registering judoka: ' + error.message);
+      });
   } catch (error) {
       console.error('Unhandled error during registration:', error);
       displayError('Unhandled error: ' + error.message);
@@ -1280,42 +1277,86 @@ async function getJudokaProfile() {
 
   try {
       const judokaInfo = await judoSystem.methods.getJudokaInfo(judokaId).call();
-      displayJudokaProfile(judokaInfo);
+      if (judokaInfo) {
+          displayJudokaProfile(judokaInfo);
+      } else {
+          displayError('No judoka information found. Check the judoka ID.');
+      }
   } catch (error) {
       console.error('Error fetching judoka information:', error);
-      displayError('Error fetching judoka information.');
+      displayError('Error fetching judoka information: ' + error.message);
   }
 }
 
 // Function to display a judoka's profile information
 function displayJudokaProfile(judokaInfo) {
-  const [id, name, walletAddress, beltLevel, dateOfBirth, gender, email, phoneNumber, age, weight, club] = judokaInfo;
+  const {
+      basic: { id, name, walletAddress, beltLevel, dateOfBirth, gender },
+      contact: { email, phoneNumber },
+      physical: { age, weight, club, ageCategory, weightCategory }
+  } = judokaInfo;
 
-  let genderText = gender === '0' ? 'Male' : 'Female';
+  let genderText = gender == 0 ? 'Male' : 'Female';
   let beltLevelText = getBeltLevelText(beltLevel);
+  let dob = new Date(dateOfBirth * 1000).toLocaleDateString(); // Assuming Unix timestamp in seconds
 
-  let dob = parseDate(dateOfBirth.toString()); // Convert and parse DOB
-
-  let ageCategoryText = ''; // Convert ageCategory enum to text
-  let weightCategoryText = ''; // Convert weightCategory enum to text
+  let ageCategoryText = convertAgeCategory(ageCategory);
+  let weightCategoryText = convertWeightCategory(weightCategory);
 
   let profileHTML = `
-    <p>ID: ${id}</p>
-    <p>Name: ${name}</p>
-    <p>Wallet Address: ${walletAddress}</p>
-    <p>Belt Level: ${beltLevelText}</p>
-    <p>Date of Birth: ${dob}</p>
-    <p>Gender: ${genderText}</p>
-    <p>Email: ${email}</p>
-    <p>Phone: ${phoneNumber}</p>
-    <p>Age: ${age}</p>
-    <p>Weight: ${weight}</p>
-    <p>Club: ${club}</p>
-    <p>Age Category: ${ageCategoryText}</p>
-    <p>Weight Category: ${weightCategoryText}</p>
+      <p>ID: ${id}</p>
+      <p>Name: ${name}</p>
+      <p>Wallet Address: ${walletAddress}</p>
+      <p>Belt Level: ${beltLevelText}</p>
+      <p>Date of Birth: ${dob}</p>
+      <p>Gender: ${genderText}</p>
+      <p>Email: ${email}</p>
+      <p>Phone: ${phoneNumber}</p>
+      <p>Age: ${age}</p>
+      <p>Weight: ${weight}</p>
+      <p>Club: ${club}</p>
+      <p>Age Category: ${ageCategoryText}</p>
+      <p>Weight Category: ${weightCategoryText}</p>
   `;
 
   document.getElementById('judokaProfileDisplay').innerHTML = profileHTML;
+}
+
+function convertAgeCategory(ageCategory) {
+  switch(ageCategory) {
+      case 0: return 'Juveniles';
+      case 1: return 'Cadets';
+      case 2: return 'Juniors';
+      case 3: return 'Seniors';
+      case 4: return 'Veterans';
+      default: return 'Unknown Category';
+  }
+}
+
+function convertWeightCategory(weightCategory) {
+  switch(weightCategory) {
+      case 0: return 'Under 60kg';
+      case 1: return 'Under 66kg';
+      case 2: return 'Under 73kg';
+      case 3: return 'Under 81kg';
+      case 4: return 'Under 90kg';
+      case 5: return 'Under 100kg';
+      case 6: return 'Over 100kg';
+      default: return 'Unknown Category';
+  }
+}
+
+function getBeltLevelText(beltLevel) {
+  switch(beltLevel) {
+      case 0: return 'White';
+      case 1: return 'Yellow';
+      case 2: return 'Orange';
+      case 3: return 'Green';
+      case 4: return 'Blue';
+      case 5: return 'Brown';
+      case 6: return 'Black';
+      default: return 'Unknown';
+  }
 }
 
 // Helper functions to display messages

@@ -1,39 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Judo Belt System dApp</title>
     <link rel="stylesheet" href="style.css">
 </head>
-        <body>
-            <!-- Navigation Bar -->
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="registerJudoka.html">Register Judoka</a></li>
-                    <li><a href="promoteJudoka.html">Promote Judoka</a></li>
-                    <li><a href="getBeltLevel.html">Get Belt Level</a></li>
-                    <li><a href="judokaProfile.html">Judoka Profile</a></li>
-                    <li><a href="leaderBoards.html">Leaderboards</a></li>
-                    <li><a href="competitions.html">Competitions</a></li>
-                </ul>
-            </nav>
-        
-        <!-- Get Judoka Profile Section -->
-        <div class="container" id="judokaProfile">
-            <h2>Judoka Profile</h2>
-            <label for="judokaId">Enter Judoka ID:</label>
-            <input type="number" id="judokaId" class="input-field" placeholder="Enter judoka's ID"/>
-            <button class="button" onclick="getJudokaProfile()">Get Profile</button>
-        
-            <div id="judokaProfileDisplay">
-                <!-- Add elements to display judoka profile information -->
-                <p id="judokaNameDisplay"></p>
-                <p id="ageCategoryDisplay"></p>
-                <p id="weightCategoryDisplay"></p>
-                <!-- ... other elements for displaying profile info ... -->
-            </div>
-        </div>
-        
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registerJudoka.html">Register Judoka</a></li>
+            <li><a href="promoteJudoka.html">Promote Judoka</a></li>
+            <li><a href="getBeltLevel.html">Get Belt Level</a></li>
+            <li><a href="judokaProfile.html">Judoka Profile</a></li>
+            <li><a href="leaderBoards.html">Leaderboards</a></li>
+            <li><a href="competitions.html">Competitions</a></li>
+        </ul>
+    </nav>
 
-        <div id="beltLevelDisplay" class="message"></div>
-        <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
-        <script src="app.js"></script>
-        </body>
+    <!-- Get Judoka Profile Section -->
+    <div class="container" id="judokaProfile">
+        <h2>Judoka Profile</h2>
+        <label for="judokaId">Enter Judoka ID:</label>
+        <input type="number" id="judokaId" class="input-field" placeholder="Enter judoka's ID" />
+        <button class="button" onclick="getJudokaProfile()">Get Profile</button>
+
+        <div id="judokaProfileDisplay">
+            <!-- Dynamic elements to display judoka profile information will be added here -->
+        </div>
+    </div>
+
+    <div id="beltLevelDisplay" class="message"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
