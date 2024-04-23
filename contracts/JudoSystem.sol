@@ -141,6 +141,17 @@ contract JudoSystem {
         }
     }
 
+    // Example getter functions in your Solidity contract
+
+    function getAgeCategoryByAge(uint256 _age) public view returns (AgeCategory) {
+        return getAgeCategory(_age);
+    }
+
+    function getWeightCategoryByWeight(uint256 _weight) public view returns (WeightCategory) {
+        return getWeightCategory(_weight);
+    }
+
+
     function calculateAge(Date memory _birthDate) public view returns (uint256) {
         uint256 currentYear = block.timestamp / 365 days; // Get current year from timestamp
         return currentYear > _birthDate.year ? currentYear - _birthDate.year : 0;

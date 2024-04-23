@@ -1,5 +1,5 @@
 
-const judoSystemAddress = '0x28b1d3A759530e8a58949952c32B53D9145F537f'; // Replace with your judoSystem contract address
+const judoSystemAddress = '0x7D242E4626aa893991659552138F9F762838532B'; // Replace with your judoSystem contract address
 
 const judoSystemABI = [
   {
@@ -688,6 +688,46 @@ const judoSystemABI = [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_age",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAgeCategoryByAge",
+    "outputs": [
+      {
+        "internalType": "enum JudoSystem.AgeCategory",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWeightCategoryByWeight",
+    "outputs": [
+      {
+        "internalType": "enum JudoSystem.WeightCategory",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
         "components": [
           {
             "internalType": "uint8",
@@ -1227,46 +1267,35 @@ function parseDateOfBirth(dob) {
   return Math.floor(date.getTime() / 1000); // Convert to Unix timestamp in seconds.
 }
 
-function calculateAge(dob) { // dob is in UNIX timestamp
-  var diff_ms = Date.now() - dob * 1000;
-  var age_dt = new Date(diff_ms); 
-  return Math.abs(age_dt.getUTCFullYear() - 1970);
-}
-
 async function registerJudoka() {
-  const name = document.getElementById('judokaName').value;
-  const walletAddress = document.getElementById('judokaAddress').value;
-  const dob = document.getElementById('judokaDOB').value;
-  const gender = document.getElementById('judokaGender').value;
+  const name = document.getElementById('judokaName').value.trim();
+  const walletAddress = document.getElementById('judokaAddress').value.trim();
+  const dob = document.getElementById('judokaDOB').value.trim();
+  const gender = document.getElementById('judokaGender').value.trim();
   const weight = parseInt(document.getElementById('judokaWeight').value, 10);
-  const club = document.getElementById('judokaClub').value;
+  const club = document.getElementById('judokaClub').value.trim();
 
   const year = parseInt(dob.substring(0, 4), 10);
   const month = parseInt(dob.substring(4, 6), 10);
   const day = parseInt(dob.substring(6, 8), 10);
 
-  if (!walletAddress || isNaN(year) || isNaN(month) || isNaN(day) || isNaN(gender) || isNaN(weight)) {
-      displayError('Please ensure all fields are correctly filled.');
-      return;
-  }
-
-  const birthDate = { year, month, day }; // Struct for the smart contract
+  // Convert year, month, day into a date object expected by the Solidity contract
+  const birthDate = { day, month, year }; // Struct for the smart contract
 
   try {
       const accounts = await web3.eth.getAccounts();
       await judoSystem.methods.registerJudoka(
-          name, 
-          walletAddress, 
+          name,
+          walletAddress,
           birthDate,
-          parseInt(gender, 10), 
-          weight, 
+          parseInt(gender, 10),
+          weight,
           club
       ).send({ from: accounts[0] })
       .on('receipt', function(receipt) {
           if (receipt.events.JudokaRegistered && receipt.events.JudokaRegistered.returnValues) {
               const judokaId = receipt.events.JudokaRegistered.returnValues.id;
               displayMessage(`Judoka registered successfully. ID: ${judokaId}`);
-              document.getElementById('displayJudokaId').textContent = `Registered Judoka ID: ${judokaId}`;
           } else {
               displayError('Judoka registered, but no ID was returned.');
           }
@@ -1281,6 +1310,31 @@ async function registerJudoka() {
   }
 }
 
+function calculateAgeFromDOB(dob) {
+  const birthDate = new Date(dob.substring(0, 4), dob.substring(4, 6) - 1, dob.substring(6, 8));
+  const ageDifMs = Date.now() - birthDate.getTime();
+  const ageDate = new Date(ageDifMs);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+async function fetchAgeCategory(age) {
+  try {
+      return await judoSystem.methods.getAgeCategoryByAge(age).call();
+  } catch (error) {
+      console.error('Failed to fetch age category:', error);
+      return null;
+  }
+}
+
+async function fetchWeightCategory(weight) {
+  try {
+      return await judoSystem.methods.getWeightCategoryByWeight(weight).call();
+  } catch (error) {
+      console.error('Failed to fetch weight category:', error);
+      return null;
+  }
+}
+
 function calculateAgeFromStruct(birthDate) {
   const today = new Date();
   const birthDateObj = new Date(birthDate.year, birthDate.month - 1, birthDate.day); // JS months are zero-indexed
@@ -1291,7 +1345,6 @@ function calculateAgeFromStruct(birthDate) {
   }
   return age;
 }
-
 
 async function updateJudokaContactDetails() {
   // Retrieve judoka ID and contact info
@@ -1377,6 +1430,20 @@ function displayBeltLevel(beltLevel, judokaId) { // Add judokaId as a parameter
   document.getElementById('beltLevelDisplay').innerText = `Belt Level: ${beltLevelText}, Judoka ID: ${judokaId}`;
 }
 
+// Utility function to convert belt level from numeric to text description
+function getBeltLevelText(beltLevel) {
+  switch (beltLevel) {
+      case '0': return 'White Belt';
+      case '1': return 'Yellow Belt';
+      case '2': return 'Orange Belt';
+      case '3': return 'Green Belt';
+      case '4': return 'Blue Belt';
+      case '5': return 'Brown Belt';
+      case '6': return 'Black Belt';
+      default: return 'Unknown Belt Level';
+  }
+}
+
 async function getJudokaProfile() {
   const judokaIdInput = document.getElementById('judokaId').value;
 
@@ -1392,65 +1459,63 @@ async function getJudokaProfile() {
   }
 
   try {
+      // Fetch judokaInfo first to ensure it exists before making other calls
       const judokaInfo = await judoSystem.methods.getJudokaInfo(judokaId).call();
-      const beltLevel = await judoSystem.methods.getBeltLevel(judokaId).call(); // Fetch belt level directly
-      if (judokaInfo && beltLevel != null) {
-          displayJudokaProfile(judokaInfo, beltLevel);
-      } else {
+
+      if (!judokaInfo) {
           displayError('No judoka information found. Check the judoka ID.');
+          return;
       }
+
+      // After judokaInfo is fetched and confirmed, fetch other details
+      const [beltLevel, ageCategory, weightCategory] = await Promise.all([
+          judoSystem.methods.getBeltLevel(judokaId).call(),
+          judoSystem.methods.getAgeCategoryByAge(judokaInfo.physical.age).call(),
+          judoSystem.methods.getWeightCategoryByWeight(judokaInfo.physical.weight).call()
+      ]);
+
+      displayJudokaProfile(judokaInfo, beltLevel, ageCategory, weightCategory);
   } catch (error) {
       console.error('Error fetching judoka information:', error);
       displayError('Error fetching judoka information: ' + error.message);
   }
 }
 
-function displayJudokaProfile(judokaInfo, beltLevel) {
+function displayJudokaProfile(judokaInfo, beltLevel, ageCategory, weightCategory) {
   const {
       basic: { id, name, walletAddress, birthDate, gender },
       contact: { email, phoneNumber },
       physical: { weight, club }
   } = judokaInfo;
 
-  let beltLevelText = getBeltLevelText(beltLevel); // Convert belt level number to color name
-  let genderText = gender == 0 ? 'Male' : 'Female';
-  let age = calculateAgeFromStruct(birthDate);
+  const birthDateFormatted = `${birthDate.day}/${birthDate.month}/${birthDate.year}`;
+  const beltLevelText = getBeltLevelText(beltLevel);
+  const genderText = gender == 0 ? 'Male' : 'Female'; // Adjust based on your gender encoding
+  const age = calculateAgeFromStruct(birthDate); // Assuming you have this function correctly calculating age
+  const ageCategoryText = convertAgeCategory(ageCategory);
+  const weightCategoryText = convertWeightCategory(weightCategory);
 
   let profileHTML = `
       <p>ID: ${id}</p>
       <p>Name: ${name}</p>
       <p>Wallet Address: ${walletAddress}</p>
-      <p>Belt Level: ${beltLevelText}</p> <!-- Displaying belt level as color name -->
-      <p>Date of Birth: ${birthDate.day}/${birthDate.month}/${birthDate.year}</p>
+      <p>Belt Level: ${beltLevelText}</p>
+      <p>Date of Birth: ${birthDateFormatted}</p>
       <p>Age: ${age}</p>
       <p>Gender: ${genderText}</p>
       <p>Email: ${email}</p>
       <p>Phone: ${phoneNumber}</p>
-      <p>Weight: ${weight}</p>
+      <p>Weight: ${weight} kg</p>
+      <p>Age Category: ${ageCategoryText}</p>
+      <p>Weight Category: ${weightCategoryText}</p>
       <p>Club: ${club}</p>
   `;
 
   document.getElementById('judokaProfileDisplay').innerHTML = profileHTML;
 }
 
-// Utility function to convert belt level from numeric to text description
-function getBeltLevelText(beltLevel) {
-  switch (beltLevel) {
-      case '0': return 'White Belt';
-      case '1': return 'Yellow Belt';
-      case '2': return 'Orange Belt';
-      case '3': return 'Green Belt';
-      case '4': return 'Blue Belt';
-      case '5': return 'Brown Belt';
-      case '6': return 'Black Belt';
-      default: return 'Unknown Belt Level';
-  }
-}
-
-
-
 function convertAgeCategory(ageCategory) {
-  switch(ageCategory) {
+  switch(parseInt(ageCategory)) {
       case 0: return 'Juveniles';
       case 1: return 'Cadets';
       case 2: return 'Juniors';
@@ -1461,7 +1526,7 @@ function convertAgeCategory(ageCategory) {
 }
 
 function convertWeightCategory(weightCategory) {
-  switch(weightCategory) {
+  switch(parseInt(weightCategory)) {
       case 0: return 'Under 60kg';
       case 1: return 'Under 66kg';
       case 2: return 'Under 73kg';
